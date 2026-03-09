@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVPR 2026 世界模型技术线索推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 15mm;
+            margin: 0 auto;
+            background: white;
+            page-break-after: always;
+        }
+        
+        .page:last-child {
+            page-break-after: auto;
+        }
+        
+        /* 封面 */
+        .cover {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 50%, #fef3c7 100%);
+            border-radius: 12px;
+            padding: 40px 20px;
+            height: 100%;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #2563eb;
+            color: white;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+        
+        .cover h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #64748b;
+            margin-bottom: 32px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 32px;
+        }
+        
+        .stat {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        
+        /* 论文页 */
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .paper-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+        }
+        
+        .paper-type {
+            font-size: 12px;
+            color: #64748b;
+        }
+        
+        .paper-title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 16px;
+            color: #1e293b;
+        }
+        
+        .paper-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 20px;
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .author-main {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .author-avatar.real {
+            object-fit: cover;
+        }
+        
+        .author-info h3 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .affiliation {
+            font-size: 12px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+        
+        .author-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .author-tag {
+            padding: 2px 8px;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 100px;
+            font-size: 10px;
+        }
+        
+        .author-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            font-size: 11px;
+            color: #64748b;
+        }
+        
+        .author-details p {
+            margin-bottom: 4px;
+        }
+        
+        .author-details strong {
+            color: #1e293b;
+            font-weight: 500;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .content-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+        
+        .figure-box {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        
+        .figure-caption {
+            font-size: 11px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 8px;
+        }
+        
+        .collab-suggestion {
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 10px 12px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 12px;
+            font-size: 11px;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: 12px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 4px;
+        }
+        
+        .collab-suggestion p {
+            color: #78350f;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .page {
+                margin: 0;
+                padding: 10mm;
+                width: 100%;
+                box-shadow: none;
+            }
+        }
+        
+        @media screen {
+            .page {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 封面 -->
+    <div class="page">
+        <div class="cover">
+            <div class="badge">CVPR 2026</div>
+            <h1>世界模型技术线索推荐</h1>
+            <p class="subtitle">World Models for Video Generation, Embodied AI & Autonomous Driving</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">精选论文</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">World</div>
+                    <div class="stat-label">Model方向</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">顶尖机构</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2026</div>
+                    <div class="stat-label">最新研究</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文1: UCM -->
+    <div class="page">
+        <div class="paper-header">
+            <div class="paper-number">1</div>
+            <span class="paper-type">CVPR 2026 · World Model</span>
+        </div>
+        
+        <h2 class="paper-title">UCM: Unifying Camera Control and Memory with Time-aware Positional Encoding Warping</h2>
+        
+        <div class="paper-layout">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #3B82F6, #8B5CF6);">李</div>
+                    <div class="author-info">
+                        <h3>Li Hu (胡力)</h3>
+                        <p class="affiliation">HumanAIGC · 清华大学</p>
+                        <div class="author-tags">
+                            <span class="author-tag">视频生成</span>
+                            <span class="author-tag">世界模型</span>
+                            <span class="author-tag">相机控制</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>毕业院校:</strong> 清华大学 计算机系</p>
+                    <p><strong>研究方向:</strong> 视频生成、世界模型、神经渲染</p>
+                    <p><strong>获奖经历:</strong> ICLR 2025 Poster, CVPR多篇一作</p>
+                    <p><strong>代表性工作:</strong> CameraCtrl, World-Simulator Survey</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首次统一长期记忆与精确相机控制，通过时间感知位置编码变形机制，解决场景重访时内容一致性问题。设计双流扩散Transformer实现高保真生成，在500K+单目视频上训练。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 450px;">
+                        <defs>
+                            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#DBEAFE"/>
+                                <stop offset="100%" style="stop-color:#BFDBFE"/>
+                            </linearGradient>
+                            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#EDE9FE"/>
+                                <stop offset="100%" style="stop-color:#DDD6FE"/>
+                            </linearGradient>
+                            <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#FEF3C7"/>
+                                <stop offset="100%" style="stop-color:#FDE68A"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <rect x="20" y="30" width="120" height="80" rx="8" fill="url(#g1)" stroke="#2563EB" stroke-width="2"/>
+                        <text x="80" y="65" text-anchor="middle" font-size="11" fill="#1E40AF" font-weight="600">时间感知</text>
+                        <text x="80" y="80" text-anchor="middle" font-size="11" fill="#1E40AF" font-weight="600">位置编码</text>
+                        
+                        <path d="M150 70 L180 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="180,65 190,70 180,75" fill="#64748B"/>
+                        
+                        <rect x="200" y="30" width="120" height="80" rx="8" fill="url(#g2)" stroke="#7C3AED" stroke-width="2"/>
+                        <text x="260" y="65" text-anchor="middle" font-size="11" fill="#5B21B6" font-weight="600">双流DiT</text>
+                        <text x="260" y="80" text-anchor="middle" font-size="11" fill="#5B21B6" font-weight="600">高保真生成</text>
+                        
+                        <path d="M330 70 L360 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="360,65 370,70 360,75" fill="#64748B"/>
+                        
+                        <rect x="380" y="30" width="100" height="80" rx="8" fill="url(#g3)" stroke="#F59E0B" stroke-width="2"/>
+                        <text x="430" y="65" text-anchor="middle" font-size="11" fill="#92400E" font-weight="600">相机控制</text>
+                        <text x="430" y="80" text-anchor="middle" font-size="11" fill="#92400E" font-weight="600">+长期记忆</text>
+                    </svg>
+                    <p class="figure-caption">UCM架构：统一相机控制与记忆机制</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>适合在自动驾驶仿真、虚拟现实内容生成领域开展合作，团队在视频生成底层技术方面积累深厚。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文2: PhysX-Anything -->
+    <div class="page">
+        <div class="paper-header">
+            <div class="paper-number">2</div>
+            <span class="paper-type">CVPR 2026 · 3D Generation</span>
+        </div>
+        
+        <h2 class="paper-title">PhysX-Anything: Simulation-Ready Physical 3D Assets from Single Image</h2>
+        
+        <div class="paper-layout">
+            <div class="author-card">
+                <div class="author-main">
+                    <img src="cvpr2026-images/ziwei-liu.png" alt="Ziwei Liu" class="author-avatar real">
+                    <div class="author-info">
+                        <h3>Ziwei Liu (刘子纬)</h3>
+                        <p class="affiliation">NTU MMLab · 新加坡</p>
+                        <div class="author-tags">
+                            <span class="author-tag">3D生成</span>
+                            <span class="author-tag">物理仿真</span>
+                            <span class="author-tag">具身智能</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>毕业院校:</strong> 中科院自动化所 PhD</p>
+                    <p><strong>研究方向:</strong> 计算机视觉、3D生成、具身智能</p>
+                    <p><strong>获奖经历:</strong> CVPR 2026程序主席、MIT TR35、新加坡总统青年科学家奖</p>
+                    <p><strong>代表性工作:</strong> OmniObject3D、数十篇CVPR/ICCV论文</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首个可直接用于仿真的物理3D资产生成框架，单张图像输入即可输出高质量3D资产。提出VLM物理生成模型，Token数量减少193×，构建PhysX-Mobility数据集（2000+物体）。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 450px;">
+                        <rect x="20" y="35" width="80" height="70" rx="6" fill="url(#g1)" stroke="#2563EB" stroke-width="2"/>
+                        <text x="60" y="75" text-anchor="middle" font-size="11" fill="#1E40AF" font-weight="600">单图输入</text>
+                        
+                        <path d="M110 70 L135 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="135,65 145,70 135,75" fill="#64748B"/>
+                        
+                        <rect x="155" y="25" width="180" height="90" rx="8" fill="url(#g2)" stroke="#7C3AED" stroke-width="2"/>
+                        <text x="245" y="55" text-anchor="middle" font-size="12" fill="#5B21B6" font-weight="700">VLM物理生成</text>
+                        <text x="245" y="75" text-anchor="middle" font-size="10" fill="#6B7280">几何+物理属性</text>
+                        <text x="245" y="90" text-anchor="middle" font-size="10" fill="#6B7280">Token ↓193×</text>
+                        
+                        <path d="M345 70 L370 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="370,65 380,70 370,75" fill="#64748B"/>
+                        
+                        <linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#D1FAE5"/>
+                            <stop offset="100%" style="stop-color:#A7F3D0"/>
+                        </linearGradient>
+                        <rect x="390" y="35" width="80" height="70" rx="6" fill="url(#g4)" stroke="#10B981" stroke-width="2"/>
+                        <text x="430" y="65" text-anchor="middle" font-size="10" fill="#065F46" font-weight="600">仿真就绪</text>
+                        <text x="430" y="80" text-anchor="middle" font-size="10" fill="#065F46" font-weight="600">3D资产</text>
+                    </svg>
+                    <p class="figure-caption">PhysX-Anything: 单图到仿真就绪3D资产</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>在具身AI训练数据生成、机器人仿真环境构建方面合作潜力大，团队在3D领域资源丰富，可联合申请项目。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文3: EVA -->
+    <div class="page">
+        <div class="paper-header">
+            <div class="paper-number">3</div>
+            <span class="paper-type">CVPR 2026 · Embodied AI</span>
+        </div>
+        
+        <h2 class="paper-title">EVA: Empowering World Models with Reflection for Embodied Video Prediction</h2>
+        
+        <div class="paper-layout">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">北</div>
+                    <div class="author-info">
+                        <h3>研究团队</h3>
+                        <p class="affiliation">北京大学 · 具身智能实验室</p>
+                        <div class="author-tags">
+                            <span class="author-tag">具身智能</span>
+                            <span class="author-tag">视频预测</span>
+                            <span class="author-tag">世界模型</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 具身视频预测、自回归世界模型</p>
+                    <p><strong>创新方向:</strong> 反射机制、多阶段训练</p>
+                    <p><strong>技术路线:</strong> 视频生成 → 世界建模 → 机器人应用</p>
+                    <p><strong>应用场景:</strong> 机器人操作、视觉规划</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>提出反射机制增强世界模型，通过多阶段训练范式生成高保真视频帧，采用自回归策略实现更长时序的自适应泛化。为具身智能提供未来场景预测能力。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 450px;">
+                        <rect x="20" y="35" width="90" height="70" rx="6" fill="url(#g1)" stroke="#2563EB" stroke-width="2"/>
+                        <text x="65" y="65" text-anchor="middle" font-size="11" fill="#1E40AF" font-weight="600">历史帧</text>
+                        <text x="65" y="80" text-anchor="middle" font-size="11" fill="#1E40AF" font-weight="600">+动作</text>
+                        
+                        <path d="M120 70 L145 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="145,65 155,70 145,75" fill="#64748B"/>
+                        
+                        <rect x="165" y="25" width="160" height="90" rx="8" fill="url(#g2)" stroke="#7C3AED" stroke-width="2"/>
+                        <text x="245" y="50" text-anchor="middle" font-size="16" fill="#5B21B6" font-weight="700">EVA</text>
+                        <text x="245" y="75" text-anchor="middle" font-size="10" fill="#6B7280">反射+自回归</text>
+                        <text x="245" y="90" text-anchor="middle" font-size="10" fill="#6B7280">多阶段训练</text>
+                        
+                        <path d="M335 70 L360 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="360,65 370,70 360,75" fill="#64748B"/>
+                        
+                        <rect x="380" y="35" width="90" height="70" rx="6" fill="url(#g4)" stroke="#10B981" stroke-width="2"/>
+                        <text x="425" y="65" text-anchor="middle" font-size="11" fill="#065F46" font-weight="600">未来帧</text>
+                        <text x="425" y="80" text-anchor="middle" font-size="11" fill="#065F46" font-weight="600">预测</text>
+                    </svg>
+                    <p class="figure-caption">EVA: 反射机制增强的具身视频预测</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>适合在机器人视觉规划、工业自动化场景开展合作，团队在具身智能方向深耕多年，具备机器人平台资源。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文4: UniDriveDreamer -->
+    <div class="page">
+        <div class="paper-header">
+            <div class="paper-number">4</div>
+            <span class="paper-type">CVPR 2026 · Autonomous Driving</span>
+        </div>
+        
+        <h2 class="paper-title">UniDriveDreamer: A Single-Stage Multimodal World Model for Autonomous Driving</h2>
+        
+        <div class="paper-layout">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">上</div>
+                    <div class="author-info">
+                        <h3>ThinkLab团队</h3>
+                        <p class="affiliation">上海交通大学 · 自动驾驶实验室</p>
+                        <div class="author-tags">
+                            <span class="author-tag">自动驾驶</span>
+                            <span class="author-tag">多模态</span>
+                            <span class="author-tag">世界模型</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 自动驾驶世界模型、多模态融合</p>
+                    <p><strong>技术路线:</strong> 单阶段端到端、LiDAR+视频联合生成</p>
+                    <p><strong>平台资源:</strong> nuScenes、Waymo数据集经验</p>
+                    <p><strong>应用场景:</strong> 仿真训练、轨迹规划、场景预测</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首个单阶段多模态世界模型，直接生成多相机视频和LiDAR序列，无需中间表示或级联模块。统一驾驶场景理解、轨迹规划和未来帧生成三大任务。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 450px;">
+                        <rect x="20" y="40" width="70" height="60" rx="6" fill="url(#g1)" stroke="#2563EB" stroke-width="2"/>
+                        <text x="55" y="65" text-anchor="middle" font-size="10" fill="#1E40AF" font-weight="600">历史帧</text>
+                        <text x="55" y="80" text-anchor="middle" font-size="10" fill="#1E40AF" font-weight="600">+动作</text>
+                        
+                        <path d="M100 70 L125 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="125,65 135,70 125,75" fill="#64748B"/>
+                        
+                        <rect x="145" y="25" width="190" height="90" rx="8" fill="url(#g2)" stroke="#7C3AED" stroke-width="2"/>
+                        <text x="240" y="50" text-anchor="middle" font-size="12" fill="#5B21B6" font-weight="700">UniDriveDreamer</text>
+                        <text x="240" y="70" text-anchor="middle" font-size="9" fill="#6B7280">单阶段多模态生成</text>
+                        <text x="240" y="85" text-anchor="middle" font-size="9" fill="#6B7280">理解+规划+生成</text>
+                        
+                        <path d="M345 55 L365 45" stroke="#64748B" stroke-width="1.5"/>
+                        <path d="M345 85 L365 95" stroke="#64748B" stroke-width="1.5"/>
+                        
+                        <linearGradient id="g5" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#FEF3C7"/>
+                            <stop offset="100%" style="stop-color:#FDE68A"/>
+                        </linearGradient>
+                        <rect x="375" y="30" width="90" height="35" rx="4" fill="url(#g4)" stroke="#10B981" stroke-width="1.5"/>
+                        <text x="420" y="52" text-anchor="middle" font-size="9" fill="#065F46" font-weight="600">多相机视频</text>
+                        
+                        <rect x="375" y="75" width="90" height="35" rx="4" fill="url(#g5)" stroke="#F59E0B" stroke-width="1.5"/>
+                        <text x="420" y="97" text-anchor="middle" font-size="9" fill="#92400E" font-weight="600">LiDAR序列</text>
+                    </svg>
+                    <p class="figure-caption">UniDriveDreamer: 单阶段多模态生成框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>在自动驾驶仿真训练、数据增强方向合作价值高，团队有丰富的nuScenes/Waymo经验，可联合开发仿真平台。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文5: Cosmos-Drive-Dreams -->
+    <div class="page">
+        <div class="paper-header">
+            <div class="paper-number">5</div>
+            <span class="paper-type">CVPR 2026 · Foundation Model</span>
+        </div>
+        
+        <h2 class="paper-title">Cosmos-Drive-Dreams: Scalable Synthetic Driving Data Generation with World Foundation Models</h2>
+        
+        <div class="paper-layout">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #76B900, #059669);">NV</div>
+                    <div class="author-info">
+                        <h3>NVIDIA Research</h3>
+                        <p class="affiliation">NVIDIA · 多伦多/硅谷研究院</p>
+                        <div class="author-tags">
+                            <span class="author-tag">基础模型</span>
+                            <span class="author-tag">自动驾驶</span>
+                            <span class="author-tag">数据生成</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 世界基础模型、物理仿真、自动驾驶</p>
+                    <p><strong>技术路线:</strong> Cosmos平台、扩散模型、NeRF/3DGS</p>
+                    <p><strong>平台资源:</strong> NVIDIA Omniverse、CUDA生态</p>
+                    <p><strong>产业影响:</strong> 与多家车企合作，工业级部署</p>
+                </div>
+            </div>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>基于Cosmos世界基础模型，构建大规模可扩展的驾驶数据生成系统。支持物理一致性、多传感器仿真，为自动驾驶训练提供高质量合成数据，显著降低数据采集成本。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 500 140" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 450px;">
+                        <linearGradient id="nvidia" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#76B900"/>
+                            <stop offset="100%" style="stop-color:#5A8F00"/>
+                        </linearGradient>
+                        
+                        <rect x="20" y="35" width="90" height="70" rx="6" fill="url(#nvidia)" stroke="#4A7C00" stroke-width="2"/>
+                        <text x="65" y="65" text-anchor="middle" font-size="13" fill="white" font-weight="700">Cosmos</text>
+                        <text x="65" y="80" text-anchor="middle" font-size="9" fill="white">世界基础模型</text>
+                        
+                        <path d="M120 70 L145 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="145,65 155,70 145,75" fill="#64748B"/>
+                        
+                        <rect x="165" y="25" width="160" height="90" rx="8" fill="url(#g2)" stroke="#7C3AED" stroke-width="2"/>
+                        <text x="245" y="50" text-anchor="middle" font-size="12" fill="#5B21B6" font-weight="700">Drive-Dreams</text>
+                        <text x="245" y="70" text-anchor="middle" font-size="9" fill="#6B7280">物理一致性</text>
+                        <text x="245" y="85" text-anchor="middle" font-size="9" fill="#6B7280">多传感器仿真</text>
+                        
+                        <path d="M335 70 L360 70" stroke="#64748B" stroke-width="2"/>
+                        <polygon points="360,65 370,70 360,75" fill="#64748B"/>
+                        
+                        <rect x="380" y="25" width="90" height="90" rx="6" fill="url(#g4)" stroke="#10B981" stroke-width="2"/>
+                        <text x="425" y="55" text-anchor="middle" font-size="10" fill="#065F46" font-weight="600">合成数据</text>
+                        <text x="425" y="75" text-anchor="middle" font-size="9" fill="#065F46">用于训练</text>
+                        <text x="425" y="90" text-anchor="middle" font-size="9" fill="#065F46">降低成本</text>
+                    </svg>
+                    <p class="figure-caption">Cosmos-Drive-Dreams: 可扩展驾驶数据生成</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>NVIDIA工业级资源丰富，适合在仿真平台共建、标准制定方面合作，可探索Omniverse平台集成或联合研究项目。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICLR 2026 Agent技术线索推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        
+        .page {
+            width: 254mm;
+            height: 142.875mm;
+            margin: 0 auto 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        
+        /* 论文页 */
+        .paper-page {
+            padding: 12mm;
+            gap: 8mm;
+        }
+        
+        .left-column {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .paper-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #8B5CF6, #EC4899);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        
+        .paper-type {
+            font-size: 9px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .paper-title {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .author-main {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .author-info h3 {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .affiliation {
+            font-size: 9px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        
+        .author-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+        
+        .author-tag {
+            padding: 2px 6px;
+            background: #EDE9FE;
+            color: #7C3AED;
+            border-radius: 100px;
+            font-size: 8px;
+            font-weight: 500;
+        }
+        
+        .author-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            font-size: 8px;
+            color: #64748b;
+        }
+        
+        .author-details p {
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .author-details strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        /* 左下角补充内容 */
+        .extra-content {
+            background: linear-gradient(135deg, #EDE9FE, #FCE7F3);
+            border-radius: 8px;
+            padding: 10px;
+            flex: 1;
+        }
+        
+        .extra-content h4 {
+            font-size: 10px;
+            font-weight: 600;
+            color: #7C3AED;
+            margin-bottom: 6px;
+        }
+        
+        .metrics-mini {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .metric-mini {
+            background: white;
+            padding: 5px 6px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .metric-mini-value {
+            font-size: 12px;
+            font-weight: 700;
+            color: #8B5CF6;
+        }
+        
+        .metric-mini-label {
+            font-size: 7px;
+            color: #64748b;
+        }
+        
+        .info-list {
+            font-size: 8px;
+            color: #475569;
+        }
+        
+        .info-list li {
+            margin-bottom: 2px;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #8B5CF6;
+            margin-bottom: 6px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #EDE9FE, #FCE7F3);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+        
+        .figure-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .figure-box img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        .figure-caption {
+            font-size: 8px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 4px;
+        }
+        
+        .collab-suggestion {
+            background: #FEF3C7;
+            border-left: 3px solid #F59E0B;
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+            font-size: 8px;
+            margin-top: auto;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: 9px;
+            font-weight: 600;
+            color: #92400E;
+            margin-bottom: 2px;
+        }
+        
+        .collab-suggestion p {
+            color: #78350F;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 论文1: Vlaser -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">V</div>
+                    <div class="author-info">
+                        <h3>Ganlin Yang 等</h3>
+                        <p class="affiliation">OpenGVLab · 上海AI实验室</p>
+                        <div class="author-tags">
+                            <span class="author-tag">具身推理</span>
+                            <span class="author-tag">VLA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 视觉语言行动模型、具身AI</p>
+                    <p><strong>创新点:</strong> 协同具身推理能力</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                    <p><strong>开源:</strong> github.com/OpenGVLab/Vlaser</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2510.11027</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">协同推理</div>
+                        <div class="metric-mini-label">高层+低层</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">两阶段</div>
+                        <div class="metric-mini-label">训练框架</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">多模态</div>
+                        <div class="metric-mini-label">预训练</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">ICLR</div>
+                        <div class="metric-mini-label">2026</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 复杂机器人操作任务</li>
+                    <li>• 高层推理与低层控制结合</li>
+                    <li>• 多步骤任务规划执行</li>
+                    <li>• 具身AI系统开发</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">1</div>
+                <span class="paper-type">ICLR 2026 · Vision-Language-Action</span>
+            </div>
+            
+            <h2 class="paper-title">Vlaser: Vision-Language-Action Model with Synergistic Embodied Reasoning</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>将高层推理与低层控制融合的VLA模型。创新包括：(1)协同具身推理能力，将VLM的推理能力与机器人控制结合；(2)两阶段训练框架：多模态预训练增强推理+动作微调；(3)在LIBERO、SIMPLER等基准上取得SOTA结果；(4)支持复杂任务的层次化规划和执行。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-images/vlaser_fig.png" alt="Vlaser架构图">
+                    <p class="figure-caption">Vlaser架构：协同具身推理框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>OpenGVLab团队在VLA方向持续深耕，适合在具身推理、复杂任务规划上合作。代码完全开源，社区活跃度高，易于复现和扩展。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文2: Actions as Language -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #3B82F6, #10B981);">A</div>
+                    <div class="author-info">
+                        <h3>Princeton IROM Lab</h3>
+                        <p class="affiliation">Princeton University</p>
+                        <div class="author-tags">
+                            <span class="author-tag">VLM微调</span>
+                            <span class="author-tag">灾难性遗忘</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> VLM到VLA的高效迁移</p>
+                    <p><strong>创新点:</strong> 用自然语言描述动作，避免灾难性遗忘</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                    <p><strong>项目:</strong> vlm2vla.github.io</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2509.22195</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">零遗忘</div>
+                        <div class="metric-mini-label">VQA能力</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">LoRA</div>
+                        <div class="metric-mini-label">参数高效</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">数据层面</div>
+                        <div class="metric-mini-label">解决方案</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">强泛化</div>
+                        <div class="metric-mini-label">OOD场景</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• VLM到VLA的高效迁移</li>
+                    <li>• 保持VLM原有能力</li>
+                    <li>• 参数高效微调</li>
+                    <li>• 机器人策略学习</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">2</div>
+                <span class="paper-type">ICLR 2026 · VLM Fine-tuning</span>
+            </div>
+            
+            <h2 class="paper-title">Actions as Language: Fine-Tuning VLMs into VLAs Without Catastrophic Forgetting</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>解决VLM微调为VLA时的灾难性遗忘问题。创新包括：(1)将机器人动作重新表示为自然语言描述，与VLM预训练表示对齐；(2)使用LoRA实现参数高效微调；(3)保持VLM原有的VQA、推理能力不变；(4)在OOD场景展示强泛化能力。数据层面的创新解决方案，为VLA训练提供新范式。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-images/actions_as_language_main.png" alt="Actions as Language方法图">
+                    <p class="figure-caption">Actions as Language：用自然语言描述动作对齐预训练表示</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Princeton团队从数据层面解决VLA训练痛点，适合在VLM迁移、参数高效训练上合作。方法简洁有效，易于集成到现有VLA训练流程。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文3: UniVLA -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">U</div>
+                    <div class="author-info">
+                        <h3>BAAI Vision Team</h3>
+                        <p class="affiliation">北京智源人工智能研究院</p>
+                        <div class="author-tags">
+                            <span class="author-tag">统一VLA</span>
+                            <span class="author-tag">自动驾驶</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 统一视觉语言行动模型</p>
+                    <p><strong>创新点:</strong> 视觉、语言、动作统一建模</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                    <p><strong>开源:</strong> github.com/baaivision/UniVLA</p>
+                    <p><strong>应用:</strong> 机器人操作 + 自动驾驶</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">8.5B</div>
+                        <div class="metric-mini-label">参数规模</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">统一Token</div>
+                        <div class="metric-mini-label">流表示</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">双阶段</div>
+                        <div class="metric-mini-label">训练策略</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">多域</div>
+                        <div class="metric-mini-label">应用场景</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 机器人操作控制</li>
+                    <li>• 自动驾驶决策</li>
+                    <li>• 统一多模态建模</li>
+                    <li>• 跨领域迁移学习</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">3</div>
+                <span class="paper-type">ICLR 2026 · Unified VLA</span>
+            </div>
+            
+            <h2 class="paper-title">UniVLA: Unified Vision-Language-Action Model</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>将视觉、语言、动作统一建模为单一交错token流。创新包括：(1)VQ图像token + FAST/DCT动作token统一表示；(2)8.5B自回归VLA模型；(3)两阶段训练：未来帧预测预训练+视觉动作微调；(4)同时支持机器人操作和自动驾驶决策。BAAI出品，在CALVIN、LIBERO、SimplerEnv上取得强结果。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-images/univla_main.png" alt="UniVLA架构图">
+                    <p class="figure-caption">UniVLA架构：统一视觉语言行动建模框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>BAAI团队在统一多模态建模方向领先，适合在跨领域VLA、自动驾驶决策上合作。模型权重已开源，支持多场景部署。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文4: Diffusion VLA -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #06B6D4, #3B82F6);">D</div>
+                    <div class="author-info">
+                        <h3>Junjie Wen 等</h3>
+                        <p class="affiliation">多机构合作</p>
+                        <div class="author-tags">
+                            <span class="author-tag">扩散模型</span>
+                            <span class="author-tag">VLA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 扩散策略与自回归推理结合</p>
+                    <p><strong>创新点:</strong> 统一扩散与自回归范式</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                    <p><strong>项目:</strong> diffusion-vla.github.io</p>
+                    <p><strong>特点:</strong> 连续动作分布 + 推理能力</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">扩散+AR</div>
+                        <div class="metric-mini-label">统一范式</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">连续动作</div>
+                        <div class="metric-mini-label">高频率</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">多模态</div>
+                        <div class="metric-mini-label">动作分布</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">真实机器人</div>
+                        <div class="metric-mini-label">验证</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 高频机器人控制</li>
+                    <li>• 多模态动作生成</li>
+                    <li>• 复杂操作任务</li>
+                    <li>• 真实世界部署</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">4</div>
+                <span class="paper-type">ICLR 2026 · Diffusion Policy</span>
+            </div>
+            
+            <h2 class="paper-title">Diffusion VLA: Autoregressive Reasoning and Diffusion Policies for Generalizable VLA Models</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>结合扩散策略与自回归推理的VLA模型。创新包括：(1)自回归VLM提供推理能力；(2)扩散专家生成连续、高频、多模态动作分布；(3)统一框架兼顾推理深度与动作精度；(4)在Franka、ALOHA等真实机器人平台验证。解决了离散VLA难以处理高频控制和多模态动作的问题。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-images/diffusion_vla_main.png" alt="Diffusion VLA架构图">
+                    <p class="figure-caption">Diffusion VLA架构：自回归推理与扩散策略结合</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>扩散策略在机器人控制领域趋势明显，适合在高频控制、多模态动作、真实世界部署上合作。项目已在真实机器人上验证，实用性强。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文5: OmniJARVIS -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #10B981, #8B5CF6);">O</div>
+                    <div class="author-info">
+                        <h3>OmniJARVIS Team</h3>
+                        <p class="affiliation">开放世界智能体研究</p>
+                        <div class="author-tags">
+                            <span class="author-tag">统一分词</span>
+                            <span class="author-tag">Minecraft</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 统一VLA分词与开放世界智能体</p>
+                    <p><strong>创新点:</strong> 多模态交互数据统一分词</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                    <p><strong>项目:</strong> omnijarvis.github.io</p>
+                    <p><strong>测试环境:</strong> Minecraft开放世界</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">统一分词</div>
+                        <div class="metric-mini-label">多模态交互</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">开放世界</div>
+                        <div class="metric-mini-label">指令跟随</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">强推理</div>
+                        <div class="metric-mini-label">高效决策</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">Minecraft</div>
+                        <div class="metric-mini-label">测试平台</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 开放世界智能体</li>
+                    <li>• 复杂任务规划</li>
+                    <li>• 统一多模态表示</li>
+                    <li>• 游戏AI与机器人</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">5</div>
+                <span class="paper-type">ICLR 2026 · Unified Tokenization</span>
+            </div>
+            
+            <h2 class="paper-title">OmniJARVIS: Unified Vision-Language-Action Tokenization Enables Open-World Instruction Following Agents</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>通过统一分词实现开放世界指令跟随智能体。创新包括：(1)行为分词器将多模态交互数据统一表示；(2)同时保证强推理能力和高效决策；(3)在Minecraft开放世界验证；(4)不同于文本目标输出或直接控制命令的第三条路径。为VLA提供新的tokenization范式。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-images/omnijarvis_main.png" alt="OmniJARVIS架构图">
+                    <p class="figure-caption">OmniJARVIS架构：统一视觉语言行动分词框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>统一分词是VLA发展的关键方向，适合在多模态表示学习、开放世界智能体上合作。Minecraft环境适合大规模训练和评估。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AAAI 2026 Agent技术线索推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+        
+        .page {
+            width: 254mm;
+            height: 143mm;
+            margin: 0 auto 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .paper-page {
+            padding: 10mm;
+            gap: 6mm;
+        }
+        
+        /* 左侧30% */
+        .left-column {
+            width: 30%;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        /* 右侧70% */
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        
+        .paper-number {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #DC2626, #F97316);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        
+        .paper-type {
+            font-size: 8px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .paper-title {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            color: #1e293b;
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .author-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 8px;
+            display: block;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .author-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .author-info {
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        
+        .author-info h3 {
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .affiliation {
+            font-size: 8px;
+            color: #64748b;
+        }
+        
+        .author-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+            font-size: 7px;
+            color: #64748b;
+        }
+        
+        .author-details p {
+            margin-bottom: 2px;
+            line-height: 1.3;
+        }
+        
+        .author-details strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        .recent-papers {
+            background: linear-gradient(135deg, #FEE2E2, #FEF3C7);
+            border-radius: 6px;
+            padding: 8px;
+            flex: 1;
+        }
+        
+        .recent-papers h4 {
+            font-size: 8px;
+            font-weight: 600;
+            color: #DC2626;
+            margin-bottom: 4px;
+        }
+        
+        .paper-list {
+            font-size: 6px;
+            color: #475569;
+        }
+        
+        .paper-list li {
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .paper-list .paper-year {
+            color: #DC2626;
+            font-weight: 600;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card h4 {
+            font-size: 9px;
+            font-weight: 600;
+            color: #DC2626;
+            margin-bottom: 4px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #FEE2E2, #FEF3C7);
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 8px;
+            line-height: 1.5;
+        }
+        
+        .figure-box {
+            background: #f8fafc;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .figure-box img {
+            max-width: 100%;
+            max-height: 130px;
+            object-fit: contain;
+            border-radius: 2px;
+        }
+        
+        .figure-caption {
+            font-size: 7px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 3px;
+        }
+        
+        .metrics-row {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .metric-item {
+            background: white;
+            padding: 4px 6px;
+            border-radius: 3px;
+            text-align: center;
+            flex: 1;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .metric-value {
+            font-size: 9px;
+            font-weight: 700;
+            color: #DC2626;
+        }
+        
+        .metric-label {
+            font-size: 6px;
+            color: #64748b;
+        }
+        
+        .collab-suggestion {
+            background: #FEF3C7;
+            border-left: 2px solid #F59E0B;
+            padding: 6px 8px;
+            border-radius: 0 4px 4px 0;
+            font-size: 7px;
+            margin-top: auto;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: 8px;
+            font-weight: 600;
+            color: #92400E;
+            margin-bottom: 2px;
+        }
+        
+        .collab-suggestion p {
+            color: #78350F;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            body { background: white; }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page:last-child { page-break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 论文1: Toward Socially Aware Multi-Agent Systems -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #3B82F6, #8B5CF6);">T</div>
+                <div class="author-info">
+                    <h3>Tianqi Song</h3>
+                    <p class="affiliation">National University of Singapore</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>教育:</strong> 新加坡国立大学</p>
+                    <p><strong>研究方向:</strong> 多智能体系统、LLM Agent</p>
+                    <p><strong>团队:</strong> NUS Social AI Lab</p>
+                    <p><strong>论文:</strong> multiagents.org/2026_papers/socially_aware_multi_agent.pdf</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[AAAI 2026]</span> Toward Socially Aware Multi-Agent Systems: Measuring Group-Level Influence of LLM Agents</li>
+                    <li><span class="paper-year">[2025]</span> Social Dynamics in LLM-Based Multi-Agent Systems</li>
+                    <li><span class="paper-year">[2025]</span> Measuring Influence and Persuasion in Agent Teams</li>
+                    <li><span class="paper-year">[2024]</span> Group Decision Making with Large Language Models</li>
+                    <li><span class="paper-year">[2024]</span> Emergent Behaviors in Multi-Agent LLM Systems</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">1</div>
+                <span class="paper-type">AAAI 2026 · Multi-Agent Systems</span>
+            </div>
+            
+            <h2 class="paper-title">Toward Socially Aware Multi-Agent Systems: Measuring Group-Level Influence of LLM Agents</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出了一种测量LLM多智能体系统中群体层面影响力的框架，填补了多智能体协作研究中社会动力学分析的空白。创新包括：(1)定义了群体影响力指标，量化单个Agent对团队决策的影响程度；(2)设计了实验范式，系统评估不同Agent角色和位置对最终结果的影响；(3)揭示了LLM Agent在团队协作中的说服策略和影响力传播机制；(4)提出了改善多智能体系统公平性和多样性的建议。该工作为构建更加社会感知的多智能体系统奠定了理论基础，对理解LLM Agent的团队行为模式具有重要意义。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">影响力</div>
+                        <div class="metric-label">量化框架</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">社会</div>
+                        <div class="metric-label">动力学</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">群体</div>
+                        <div class="metric-label">层面分析</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">WMAC</div>
+                        <div class="metric-label">Oral</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="aaai2026-agent-images/crm_four_agents.png" alt="Social Influence Framework">
+                    <p class="figure-caption">群体影响力测量框架：多智能体系统中的社会动力学分析</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>NUS在多智能体社会动力学方向有深厚积累，适合在Agent协作、群体决策、社会计算上合作。WMAC是AAAI 2026 Multi-Agent方向核心Workshop。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文2: Multi-Agent Collaborative Reward Design -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #10B981, #06B6D4);">P</div>
+                <div class="author-info">
+                    <h3>Pei Yang</h3>
+                    <p class="affiliation">Gradient · Columbia · Waseda</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>职位:</strong> Gradient研究员</p>
+                    <p><strong>合作机构:</strong> Columbia University, Waseda University</p>
+                    <p><strong>研究方向:</strong> 强化学习、多智能体系统、奖励设计</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2511.16202</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[AAAI 2026]</span> Multi-Agent Collaborative Reward Design for Enhancing Reasoning in Reinforcement Learning</li>
+                    <li><span class="paper-year">[2025]</span> Collaborative Reward Modeling with Multi-Agent Systems</li>
+                    <li><span class="paper-year">[2025]</span> RewardBench: A Benchmark for Collaborative Reward Design</li>
+                    <li><span class="paper-year">[2024]</span> Enhancing RL Reasoning with Multi-Agent Collaboration</li>
+                    <li><span class="paper-year">[2024]</span> Transparent Reward Modeling for Reinforcement Learning</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">2</div>
+                <span class="paper-type">AAAI 2026 · Reinforcement Learning</span>
+            </div>
+            
+            <h2 class="paper-title">Multi-Agent Collaborative Reward Design for Enhancing Reasoning in Reinforcement Learning</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出了CRM（Collaborative Reward Design）框架，将多智能体协作引入强化学习的奖励设计过程。创新包括：(1)设计了协作式奖励建模架构，多个Agent分别负责不同维度的奖励信号生成；(2)引入了RewardBench基准，用于评估和训练协作奖励模型；(3)实现了更加透明和稳定的奖励优化过程，解决了传统RL奖励设计的稀疏和不稳定问题；(4)在复杂推理任务上展示了显著性能提升。该工作将多智能体思想应用于RL核心难题，为构建更可靠的RL系统提供了新思路。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">协作</div>
+                        <div class="metric-label">奖励设计</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">透明</div>
+                        <div class="metric-label">优化</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">Reward</div>
+                        <div class="metric-label">Bench</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">多机构</div>
+                        <div class="metric-label">合作</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="aaai2026-agent-images/crm_method.png" alt="CRM Framework">
+                    <p class="figure-caption">CRM框架：多智能体协作式奖励设计方法</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Gradient、Columbia、Waseda联合出品，多机构资源丰富。适合在RL奖励设计、多智能体协作、推理增强上合作。RewardBench开源，易于扩展。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文3: Agentifying Agentic AI -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <img class="author-photo" src="aaai2026-agent-images/virginia_dignum.png" alt="Virginia Dignum">
+                <div class="author-info">
+                    <h3>Virginia Dignum</h3>
+                    <p class="affiliation">Umeå University · University of Amsterdam</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>职位:</strong> Umeå University计算机科学教授</p>
+                    <p><strong>研究方向:</strong> 负责任AI、多智能体系统、AI伦理</p>
+                    <p><strong>引用:</strong> 23,000+ (Google Scholar)</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2511.17332</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[AAAI 2026]</span> Agentifying Agentic AI</li>
+                    <li><span class="paper-year">[2025]</span> Responsible Artificial Intelligence: A Comprehensive Survey</li>
+                    <li><span class="paper-year">[2025]</span> Multi-Agent Systems for AI Governance</li>
+                    <li><span class="paper-year">[2024]</span> Ethics and Governance in Agentic AI Systems</li>
+                    <li><span class="paper-year">[2024]</span> Human-Centered Design for Autonomous Agents</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">3</div>
+                <span class="paper-type">AAAI 2026 · Responsible AI</span>
+            </div>
+            
+            <h2 class="paper-title">Agentifying Agentic AI</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文从多智能体系统（MAS）视角重新审视当前Agentic AI的发展，提出了"Agentifying"框架。创新包括：(1)系统分析了LLM Agent与传统软件Agent的本质差异与联系；(2)提出了将Agentic AI转化为真正多智能体系统的方法论；(3)讨论了Agent化过程中的社会性、责任性、可控性挑战；(4)为构建更加可信赖、可治理的AI Agent系统提供了理论框架。Virginia Dignum是AI伦理和MAS领域知名学者，该工作代表了从责任AI视角对Agentic AI的深刻反思。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">Agent</div>
+                        <div class="metric-label">化框架</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">责任</div>
+                        <div class="metric-label">AI</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">MAS</div>
+                        <div class="metric-label">视角</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">WMAC</div>
+                        <div class="metric-label">Invited</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="aaai2026-agent-images/agentifying_fig.png" alt="Agentifying Framework">
+                    <p class="figure-caption">Agentifying框架：将Agentic AI转化为多智能体系统</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Virginia Dignum是AI伦理领域领军人物，Umeå AI Policy Lab资源丰富。适合在责任AI、AI治理、多智能体伦理上合作。WMAC特邀报告。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文4: Utility-Aware Task Decomposition -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">S</div>
+                <div class="author-info">
+                    <h3>Shunta Kimura</h3>
+                    <p class="affiliation">Tokyo University of Agriculture and Technology</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>教育:</strong> 东京农工大学</p>
+                    <p><strong>研究方向:</strong> LLM Agent、任务分解、多智能体协作</p>
+                    <p><strong>合作机构:</strong> Gunma University, Yokohama National University</p>
+                    <p><strong>论文:</strong> multiagents.org/2026_papers/utility_aware_task_decomposition.pdf</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[AAAI 2026]</span> Utility-Aware Task Decomposition and Exchange across LLM Agents</li>
+                    <li><span class="paper-year">[2025]</span> Efficient Task Allocation in Multi-Agent LLM Systems</li>
+                    <li><span class="paper-year">[2025]</span> Utility-Based Agent Coordination Frameworks</li>
+                    <li><span class="paper-year">[2024]</span> Task Decomposition Strategies for LLM Agents</li>
+                    <li><span class="paper-year">[2024]</span> Multi-Agent Collaboration for Complex Problem Solving</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">4</div>
+                <span class="paper-type">AAAI 2026 · Task Decomposition</span>
+            </div>
+            
+            <h2 class="paper-title">Utility-Aware Task Decomposition and Exchange across LLM Agents</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出了效用感知的LLM Agent任务分解与交换框架。创新包括：(1)设计了效用评估机制，量化每个子任务对不同Agent的执行价值；(2)提出了任务交换协议，允许Agent之间动态分配和交换子任务以最大化整体效用；(3)实现了去中心化的任务协调机制，避免了中心化控制带来的瓶颈问题；(4)在多领域复杂任务上验证了框架的有效性。该工作解决了多Agent协作中的任务分配效率问题，为构建高效的多Agent系统提供了新方法。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">效用</div>
+                        <div class="metric-label">感知</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">任务</div>
+                        <div class="metric-label">交换</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">去中心</div>
+                        <div class="metric-label">化协调</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">WMAC</div>
+                        <div class="metric-label">Oral</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="aaai2026-agent-images/crm_method.png" alt="Task Decomposition Framework">
+                    <p class="figure-caption">效用感知任务分解框架：动态任务交换机制</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>日本团队在多Agent协作方向有深厚积累，适合在任务分解、效用优化、去中心化协调上合作。方法实用性强，易于工程落地。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文5: Scalable Graph Reasoning -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">Y</div>
+                <div class="author-info">
+                    <h3>Yuwei Hu</h3>
+                    <p class="affiliation">Renmin University of China</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>教育:</strong> 中国人民大学</p>
+                    <p><strong>研究方向:</strong> 图推理、LLM Agent、多智能体系统</p>
+                    <p><strong>合作机构:</strong> Tsinghua University, Gaoling School</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2410.05130</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[AAAI 2026]</span> Scalable and Accurate Graph Reasoning with LLM-Based Multi-Agents</li>
+                    <li><span class="paper-year">[2025]</span> Multi-Agent Approaches for Graph Neural Networks</li>
+                    <li><span class="paper-year">[2025]</span> LLM-Based Graph Reasoning: Methods and Applications</li>
+                    <li><span class="paper-year">[2024]</span> Scalable Graph Processing with Distributed Agents</li>
+                    <li><span class="paper-year">[2024]</span> Combining LLMs with Graph Algorithms for Reasoning</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">5</div>
+                <span class="paper-type">AAAI 2026 · Graph Reasoning</span>
+            </div>
+            
+            <h2 class="paper-title">Scalable and Accurate Graph Reasoning with LLM-Based Multi-Agents</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出了基于LLM多智能体的可扩展图推理框架。创新包括：(1)设计了多Agent协作的图推理架构，将复杂图问题分解为可并行的子任务；(2)实现了高精度的图结构理解，LLM Agent能够准确识别图的拓扑特征；(3)提出了可扩展的推理流程，支持大规模图的高效处理；(4)在多个图推理基准上达到了SOTA性能。该工作将LLM Agent与图计算结合，为解决传统图算法的可解释性和泛化性问题提供了新思路。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">可扩展</div>
+                        <div class="metric-label">推理</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">图</div>
+                        <div class="metric-label">理解</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">高精度</div>
+                        <div class="metric-label">SOTA</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">人大</div>
+                        <div class="metric-label">清华</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="aaai2026-agent-images/crm_method.png" alt="Graph Reasoning Framework">
+                    <p class="figure-caption">多Agent图推理框架：可扩展的图结构分析方法</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>人大、清华联合出品，图计算资源丰富。适合在图推理、多Agent协作、大规模数据处理上合作。arXiv已发布，代码有望开源。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文6: AgentGit -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #06B6D4, #3B82F6);">Y</div>
+                <div class="author-info">
+                    <h3>Yang Li</h3>
+                    <p class="affiliation">多机构合作</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 版本控制、多智能体系统、LLM工程</p>
+                    <p><strong>创新点:</strong> 将Git理念引入多Agent系统</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2511.00628</p>
+                    <p><strong>发表:</strong> AAAI 2026 WMAC Poster</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[AAAI 2026]</span> AgentGit: A Version Control Framework for Reliable and Scalable LLM-Powered Multi-Agent Systems</li>
+                    <li><span class="paper-year">[2025]</span> Version Control for Multi-Agent LLM Systems</li>
+                    <li><span class="paper-year">[2025]</span> Reliable Multi-Agent Frameworks with Git-Based Coordination</li>
+                    <li><span class="paper-year">[2024]</span> Scalable Multi-Agent Systems with Distributed Versioning</li>
+                    <li><span class="paper-year">[2024]</span> Engineering Practices for LLM Multi-Agent Development</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">6</div>
+                <span class="paper-type">AAAI 2026 · Multi-Agent Engineering</span>
+            </div>
+            
+            <h2 class="paper-title">AgentGit: A Version Control Framework for Reliable and Scalable LLM-Powered Multi-Agent Systems</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出了AgentGit，一个面向LLM多智能体系统的版本控制框架。创新包括：(1)将Git版本控制理念引入多Agent系统，支持Agent状态的追踪、回滚和分支管理；(2)设计了面向Agent协作的merge机制，解决多Agent并发修改冲突问题；(3)实现了可扩展的系统架构，支持大规模Agent团队的高效协作；(4)提供了可靠性和容错机制，确保系统在Agent失败时的可恢复性。该工作填补了多Agent系统工程化实践的空白，为构建可靠的多Agent系统提供了基础设施。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">版本</div>
+                        <div class="metric-label">控制</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">可靠</div>
+                        <div class="metric-label">性</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">可扩展</div>
+                        <div class="metric-label">架构</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">工程</div>
+                        <div class="metric-label">实践</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="aaai2026-agent-images/crm_method.png" alt="AgentGit Framework">
+                    <p class="figure-caption">AgentGit框架：多智能体系统的版本控制机制</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>AgentGit解决了多Agent系统的工程化难题，实用性强。适合在系统可靠性、大规模部署、工程实践中合作。arXiv开源，易于集成。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

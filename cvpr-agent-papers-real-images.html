@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVPR 2026/2025 Agent技术线索推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+        
+        .page {
+            width: 254mm;
+            height: 142.875mm;
+            margin: 0 auto 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        
+        /* 论文页 */
+        .paper-page {
+            padding: 12mm;
+            gap: 8mm;
+        }
+        
+        .left-column {
+            width: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .paper-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+        
+        .paper-type {
+            font-size: 9px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .paper-title {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .author-main {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+        
+        .author-info h3 {
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+        
+        .affiliation {
+            font-size: 9px;
+            color: #64748b;
+            margin-bottom: 4px;
+        }
+        
+        .author-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+        }
+        
+        .author-tag {
+            padding: 2px 6px;
+            background: #D1FAE5;
+            color: #059669;
+            border-radius: 100px;
+            font-size: 8px;
+            font-weight: 500;
+        }
+        
+        .author-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 8px;
+            font-size: 8px;
+            color: #64748b;
+        }
+        
+        .author-details p {
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .author-details strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        /* 左下角补充内容 */
+        .extra-content {
+            background: linear-gradient(135deg, #D1FAE5, #DBEAFE);
+            border-radius: 8px;
+            padding: 10px;
+            flex: 1;
+        }
+        
+        .extra-content h4 {
+            font-size: 10px;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 6px;
+        }
+        
+        .metrics-mini {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .metric-mini {
+            background: white;
+            padding: 5px 6px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .metric-mini-value {
+            font-size: 12px;
+            font-weight: 700;
+            color: #10B981;
+        }
+        
+        .metric-mini-label {
+            font-size: 7px;
+            color: #64748b;
+        }
+        
+        .info-list {
+            font-size: 8px;
+            color: #475569;
+        }
+        
+        .info-list li {
+            margin-bottom: 2px;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card h4 {
+            font-size: 11px;
+            font-weight: 600;
+            color: #10B981;
+            margin-bottom: 6px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #D1FAE5, #DBEAFE);
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 9px;
+            line-height: 1.5;
+        }
+        
+        .figure-box {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .figure-box img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        
+        .figure-caption {
+            font-size: 8px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 4px;
+        }
+        
+        .collab-suggestion {
+            background: #FEF3C7;
+            border-left: 3px solid #F59E0B;
+            padding: 8px 10px;
+            border-radius: 0 6px 6px 0;
+            font-size: 8px;
+            margin-top: auto;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: 9px;
+            font-weight: 600;
+            color: #92400E;
+            margin-bottom: 2px;
+        }
+        
+        .collab-suggestion p {
+            color: #78350F;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 论文1: Magma -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #76B900, #059669);">杨</div>
+                    <div class="author-info">
+                        <h3>Jianwei Yang (杨建伟)</h3>
+                        <p class="affiliation">Microsoft Research · xAI</p>
+                        <div class="author-tags">
+                            <span class="author-tag">AI代理</span>
+                            <span class="author-tag">多模态</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>职位:</strong> 原MSR首席研究员，现xAI技术团队</p>
+                    <p><strong>获奖:</strong> CVPR 2022 Best Paper Final (GLIP)</p>
+                    <p><strong>代表工作:</strong> Magma、GLIP、X-Decoder、SEEM</p>
+                    <p><strong>近作:</strong> Phi-3-Vision、Semantic-SAM (ECCV 2024)</p>
+                    <p><strong>论文:</strong> openaccess.thecvf.com/content/CVPR2025/papers/Yang_Magma</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">统一</div>
+                        <div class="metric-mini-label">理解+行动</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">双环境</div>
+                        <div class="metric-mini-label">数字+物理</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">HN第一</div>
+                        <div class="metric-mini-label">热度排名</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">Microsoft</div>
+                        <div class="metric-mini-label">旗舰项目</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• UI自动化导航与操作</li>
+                    <li>• 物理机器人控制</li>
+                    <li>• 多模态AI代理系统</li>
+                    <li>• 跨环境任务执行</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">1</div>
+                <span class="paper-type">CVPR 2025 · Multimodal AI Agent</span>
+            </div>
+            
+            <h2 class="paper-title">Magma: A Foundation Model for Multimodal AI Agents</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首个能理解和执行多模态输入的基础模型，同时具备数字环境UI导航和物理环境机器人操作能力。创新包括：(1)保留视觉语言理解能力；(2)添加行动执行能力；(3)数字物理世界无缝切换；(4)支持UI元素定位、机器人操作规划。项目在Hacker News排名第一，代表Microsoft Research在多模态AI代理方向的旗舰工作。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="cvpr2026-images/magma_pretrain.png" alt="Magma架构图">
+                    <p class="figure-caption">Magma架构：统一理解与行动的多模态AI代理框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Microsoft Research在多模态AI代理方向领先，适合在基础模型、跨环境AI系统方向合作。项目开源(github.com/microsoft/Magma)，社区活跃度高，易于扩展应用。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文2: OpenVLA -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #3B82F6, #8B5CF6);">M</div>
+                    <div class="author-info">
+                        <h3>Moo Jin Kim</h3>
+                        <p class="affiliation">Stanford · UC Berkeley</p>
+                        <div class="author-tags">
+                            <span class="author-tag">机器人学习</span>
+                            <span class="author-tag">VLA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>合作团队:</strong> Chelsea Finn (Stanford教授), Sergey Levine (UC Berkeley教授)</p>
+                    <p><strong>研究方向:</strong> 机器人学习、视觉语言行动模型</p>
+                    <p><strong>代表工作:</strong> OpenVLA、RT-X数据集、Meta-World</p>
+                    <p><strong>开源:</strong> github.com/openvla/openvla</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2406.09246</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">+16.5%</div>
+                        <div class="metric-mini-label">超越RT-2-X</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">7B</div>
+                        <div class="metric-mini-label">参数量</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">完全开源</div>
+                        <div class="metric-mini-label">训练配方</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">29任务</div>
+                        <div class="metric-mini-label">测试场景</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 机器人操作控制</li>
+                    <li>• 跨机器人平台部署</li>
+                    <li>• 参数高效微调(LoRA)</li>
+                    <li>• 新机器人快速适配</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">2</div>
+                <span class="paper-type">arXiv 2024 · Vision-Language-Action</span>
+            </div>
+            
+            <h2 class="paper-title">OpenVLA: An Open-Source Vision-Language-Action Model</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>开源7B参数VLA模型，在29个任务上超越RT-2-X (55B) 16.5%，参数量仅1/7。创新包括：(1)基于Prismatic-7B VLM微调；(2)完整的开源训练配方；(3)支持参数高效微调(LoRA)；(4)跨机器人平台泛化能力。首个高性能开源VLA模型，降低了机器人学习门槛。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="cvpr2026-images/openvla_model.jpg" alt="OpenVLA架构图">
+                    <p class="figure-caption">OpenVLA架构：基于Prismatic VLM的机器人操作模型</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Stanford/UC Berkeley团队在机器人学习方向资源丰富，适合在机器人部署、数据集构建、真实场景验证上合作。模型完全开源，易于二次开发和定制。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文3: RT-2 -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #4285F4, #EA4335);">G</div>
+                    <div class="author-info">
+                        <h3>Google DeepMind</h3>
+                        <p class="affiliation">Robotics Team</p>
+                        <div class="author-tags">
+                            <span class="author-tag">VLA</span>
+                            <span class="author-tag">机器人</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>核心贡献者:</strong> Anthony Brohan, Noah Brown等</p>
+                    <p><strong>研究方向:</strong> 视觉语言行动模型、机器人学习</p>
+                    <p><strong>代表工作:</strong> RT-1、RT-2、RT-X、SayCan</p>
+                    <p><strong>数据集:</strong> RT-X (100万+机器人轨迹)</p>
+                    <p><strong>论文:</strong> robotics-transformer2.github.io</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">首个</div>
+                        <div class="metric-mini-label">VLA模型</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">55B</div>
+                        <div class="metric-mini-label">参数规模</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">涌现能力</div>
+                        <div class="metric-mini-label">推理能力</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">6K+</div>
+                        <div class="metric-mini-label">评估试验</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 机器人操作推理</li>
+                    <li>• 零样本任务迁移</li>
+                    <li>• 语言指令执行</li>
+                    <li>• 多机器人平台部署</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">3</div>
+                <span class="paper-type">Google DeepMind · Vision-Language-Action</span>
+            </div>
+            
+            <h2 class="paper-title">RT-2: Vision-Language-Action Models Transfer Web Knowledge to Robotic Control</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首个将视觉语言模型(VLM)转化为视觉语言行动模型(VLA)的工作，直接输出机器人动作。创新包括：(1)VLM预训练+机器人数据联合训练；(2)涌现推理能力（数学推理、符号理解、多语言理解）；(3)基于PaLM-E和PaLI-X两种实现；(4)Web知识迁移到机器人控制。奠基性工作，定义了VLA模型范式。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="cvpr2026-images/rt2_fig1.png" alt="RT-2架构图">
+                    <p class="figure-caption">RT-2架构：视觉语言模型转化为机器人控制系统</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Google DeepMind在VLA方向奠基性工作，适合在基础研究、大规模数据集(RT-X)上合作。RT-X数据集已开放，包含100万+机器人轨迹，可用于模型训练。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文4: CoT-VLA -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #8B5CF6, #EC4899);">赵</div>
+                    <div class="author-info">
+                        <h3>Yuwang Zhao</h3>
+                        <p class="affiliation">研究团队</p>
+                        <div class="author-tags">
+                            <span class="author-tag">视觉推理</span>
+                            <span class="author-tag">VLA</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 视觉推理、机器人学习、链式思维</p>
+                    <p><strong>创新点:</strong> 将链式思维引入VLA模型</p>
+                    <p><strong>发表:</strong> CVPR 2025</p>
+                    <p><strong>应用:</strong> 复杂任务规划、多步骤推理</p>
+                    <p><strong>论文:</strong> openaccess.thecvf.com/content/CVPR2025/papers/Zhao_CoT-VLA</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">链式推理</div>
+                        <div class="metric-mini-label">CoT能力</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">视觉</div>
+                        <div class="metric-mini-label">思维链</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">多步规划</div>
+                        <div class="metric-mini-label">任务分解</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">CVPR</div>
+                        <div class="metric-mini-label">2025</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 复杂操作任务规划</li>
+                    <li>• 多步骤推理执行</li>
+                    <li>• 任务分解与规划</li>
+                    <li>• 推理过程可视化</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">4</div>
+                <span class="paper-type">CVPR 2025 · Visual Reasoning</span>
+            </div>
+            
+            <h2 class="paper-title">CoT-VLA: Visual Chain-of-Thought Reasoning for Vision-Language-Action Models</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>将视觉链式思维(Chain-of-Thought)推理引入VLA模型，显著提升复杂任务的规划与执行能力。创新包括：(1)视觉推理链构建方法；(2)多步骤任务分解机制；(3)推理过程可视化；(4)与现有VLA模型无缝集成。CVPR 2025发表，扩展了VLA模型在复杂场景下的推理深度。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="cvpr2026-images/cot_vla_pipeline.png" alt="CoT-VLA架构图">
+                    <p class="figure-caption">CoT-VLA架构：视觉链式思维推理框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>在需要复杂推理的机器人任务上有应用潜力，适合与现有VLA模型(OpenVLA、RT-2)结合，提升复杂任务的执行成功率。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文5: Embodied AI Workshop -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #10B981, #3B82F6);">EAI</div>
+                    <div class="author-info">
+                        <h3>Embodied AI Workshop</h3>
+                        <p class="affiliation">CVPR 2026 · 第6届</p>
+                        <div class="author-tags">
+                            <span class="author-tag">具身智能</span>
+                            <span class="author-tag">导航操作</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>主题:</strong> 具身智能体的看、说、听、推理、行动</p>
+                    <p><strong>领域:</strong> 计算机视觉、语言、图形、机器人</p>
+                    <p><strong>挑战赛:</strong> 视觉导航、物体操作、社交交互</p>
+                    <p><strong>仿真平台:</strong> Habitat、AI2-THOR、BEHAVIOR</p>
+                    <p><strong>官网:</strong> embodied-ai.org</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">第6届</div>
+                        <div class="metric-mini-label">年度会议</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">多模态</div>
+                        <div class="metric-mini-label">感知交互</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">仿真平台</div>
+                        <div class="metric-mini-label">环境支持</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">挑战赛</div>
+                        <div class="metric-mini-label">基准测试</div>
+                    </div>
+                </div>
+                <h4>🎯 研究方向</h4>
+                <ul class="info-list">
+                    <li>• 视觉导航与探索</li>
+                    <li>• 物体操作与交互</li>
+                    <li>• 人机交互与协作</li>
+                    <li>• 多智能体系统</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">5</div>
+                <span class="paper-type">CVPR 2026 Workshop · Embodied AI</span>
+            </div>
+            
+            <h2 class="paper-title">6th Embodied AI Workshop: Agents that See, Talk, Listen, Reason, and Act</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心主题：</strong>CVPR 2026第6届Embodied AI Workshop，聚焦具身智能体在交互环境中的多模态能力。涵盖视觉导航、物体操作、社交交互等核心挑战，连接计算机视觉、语言、图形和机器人领域。提供标准化仿真平台(Habitat、AI2-THOR)和基准测试，推动具身AI研究发展。
+                </div>
+                
+                <div class="figure-box">
+                    <img src="cvpr2026-images/magma_agentic.png" alt="Embodied AI多模态交互">
+                    <p class="figure-caption">Embodied AI：多模态感知与交互能力框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>CVPR官方Workshop，汇聚顶尖研究团队，适合关注具身AI最新进展、参与挑战赛、建立学术合作。提供标准化仿真平台和基准测试，便于算法验证和对比。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

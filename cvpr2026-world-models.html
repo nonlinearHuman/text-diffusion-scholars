@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVPR 2026 世界模型技术线索推荐</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #dbeafe;
+            --accent: #7c3aed;
+            --accent-light: #ede9fe;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --border: #e2e8f0;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 3%;
+        }
+        
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* 封面页 */
+        .slide-title {
+            text-align: center;
+            background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 50%, #fef3c7 100%);
+        }
+        
+        .slide-title .slide-content { align-items: center; }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--primary);
+            color: white;
+            border-radius: 100px;
+            font-size: clamp(0.75rem, 2vw, 0.875rem);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .slide-title h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .slide-title .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(0.75rem, 2vw, 1.5rem);
+            width: 100%;
+            max-width: 500px;
+        }
+        
+        @media (min-width: 768px) {
+            .stats { grid-template-columns: repeat(4, 1fr); max-width: 700px; }
+        }
+        
+        .stat {
+            background: white;
+            padding: clamp(1rem, 2vw, 1.5rem);
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .stat-value {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: clamp(0.7rem, 1.5vw, 0.875rem);
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        
+        /* 论文页 */
+        .paper-page {
+            background: var(--bg);
+        }
+        
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .paper-number {
+            width: clamp(28px, 5vw, 36px);
+            height: clamp(28px, 5vw, 36px);
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: clamp(0.875rem, 2vw, 1rem);
+        }
+        
+        .paper-type {
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            color: var(--text-muted);
+        }
+        
+        .paper-title {
+            font-size: clamp(1.25rem, 3.5vw, 1.75rem);
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1.5rem;
+            color: var(--text);
+        }
+        
+        .paper-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: clamp(1.5rem, 3vw, 2rem);
+        }
+        
+        @media (min-width: 768px) {
+            .paper-layout { grid-template-columns: 1fr 1.2fr; }
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .author-main {
+            display: flex;
+            gap: clamp(1rem, 2vw, 1.5rem);
+            align-items: flex-start;
+            margin-bottom: 1.25rem;
+        }
+        
+        .author-avatar {
+            width: clamp(60px, 15vw, 90px);
+            height: clamp(60px, 15vw, 90px);
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 700;
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+        
+        .author-info h3 {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .author-info .affiliation {
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .author-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .author-tag {
+            padding: 0.25rem 0.625rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 100px;
+            font-size: clamp(0.625rem, 1.5vw, 0.75rem);
+        }
+        
+        .author-details {
+            border-top: 1px solid var(--border);
+            padding-top: 1rem;
+        }
+        
+        .author-details p {
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+        
+        .author-details strong {
+            color: var(--text);
+            min-width: 4rem;
+        }
+        
+        /* 论文内容卡片 */
+        .content-card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: clamp(1.25rem, 3vw, 1.75rem);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        
+        .content-card h4 {
+            font-size: clamp(0.875rem, 2vw, 1rem);
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-light));
+            padding: clamp(0.875rem, 2vw, 1.25rem);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box p {
+            font-size: clamp(0.8125rem, 1.75vw, 0.9375rem);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .figure-box {
+            background: var(--bg);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .figure-box svg {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+        }
+        
+        .figure-caption {
+            font-size: clamp(0.6875rem, 1.5vw, 0.75rem);
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .collab-suggestion {
+            background: #fef3c7;
+            border-left: 3px solid #f59e0b;
+            padding: 0.875rem 1rem;
+            border-radius: 0 8px 8px 0;
+            margin-top: 1rem;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.25rem;
+        }
+        
+        .collab-suggestion p {
+            font-size: clamp(0.6875rem, 1.5vw, 0.8125rem);
+            color: #78350f;
+        }
+        
+        /* 导航 */
+        .nav-dots {
+            position: fixed;
+            right: clamp(0.75rem, 2vw, 1.5rem);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            width: clamp(8px, 2vw, 12px);
+            height: clamp(8px, 2vw, 12px);
+            border-radius: 50%;
+            background: var(--border);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .nav-dot:hover { background: var(--text-muted); }
+        .nav-dot.active { background: var(--primary); transform: scale(1.3); }
+        
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            z-index: 100;
+            transition: width 0.3s;
+        }
+        
+        /* 动画 */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .slide.visible .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .hint {
+            text-align: center;
+            font-size: clamp(0.6875rem, 1.5vw, 0.75rem);
+            color: var(--text-muted);
+            margin-top: 2rem;
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .fade-in { transition: none; opacity: 1; transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress" id="progress"></div>
+    <nav class="nav-dots" id="navDots"></nav>
+
+    <!-- 封面 -->
+    <section class="slide slide-title" data-slide="0">
+        <div class="slide-content">
+            <div class="badge fade-in">CVPR 2026</div>
+            <h1 class="fade-in">世界模型技术线索推荐</h1>
+            <p class="subtitle fade-in">World Models for Video Generation, Embodied AI & Autonomous Driving</p>
+            <div class="stats fade-in">
+                <div class="stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">精选论文</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">World</div>
+                    <div class="stat-label">Model方向</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">顶尖机构</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2026</div>
+                    <div class="stat-label">最新研究</div>
+                </div>
+            </div>
+            <p class="hint fade-in">滚动或点击右侧圆点翻页</p>
+        </div>
+    </section>
+
+    <!-- 论文1: UCM -->
+    <section class="slide paper-page" data-slide="1">
+        <div class="slide-content">
+            <div class="paper-header fade-in">
+                <div class="paper-number">1</div>
+                <span class="paper-type">CVPR 2026 · World Model</span>
+            </div>
+            
+            <h2 class="paper-title fade-in">UCM: Unifying Camera Control and Memory with Time-aware Positional Encoding Warping</h2>
+            
+            <div class="paper-layout fade-in">
+                <div class="author-card">
+                    <div class="author-main">
+                        <div class="author-avatar">李</div>
+                        <div class="author-info">
+                            <h3>Li Hu (胡力)</h3>
+                            <p class="affiliation">HumanAIGC · 清华大学</p>
+                            <div class="author-tags">
+                                <span class="author-tag">视频生成</span>
+                                <span class="author-tag">世界模型</span>
+                                <span class="author-tag">相机控制</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-details">
+                        <p><strong>毕业院校</strong>清华大学 计算机系</p>
+                        <p><strong>研究方向</strong>视频生成、世界模型、神经渲染</p>
+                        <p><strong>获奖经历</strong>ICLR 2025 Poster, CVPR多篇一作</p>
+                        <p><strong>代表性工作</strong>CameraCtrl, World-Simulator Survey</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h4>💡 创新点总结</h4>
+                    <div class="highlight-box">
+                        <p><strong>核心贡献：</strong>首次统一长期记忆与精确相机控制，通过时间感知位置编码变形机制，解决场景重访时内容一致性问题。设计双流扩散Transformer实现高保真生成，在500K+单目视频上训练。</p>
+                    </div>
+                    
+                    <div class="figure-box">
+                        <svg viewBox="0 0 300 100">
+                            <rect x="20" y="20" width="80" height="60" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+                            <text x="60" y="45" text-anchor="middle" font-size="8" fill="#2563eb">时间感知</text>
+                            <text x="60" y="58" text-anchor="middle" font-size="8" fill="#2563eb">位置编码</text>
+                            
+                            <rect x="110" y="20" width="80" height="60" rx="8" fill="#ede9fe" stroke="#7c3aed" stroke-width="2"/>
+                            <text x="150" y="45" text-anchor="middle" font-size="8" fill="#7c3aed">双流DiT</text>
+                            <text x="150" y="58" text-anchor="middle" font-size="8" fill="#7c3aed">高保真生成</text>
+                            
+                            <rect x="200" y="20" width="80" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                            <text x="240" y="45" text-anchor="middle" font-size="8" fill="#92400e">相机控制</text>
+                            <text x="240" y="58" text-anchor="middle" font-size="8" fill="#92400e">+长期记忆</text>
+                            
+                            <path d="M100 50 L110 50" stroke="#64748b" stroke-width="2" fill="none"/>
+                            <path d="M190 50 L200 50" stroke="#64748b" stroke-width="2" fill="none"/>
+                        </svg>
+                        <p class="figure-caption">UCM架构：统一相机控制与记忆机制</p>
+                    </div>
+                    
+                    <div class="collab-suggestion">
+                        <h5>🤝 合作建议</h5>
+                        <p>适合在自动驾驶仿真、虚拟现实内容生成领域开展合作，团队在视频生成底层技术方面积累深厚。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 论文2: PhysX-Anything -->
+    <section class="slide paper-page" data-slide="2">
+        <div class="slide-content">
+            <div class="paper-header fade-in">
+                <div class="paper-number">2</div>
+                <span class="paper-type">CVPR 2026 · 3D Generation</span>
+            </div>
+            
+            <h2 class="paper-title fade-in">PhysX-Anything: Simulation-Ready Physical 3D Assets from Single Image</h2>
+            
+            <div class="paper-layout fade-in">
+                <div class="author-card">
+                    <div class="author-main">
+                        <div class="author-avatar">刘</div>
+                        <div class="author-info">
+                            <h3>Ziwei Liu (刘子玮)</h3>
+                            <p class="affiliation">NTU MMLab · 新加坡</p>
+                            <div class="author-tags">
+                                <span class="author-tag">3D生成</span>
+                                <span class="author-tag">物理仿真</span>
+                                <span class="author-tag">具身智能</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-details">
+                        <p><strong>毕业院校</strong>中科院自动化所 PhD</p>
+                        <p><strong>研究方向</strong>计算机视觉、3D生成、具身智能</p>
+                        <p><strong>获奖经历</strong>CVPR 2026程序主席、MIT TR35、新加坡总统青年科学家奖</p>
+                        <p><strong>代表性工作</strong>OmniObject3D、数十篇CVPR/ICCV论文</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h4>💡 创新点总结</h4>
+                    <div class="highlight-box">
+                        <p><strong>核心贡献：</strong>首个可直接用于仿真的物理3D资产生成框架，单张图像输入即可输出高质量3D资产。提出VLM物理生成模型，Token数量减少193×，构建PhysX-Mobility数据集（2000+物体）。</p>
+                    </div>
+                    
+                    <div class="figure-box">
+                        <svg viewBox="0 0 300 100">
+                            <rect x="10" y="25" width="60" height="50" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+                            <text x="40" y="55" text-anchor="middle" font-size="9" fill="#1e40af">单图输入</text>
+                            
+                            <rect x="85" y="15" width="130" height="70" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+                            <text x="150" y="40" text-anchor="middle" font-size="9" fill="#5b21b6">VLM物理生成</text>
+                            <text x="150" y="55" text-anchor="middle" font-size="7" fill="#6b7280">几何+物理属性</text>
+                            <text x="150" y="68" text-anchor="middle" font-size="7" fill="#6b7280">Token ↓193×</text>
+                            
+                            <rect x="230" y="25" width="60" height="50" rx="8" fill="#d1fae5" stroke="#10b981"/>
+                            <text x="260" y="48" text-anchor="middle" font-size="8" fill="#065f46">仿真就绪</text>
+                            <text x="260" y="60" text-anchor="middle" font-size="8" fill="#065f46">3D资产</text>
+                            
+                            <path d="M70 50 L85 50" stroke="#64748b" stroke-width="2"/>
+                            <path d="M215 50 L230 50" stroke="#64748b" stroke-width="2"/>
+                        </svg>
+                        <p class="figure-caption">PhysX-Anything: 单图到仿真就绪3D资产</p>
+                    </div>
+                    
+                    <div class="collab-suggestion">
+                        <h5>🤝 合作建议</h5>
+                        <p>在具身AI训练数据生成、机器人仿真环境构建方面合作潜力大，团队在3D领域资源丰富，可联合申请项目。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 论文3: EVA -->
+    <section class="slide paper-page" data-slide="3">
+        <div class="slide-content">
+            <div class="paper-header fade-in">
+                <div class="paper-number">3</div>
+                <span class="paper-type">CVPR 2026 · Embodied AI</span>
+            </div>
+            
+            <h2 class="paper-title fade-in">EVA: Empowering World Models with Reflection for Embodied Video Prediction</h2>
+            
+            <div class="paper-layout fade-in">
+                <div class="author-card">
+                    <div class="author-main">
+                        <div class="author-avatar">王</div>
+                        <div class="author-info">
+                            <h3>研究团队</h3>
+                            <p class="affiliation">北京大学 · 具身智能实验室</p>
+                            <div class="author-tags">
+                                <span class="author-tag">具身智能</span>
+                                <span class="author-tag">视频预测</span>
+                                <span class="author-tag">世界模型</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-details">
+                        <p><strong>研究方向</strong>具身视频预测、自回归世界模型</p>
+                        <p><strong>创新方向</strong>反射机制、多阶段训练</p>
+                        <p><strong>技术路线</strong>视频生成 → 世界建模 → 机器人应用</p>
+                        <p><strong>应用场景</strong>机器人操作、视觉规划</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h4>💡 创新点总结</h4>
+                    <div class="highlight-box">
+                        <p><strong>核心贡献：</strong>提出反射机制增强世界模型，通过多阶段训练范式生成高保真视频帧，采用自回归策略实现更长时序的自适应泛化。为具身智能提供未来场景预测能力。</p>
+                    </div>
+                    
+                    <div class="figure-box">
+                        <svg viewBox="0 0 300 100">
+                            <rect x="20" y="20" width="70" height="60" rx="8" fill="#dbeafe" stroke="#2563eb"/>
+                            <text x="55" y="45" text-anchor="middle" font-size="8" fill="#1e40af">历史帧</text>
+                            <text x="55" y="58" text-anchor="middle" font-size="8" fill="#1e40af">+动作</text>
+                            
+                            <rect x="110" y="20" width="80" height="60" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+                            <text x="150" y="42" text-anchor="middle" font-size="8" fill="#5b21b6">EVA</text>
+                            <text x="150" y="55" text-anchor="middle" font-size="7" fill="#6b7280">反射+自回归</text>
+                            <text x="150" y="68" text-anchor="middle" font-size="7" fill="#6b7280">多阶段训练</text>
+                            
+                            <rect x="210" y="20" width="70" height="60" rx="8" fill="#d1fae5" stroke="#10b981"/>
+                            <text x="245" y="45" text-anchor="middle" font-size="8" fill="#065f46">未来帧</text>
+                            <text x="245" y="58" text-anchor="middle" font-size="8" fill="#065f46">预测</text>
+                            
+                            <path d="M90 50 L110 50" stroke="#64748b" stroke-width="2"/>
+                            <path d="M190 50 L210 50" stroke="#64748b" stroke-width="2"/>
+                        </svg>
+                        <p class="figure-caption">EVA: 反射机制增强的具身视频预测</p>
+                    </div>
+                    
+                    <div class="collab-suggestion">
+                        <h5>🤝 合作建议</h5>
+                        <p>适合在机器人视觉规划、工业自动化场景开展合作，团队在具身智能方向深耕多年，具备机器人平台资源。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 论文4: UniDriveDreamer -->
+    <section class="slide paper-page" data-slide="4">
+        <div class="slide-content">
+            <div class="paper-header fade-in">
+                <div class="paper-number">4</div>
+                <span class="paper-type">CVPR 2026 · Autonomous Driving</span>
+            </div>
+            
+            <h2 class="paper-title fade-in">UniDriveDreamer: A Single-Stage Multimodal World Model for Autonomous Driving</h2>
+            
+            <div class="paper-layout fade-in">
+                <div class="author-card">
+                    <div class="author-main">
+                        <div class="author-avatar">团</div>
+                        <div class="author-info">
+                            <h3>ThinkLab团队</h3>
+                            <p class="affiliation">上海交通大学 · 自动驾驶实验室</p>
+                            <div class="author-tags">
+                                <span class="author-tag">自动驾驶</span>
+                                <span class="author-tag">多模态</span>
+                                <span class="author-tag">世界模型</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-details">
+                        <p><strong>研究方向</strong>自动驾驶世界模型、多模态融合</p>
+                        <p><strong>技术路线</strong>单阶段端到端、LiDAR+视频联合生成</p>
+                        <p><strong>平台资源</strong>nuScenes、Waymo数据集经验</p>
+                        <p><strong>应用场景</strong>仿真训练、轨迹规划、场景预测</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h4>💡 创新点总结</h4>
+                    <div class="highlight-box">
+                        <p><strong>核心贡献：</strong>首个单阶段多模态世界模型，直接生成多相机视频和LiDAR序列，无需中间表示或级联模块。统一驾驶场景理解、轨迹规划和未来帧生成三大任务。</p>
+                    </div>
+                    
+                    <div class="figure-box">
+                        <svg viewBox="0 0 300 100">
+                            <rect x="10" y="30" width="50" height="40" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+                            <text x="35" y="50" text-anchor="middle" font-size="7" fill="#1e40af">历史帧</text>
+                            <text x="35" y="60" text-anchor="middle" font-size="7" fill="#1e40af">+动作</text>
+                            
+                            <rect x="75" y="15" width="150" height="70" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+                            <text x="150" y="38" text-anchor="middle" font-size="9" fill="#5b21b6">UniDriveDreamer</text>
+                            <text x="150" y="52" text-anchor="middle" font-size="7" fill="#6b7280">单阶段多模态生成</text>
+                            <text x="150" y="65" text-anchor="middle" font-size="7" fill="#6b7280">理解+规划+生成</text>
+                            
+                            <rect x="240" y="20" width="50" height="25" rx="4" fill="#d1fae5" stroke="#10b981"/>
+                            <text x="265" y="37" text-anchor="middle" font-size="7" fill="#065f46">多相机视频</text>
+                            
+                            <rect x="240" y="50" width="50" height="25" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+                            <text x="265" y="67" text-anchor="middle" font-size="7" fill="#92400e">LiDAR序列</text>
+                            
+                            <path d="M60 50 L75 50" stroke="#64748b" stroke-width="2"/>
+                            <path d="M225 40 L240 32" stroke="#64748b" stroke-width="1.5"/>
+                            <path d="M225 60 L240 62" stroke="#64748b" stroke-width="1.5"/>
+                        </svg>
+                        <p class="figure-caption">UniDriveDreamer: 单阶段多模态生成框架</p>
+                    </div>
+                    
+                    <div class="collab-suggestion">
+                        <h5>🤝 合作建议</h5>
+                        <p>在自动驾驶仿真训练、数据增强方向合作价值高，团队有丰富的nuScenes/Waymo经验，可联合开发仿真平台。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 论文5: Cosmos-Drive-Dreams -->
+    <section class="slide paper-page" data-slide="5">
+        <div class="slide-content">
+            <div class="paper-header fade-in">
+                <div class="paper-number">5</div>
+                <span class="paper-type">CVPR 2026 · Foundation Model</span>
+            </div>
+            
+            <h2 class="paper-title fade-in">Cosmos-Drive-Dreams: Scalable Synthetic Driving Data Generation with World Foundation Models</h2>
+            
+            <div class="paper-layout fade-in">
+                <div class="author-card">
+                    <div class="author-main">
+                        <div class="author-avatar">N</div>
+                        <div class="author-info">
+                            <h3>NVIDIA Research</h3>
+                            <p class="affiliation">NVIDIA · 多伦多/硅谷研究院</p>
+                            <div class="author-tags">
+                                <span class="author-tag">基础模型</span>
+                                <span class="author-tag">自动驾驶</span>
+                                <span class="author-tag">数据生成</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="author-details">
+                        <p><strong>研究方向</strong>世界基础模型、物理仿真、自动驾驶</p>
+                        <p><strong>技术路线</strong>Cosmos平台、扩散模型、NeRF/3DGS</p>
+                        <p><strong>平台资源</strong>NVIDIA Omniverse、CUDA生态</p>
+                        <p><strong>产业影响</strong>与多家车企合作，工业级部署</p>
+                    </div>
+                </div>
+                
+                <div class="content-card">
+                    <h4>💡 创新点总结</h4>
+                    <div class="highlight-box">
+                        <p><strong>核心贡献：</strong>基于Cosmos世界基础模型，构建大规模可扩展的驾驶数据生成系统。支持物理一致性、多传感器仿真，为自动驾驶训练提供高质量合成数据，显著降低数据采集成本。</p>
+                    </div>
+                    
+                    <div class="figure-box">
+                        <svg viewBox="0 0 300 100">
+                            <rect x="10" y="25" width="70" height="50" rx="8" fill="#76b900" stroke="#4a7c00"/>
+                            <text x="45" y="45" text-anchor="middle" font-size="9" fill="white" font-weight="600">Cosmos</text>
+                            <text x="45" y="58" text-anchor="middle" font-size="7" fill="white">世界基础模型</text>
+                            
+                            <rect x="95" y="20" width="100" height="60" rx="8" fill="#ede9fe" stroke="#7c3aed"/>
+                            <text x="145" y="42" text-anchor="middle" font-size="8" fill="#5b21b6">Drive-Dreams</text>
+                            <text x="145" y="55" text-anchor="middle" font-size="7" fill="#6b7280">物理一致性</text>
+                            <text x="145" y="68" text-anchor="middle" font-size="7" fill="#6b7280">多传感器仿真</text>
+                            
+                            <rect x="210" y="20" width="80" height="60" rx="8" fill="#d1fae5" stroke="#10b981"/>
+                            <text x="250" y="42" text-anchor="middle" font-size="8" fill="#065f46">合成数据</text>
+                            <text x="250" y="55" text-anchor="middle" font-size="7" fill="#065f46">用于训练</text>
+                            <text x="250" y="68" text-anchor="middle" font-size="7" fill="#065f46">降低成本</text>
+                            
+                            <path d="M80 50 L95 50" stroke="#64748b" stroke-width="2"/>
+                            <path d="M195 50 L210 50" stroke="#64748b" stroke-width="2"/>
+                        </svg>
+                        <p class="figure-caption">Cosmos-Drive-Dreams: 可扩展驾驶数据生成</p>
+                    </div>
+                    
+                    <div class="collab-suggestion">
+                        <h5>🤝 合作建议</h5>
+                        <p>NVIDIA工业级资源丰富，适合在仿真平台共建、标准制定方面合作，可探索Omniverse平台集成或联合研究项目。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const navDotsContainer = document.getElementById('navDots');
+        const progress = document.getElementById('progress');
+        let currentSlide = 0;
+
+        // 创建导航点
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            navDotsContainer.appendChild(dot);
+        });
+
+        // Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    currentSlide = parseInt(entry.target.dataset.slide);
+                    updateUI();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        // 触摸滑动
+        let startY = 0;
+        document.addEventListener('touchstart', e => startY = e.touches[0].clientY, { passive: true });
+        document.addEventListener('touchend', e => {
+            const diff = startY - e.changedTouches[0].clientY;
+            if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
+        }, { passive: true });
+
+        // 键盘导航
+        document.addEventListener('keydown', e => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateUI() {
+            progress.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
+            document.querySelectorAll('.nav-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+        }
+
+        slides[0].classList.add('visible');
+    </script>
+</body>
+</html>

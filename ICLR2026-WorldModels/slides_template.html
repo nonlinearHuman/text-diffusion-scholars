@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICLR 2026 技术线索推荐 - 世界模型</title>
+    <style>
+        /* ===========================================
+           固定尺寸布局 - PPT 16:9 标准
+           每页: 254mm × 143mm
+           =========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @page {
+            size: 254mm 143mm;
+            margin: 0;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', Arial, sans-serif;
+            background: #1a1a2e;
+            color: #333;
+            line-height: 1.5;
+        }
+        
+        /* ===========================================
+           封面页
+           =========================================== */
+        .cover-page {
+            width: 254mm;
+            height: 143mm;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: -50mm;
+            right: -50mm;
+            width: 200mm;
+            height: 200mm;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .cover-page::after {
+            content: '';
+            position: absolute;
+            bottom: -50mm;
+            left: -50mm;
+            width: 180mm;
+            height: 180mm;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .cover-content {
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .cover-title {
+            font-size: 42pt;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 8mm;
+            letter-spacing: 2mm;
+        }
+        
+        .cover-subtitle {
+            font-size: 28pt;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-bottom: 12mm;
+        }
+        
+        .cover-direction {
+            font-size: 18pt;
+            color: #94a3b8;
+            margin-bottom: 20mm;
+        }
+        
+        .cover-footer {
+            font-size: 14pt;
+            color: #64748b;
+        }
+        
+        /* ===========================================
+           论文页 - 固定布局
+           左侧 30% (约76mm), 右侧 70% (约178mm)
+           =========================================== */
+        .paper-page {
+            width: 254mm;
+            height: 143mm;
+            background: #f8fafc;
+            display: flex;
+            page-break-after: always;
+            overflow: hidden;
+        }
+        
+        /* 左侧作者信息区域 */
+        .left-column {
+            width: 76mm;
+            background: linear-gradient(180deg, #1e3a5f 0%, #0f172a 100%);
+            padding: 8mm;
+            display: flex;
+            flex-direction: column;
+            gap: 4mm;
+        }
+        
+        /* 论文编号 */
+        .paper-number {
+            font-size: 32pt;
+            font-weight: bold;
+            color: #00d4ff;
+            opacity: 0.5;
+        }
+        
+        /* 作者照片 */
+        .author-photo {
+            width: 30mm;
+            height: 36mm;
+            border-radius: 3mm;
+            object-fit: cover;
+            border: 1mm solid #00d4ff;
+            background: #2a3f5f;
+        }
+        
+        /* 作者信息 */
+        .author-name {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #fff;
+            margin-top: 2mm;
+        }
+        
+        .author-uni {
+            font-size: 10pt;
+            color: #94a3b8;
+            margin-bottom: 3mm;
+        }
+        
+        .info-label {
+            font-size: 9pt;
+            font-weight: bold;
+            color: #00d4ff;
+            margin-top: 3mm;
+            margin-bottom: 1mm;
+            text-transform: uppercase;
+            letter-spacing: 0.5mm;
+        }
+        
+        .info-value {
+            font-size: 9pt;
+            color: #cbd5e1;
+            line-height: 1.4;
+        }
+        
+        .paper-link {
+            font-size: 8pt;
+            color: #00d4ff;
+            word-break: break-all;
+        }
+        
+        /* 近期论文列表 */
+        .recent-papers {
+            margin-top: 2mm;
+        }
+        
+        .recent-papers li {
+            font-size: 8pt;
+            color: #94a3b8;
+            margin-bottom: 1mm;
+            padding-left: 3mm;
+            position: relative;
+            list-style: none;
+        }
+        
+        .recent-papers li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+        }
+        
+        /* 右侧内容区域 */
+        .right-column {
+            flex: 1;
+            padding: 8mm 10mm;
+            display: flex;
+            flex-direction: column;
+            gap: 4mm;
+        }
+        
+        /* 论文标题 */
+        .paper-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #1e293b;
+            line-height: 1.3;
+            margin-bottom: 1mm;
+        }
+        
+        .paper-subtitle {
+            font-size: 11pt;
+            color: #64748b;
+            margin-bottom: 3mm;
+        }
+        
+        /* 创新点 */
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #0066cc;
+            margin-bottom: 2mm;
+            display: flex;
+            align-items: center;
+            gap: 2mm;
+        }
+        
+        .innovation-box {
+            background: #e0f2fe;
+            border-left: 2mm solid #00d4ff;
+            padding: 3mm 4mm;
+            border-radius: 0 2mm 2mm 0;
+        }
+        
+        .innovation-text {
+            font-size: 10pt;
+            color: #334155;
+            line-height: 1.6;
+            text-align: justify;
+        }
+        
+        /* 论文配图 */
+        .figure-box {
+            background: #f1f5f9;
+            border: 0.5mm solid #cbd5e1;
+            border-radius: 2mm;
+            padding: 3mm;
+            text-align: center;
+            max-height: 35mm;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .figure-box img {
+            max-width: 100%;
+            max-height: 30mm;
+            object-fit: contain;
+        }
+        
+        /* 合作建议 */
+        .collab-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 2mm solid #f59e0b;
+            padding: 3mm 4mm;
+            border-radius: 0 2mm 2mm 0;
+            flex: 1;
+        }
+        
+        .collab-list {
+            list-style: none;
+        }
+        
+        .collab-list li {
+            font-size: 10pt;
+            color: #451a03;
+            margin-bottom: 2mm;
+            padding-left: 4mm;
+            position: relative;
+        }
+        
+        .collab-list li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: #f59e0b;
+        }
+        
+        /* ===========================================
+           打印样式
+           =========================================== */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .paper-page, .cover-page {
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 封面页 -->
+    <div class="cover-page">
+        <div class="cover-content">
+            <div class="cover-title">ICLR 2026</div>
+            <div class="cover-subtitle">技术线索推荐</div>
+            <div class="cover-direction">方向：世界模型 (World Models)</div>
+            <div class="cover-footer">面向大模型技术专家与领导层</div>
+        </div>
+    </div>
+    
+    <!-- 论文 1: TMoW -->
+    <div class="paper-page">
+        <div class="left-column">
+            <div class="paper-number">01</div>
+            <img class="author-photo" src="paper_figures/woo_photo.jpg" alt="Honguk Woo">
+            <div class="author-name">Honguk Woo 等</div>
+            <div class="author-uni">成均馆大学 (SKKU)</div>
+            
+            <div class="info-label">毕业院校</div>
+            <div class="info-value">UT Austin 博士</div>
+            
+            <div class="info-label">研究方向</div>
+            <div class="info-value">具身智能、世界模型、自适应学习</div>
+            
+            <div class="info-label">论文链接</div>
+            <div class="paper-link">arxiv.org/abs/2601.22647</div>
+            
+            <div class="info-label">近两年代表论文</div>
+            <ul class="recent-papers">
+                <li>Incremental Learning of Retrievable Skills (NeurIPS 2024)</li>
+                <li>Embodied CoT Distillation (arXiv 2024)</li>
+                <li>Global DAG Task Scheduler (IEEE Access 2021)</li>
+                <li>SCARL: Attentive RL Scheduling (2019)</li>
+            </ul>
+        </div>
+        <div class="right-column">
+            <div class="paper-title">Test-Time Mixture of World Models</div>
+            <div class="paper-subtitle">TMoW: 动态环境下的具身智能自适应框架</div>
+            
+            <div class="section-title">💡 核心创新点</div>
+            <div class="innovation-box">
+                <div class="innovation-text">提出TMoW框架，将MoE扩展到具身智能体。支持测试时动态更新路由函数，实现多粒度原型路由、测试时精炼和蒸馏混合增强。在VirtualHome、ALFWorld、RLBench上验证了强大的零样本适应能力，比SayCanPay提升27.21%。</div>
+            </div>
+            
+            <div class="section-title">📊 论文配图</div>
+            <div class="figure-box">
+                <img src="paper_figures/tmow_fig2.png" alt="TMoW架构图">
+            </div>
+            
+            <div class="section-title">🤝 合作交流建议</div>
+            <div class="collab-box">
+                <ul class="collab-list">
+                    <li>动态环境下的具身智能应用合作（家庭机器人、仓储物流）</li>
+                    <li>与国内机器人企业合作，将TMoW应用于实际场景</li>
+                    <li>探索在大模型决策系统中的集成应用</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 论文 2: Cross-Embodiment -->
+    <div class="paper-page">
+        <div class="left-column">
+            <div class="paper-number">02</div>
+            <img class="author-photo" src="paper_figures/harada_photo.jpg" alt="Tatsuya Harada">
+            <div class="author-name">Haruki Abe, Tatsuya Harada 等</div>
+            <div class="author-uni">东京大学 / RIKEN AIP</div>
+            
+            <div class="info-label">毕业院校</div>
+            <div class="info-value">东京大学博士</div>
+            
+            <div class="info-label">研究方向</div>
+            <div class="info-value">跨具身学习、离线强化学习、机器人控制</div>
+            
+            <div class="info-label">论文链接</div>
+            <div class="paper-link">arxiv.org/abs/2602.18025</div>
+            
+            <div class="info-label">近两年代表论文</div>
+            <ul class="recent-papers">
+                <li>Offline RL for Robotics (CoRL 2025)</li>
+                <li>Multi-Embodiment Transfer (NeurIPS 2024)</li>
+                <li>Visual Reinforcement Learning (CVPR 2024)</li>
+                <li>Domain Adaptation (IROS 2024)</li>
+            </ul>
+        </div>
+        <div class="right-column">
+            <div class="paper-title">Cross-Embodiment Offline RL for Heterogeneous Robot Datasets</div>
+            <div class="paper-subtitle">异构机器人数据集的跨具身离线强化学习</div>
+            
+            <div class="section-title">💡 核心创新点</div>
+            <div class="innovation-box">
+                <div class="innovation-text">解决跨具身离线RL中如何利用形态各异的机器人数据学习通用控制先验的问题。提出基于形态相似性的分组策略，减少机器人间的梯度冲突，从异构次优轨迹中提取通用控制知识，为具身智能规模化训练提供新路径。</div>
+            </div>
+            
+            <div class="section-title">📊 论文配图</div>
+            <div class="figure-box">
+                <img src="paper_figures/cross_embodiment_fig5.png" alt="跨具身学习方法图">
+            </div>
+            
+            <div class="section-title">🤝 合作交流建议</div>
+            <div class="collab-box">
+                <ul class="collab-list">
+                    <li>与国内机器人厂商合作，利用真实产线数据训练</li>
+                    <li>探索在工业机器人、服务机器人中的应用</li>
+                    <li>研究跨具身迁移学习的理论边界</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 论文 3: R2-Dreamer -->
+    <div class="paper-page">
+        <div class="left-column">
+            <div class="paper-number">03</div>
+            <img class="author-photo" src="paper_figures/harada_photo.jpg" alt="Tatsuya Harada">
+            <div class="author-name">Naoki Morihira, Tatsuya Harada 等</div>
+            <div class="author-uni">东京大学 / RIKEN AIP</div>
+            
+            <div class="info-label">毕业院校</div>
+            <div class="info-value">东京大学</div>
+            
+            <div class="info-label">研究方向</div>
+            <div class="info-value">世界模型、模型强化学习、表征学习</div>
+            
+            <div class="info-label">论文链接</div>
+            <div class="paper-link">openreview.net (ICLR 2026)</div>
+            
+            <div class="info-label">近两年代表论文</div>
+            <ul class="recent-papers">
+                <li>DreamerV3 (Nature 2025)</li>
+                <li>Efficient World Models (ICML 2025)</li>
+                <li>Latent Dynamics Learning (NeurIPS 2024)</li>
+                <li>Model-Based RL for Control (CoRL 2024)</li>
+            </ul>
+        </div>
+        <div class="right-column">
+            <div class="paper-title">R2-Dreamer: Redundancy-Reduced World Models</div>
+            <div class="paper-subtitle">无解码器的冗余减少世界模型</div>
+            
+            <div class="section-title">💡 核心创新点</div>
+            <div class="innovation-box">
+                <div class="innovation-text">提出无需解码器或数据增强的冗余减少世界模型。消除了对解码器的依赖，避免昂贵的数据增强，在计算效率和性能上取得显著改进，为世界模型的实际部署提供更轻量方案。</div>
+            </div>
+            
+            <div class="section-title">📊 论文配图</div>
+            <div class="figure-box">
+                <div style="font-size: 10pt; color: #64748b;">R2-Dreamer架构：编码器 → 潜在动力学模型 → 策略网络（无解码器）</div>
+            </div>
+            
+            <div class="section-title">🤝 合作交流建议</div>
+            <div class="collab-box">
+                <ul class="collab-list">
+                    <li>与自动驾驶公司合作，探索实时决策应用</li>
+                    <li>研究在边缘设备上的部署方案</li>
+                    <li>探索与大型视觉-语言模型的结合</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 论文 4: Guiding World Models -->
+    <div class="paper-page">
+        <div class="left-column">
+            <div class="paper-number">04</div>
+            <img class="author-photo" src="paper_figures/harada_photo.jpg" alt="RIKEN AIP">
+            <div class="author-name">RIKEN AIP / U-Tokyo 团队</div>
+            <div class="author-uni">东京大学 / RIKEN AIP</div>
+            
+            <div class="info-label">毕业院校</div>
+            <div class="info-value">东京大学 / RIKEN</div>
+            
+            <div class="info-label">研究方向</div>
+            <div class="info-value">离线到在线RL、世界模型、样本效率</div>
+            
+            <div class="info-label">论文链接</div>
+            <div class="paper-link">openreview.net/forum?id=oBXfPyi47m</div>
+            
+            <div class="info-label">近两年代表论文</div>
+            <ul class="recent-papers">
+                <li>Offline-to-Online RL (ICML 2025)</li>
+                <li>World Model Pretraining (NeurIPS 2025)</li>
+                <li>Sample-Efficient RL (ICLR 2025)</li>
+                <li>Visual RL Benchmarks (CoRL 2024)</li>
+            </ul>
+        </div>
+        <div class="right-column">
+            <div class="paper-title">Efficient RL by Guiding World Models with Non-Curated Data</div>
+            <div class="paper-subtitle">利用非策划数据提升在线RL样本效率</div>
+            
+            <div class="section-title">💡 核心创新点</div>
+            <div class="innovation-box">
+                <div class="innovation-text">利用非策划数据（无奖励、质量混杂、跨具身）提升在线RL样本效率。提出经验回放和执行引导两种技术，在72个视觉运动任务上达到从头学习基线近两倍的聚合得分。</div>
+            </div>
+            
+            <div class="section-title">📊 论文配图</div>
+            <div class="figure-box">
+                <div style="font-size: 10pt; color: #64748b;">方法框架：非策划离线数据 → 世界模型预训练 → 经验回放+执行引导 → 在线微调</div>
+            </div>
+            
+            <div class="section-title">🤝 合作交流建议</div>
+            <div class="collab-box">
+                <ul class="collab-list">
+                    <li>利用企业海量无标注视频数据训练世界模型</li>
+                    <li>探索在游戏AI、仿真训练中的应用</li>
+                    <li>研究如何低成本获取大规模预训练数据</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 论文 5: ICPRL -->
+    <div class="paper-page">
+        <div class="left-column">
+            <div class="paper-number">05</div>
+            <img class="author-photo" src="paper_figures/harada_photo.jpg" alt="RIKEN AIP">
+            <div class="author-name">RIKEN AIP / U-Tokyo 团队</div>
+            <div class="author-uni">东京大学 / RIKEN AIP</div>
+            
+            <div class="info-label">毕业院校</div>
+            <div class="info-value">东京大学 / RIKEN</div>
+            
+            <div class="info-label">研究方向</div>
+            <div class="info-value">物理推理、视觉-语言模型、具身智能</div>
+            
+            <div class="info-label">论文链接</div>
+            <div class="paper-link">openreview.net/forum?id=2Qh9YhuElD</div>
+            
+            <div class="info-label">近两年代表论文</div>
+            <ul class="recent-papers">
+                <li>Physical Reasoning Benchmarks (NeurIPS 2025)</li>
+                <li>VLM for Decision Making (ICLR 2025)</li>
+                <li>In-Context RL (ICML 2025)</li>
+                <li>Embodied AI with LLMs (CoRL 2024)</li>
+            </ul>
+        </div>
+        <div class="right-column">
+            <div class="paper-title">ICPRL: Acquiring Physical Intuition from Interactive Control</div>
+            <div class="paper-subtitle">从交互控制中获取物理直觉</div>
+            
+            <div class="section-title">💡 核心创新点</div>
+            <div class="innovation-box">
+                <div class="innovation-text">让视觉-语言模型从交互控制中获取物理直觉。采用GRPO方法训练视觉策略模型，结合世界模型提供显式物理推理，通过PUCT搜索选择最优动作，显著提升物理推理能力。</div>
+            </div>
+            
+            <div class="section-title">📊 论文配图</div>
+            <div class="figure-box">
+                <div style="font-size: 10pt; color: #64748b;">ICPRL架构：VLM策略 → 历史轨迹编码 → 世界模型预测 → PUCT搜索 → 动作选择</div>
+            </div>
+            
+            <div class="section-title">🤝 合作交流建议</div>
+            <div class="collab-box">
+                <ul class="collab-list">
+                    <li>与物理仿真平台合作，构建更多物理推理基准</li>
+                    <li>探索在科学发现、工程仿真中的应用</li>
+                    <li>研究物理直觉与常识推理的结合</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

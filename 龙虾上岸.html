@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🦞 龙虾上岸</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: #000080;
+            overflow: hidden;
+            height: 100vh;
+            touch-action: none;
+        }
+        #game-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(180deg, #87CEEB 0%, #4169E1 50%, #000080 100%);
+            overflow: hidden;
+        }
+        #gameCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        #top-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: rgba(0, 0, 0, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            z-index: 10;
+        }
+        #inventory-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            z-index: 10;
+        }
+        .inventory-title {
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        #inventory {
+            display: flex;
+            justify-content: center;
+            gap: 5px;
+        }
+        .inventory-slot {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            position: relative;
+        }
+        .inventory-slot.obstacle {
+            background: rgba(139, 69, 19, 0.5);
+            border-color: rgba(139, 69, 19, 0.8);
+        }
+        .inventory-slot .hammer-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: #ff6b6b;
+            border: 2px solid white;
+            border-radius: 50%;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #start-screen, #game-over {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            color: white;
+        }
+        #start-screen h1 { font-size: 40px; margin-bottom: 20px; }
+        #start-screen p { font-size: 16px; margin-bottom: 30px; text-align: center; line-height: 1.8; }
+        #game-over h2 { font-size: 40px; margin-bottom: 20px; color: #ff6b6b; }
+        #game-over p { font-size: 18px; margin-bottom: 10px; }
+        #final-score { font-size: 32px; color: #ffd700; font-weight: bold; }
+        .btn {
+            padding: 15px 50px;
+            font-size: 22px;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        @keyframes merge {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .merging { animation: merge 0.3s ease; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="top-bar">
+            <div>分数: <span id="score">0</span></div>
+            <div>锤子: <span id="hammers">0</span> 🔨</div>
+        </div>
+        <div id="inventory-bar">
+            <div class="inventory-title">物品栏</div>
+            <div id="inventory"></div>
+        </div>
+        <div id="start-screen">
+            <h1>🦞 龙虾上岸</h1>
+            <p>点击屏幕发射鱼钩<br>抓取大模型并合成升级<br>最终合成龙虾上岸！</p>
+            <button class="btn" id="start-btn">开始游戏</button>
+        </div>
+        <div id="game-over" style="display: none;">
+            <h2>游戏结束</h2>
+            <p>物品栏已满</p>
+            <p>最终分数: <span id="final-score">0</span></p>
+            <button class="btn" id="restart-btn">再来一次</button>
+        </div>
+    </div>
+    <script>
+    class FishingGame {
+        constructor() {
+            this.canvas = document.getElementById('gameCanvas');
+            this.ctx = this.canvas.getContext('2d');
+            this.isRunning = false;
+            this.score = 0;
+            this.hammers = 0;
+            this.width = window.innerWidth;
+            this.height = window.innerHeight;
+            this.canvas.width = this.width;
+            this.canvas.height = this.height;
+            this.platformY = 80;
+            this.hook = { x: this.width/2, y: this.platformY, angle: 0, angleSpeed: 0.8, angleDirection: 1, length: 50, maxLength: this.height - 200, state: 'swinging', speed: 5, caughtItem: null };
+            this.inventory = new Array(8).fill(null);
+            this.creatures = [];
+            this.maxCreatures = 10;
+            this.creatureLevels = [
+                { emoji: '📚', name: '小商量', level: 1, score: 10, speed: 1.5 },
+                { emoji: '🤖', name: '智谱子', level: 2, score: 30, speed: 1.3 },
+                { emoji: '☁️', name: '千问君', level: 3, score: 60, speed: 1.1 },
+                { emoji: '🎨', name: '文心子', level: 4, score: 100, speed: 0.8 },
+                { emoji: '⭐', name: '星火君', level: 5, score: 200, speed: 1.6 },
+                { emoji: '🌀', name: '混元子', level: 6, score: 400, speed: 2.0 },
+                { emoji: '🏔️', name: '开智者', level: 7, score: 800, speed: 0.6 },
+                { emoji: '🦞', name: '龙虾', level: 8, score: 2000, speed: 1.0 }
+            ];
+            this.obstacles = [{ emoji: '🪨', name: '石头' }, { emoji: '🐚', name: '贝壳' }];
+            this.spawnChances = { creature: 0.82, obstacle: 0.08, tool: 0.10 };
+            this.init();
+        }
+        init() {
+            document.getElementById('start-btn').onclick = () => this.start();
+            document.getElementById('restart-btn').onclick = () => this.restart();
+            this.canvas.addEventListener('touchstart', (e) => { e.preventDefault(); this.handleClick(); }, { passive: false });
+            this.canvas.addEventListener('click', () => this.handleClick());
+            this.updateInventoryUI();
+        }
+        start() {
+            document.getElementById('start-screen').style.display = 'none';
+            this.isRunning = true;
+            this.score = 0;
+            this.hammers = 0;
+            this.inventory = new Array(8).fill(null);
+            this.creatures = [];
+            this.hook = { x: this.width/2, y: this.platformY, angle: 0, angleSpeed: 0.8, angleDirection: 1, length: 50, maxLength: this.height - 200, state: 'swinging', speed: 5, caughtItem: null };
+            for (let i = 0; i < 8; i++) this.spawnCreature();
+            this.updateUI();
+            this.gameLoop();
+        }
+        restart() {
+            document.getElementById('game-over').style.display = 'none';
+            this.start();
+        }
+        handleClick() {
+            if (!this.isRunning || this.hook.state !== 'swinging') return;
+            this.hook.state = 'extending';
+            this.hook.length = 50;
+        }
+        gameLoop() {
+            if (!this.isRunning) return;
+            this.update();
+            this.render();
+            requestAnimationFrame(() => this.gameLoop());
+        }
+        update() {
+            this.updateHook();
+            this.updateCreatures();
+            this.checkCollisions();
+        }
+        updateHook() {
+            const h = this.hook;
+            if (h.state === 'swinging') {
+                h.angle += h.angleSpeed * h.angleDirection;
+                if (h.angle > 80 || h.angle < -80) h.angleDirection *= -1;
+            } else if (h.state === 'extending') {
+                h.length += h.speed;
+                const rad = h.angle * Math.PI / 180;
+                h.x = this.width/2 + Math.sin(rad) * h.length;
+                h.y = this.platformY + Math.cos(rad) * h.length;
+                if (h.length >= h.maxLength || h.y >= this.height - 120) h.state = 'retracting';
+            } else if (h.state === 'retracting') {
+                const speed = h.caughtItem ? h.speed * 0.5 : h.speed;
+                h.length -= speed;
+                const rad = h.angle * Math.PI / 180;
+                h.x = this.width/2 + Math.sin(rad) * h.length;
+                h.y = this.platformY + Math.cos(rad) * h.length;
+                if (h.caughtItem) { h.caughtItem.x = h.x; h.caughtItem.y = h.y; }
+                if (h.length <= 50) {
+                    if (h.caughtItem) { this.addToInventory(h.caughtItem); h.caughtItem = null; }
+                    h.state = 'swinging';
+                    h.length = 50;
+                }
+            }
+        }
+        updateCreatures() {
+            const minY = 140, maxY = this.height - 140;
+            this.creatures.forEach(c => {
+                c.x += c.vx; c.y += c.vy;
+                if (c.x < 30 || c.x > this.width - 30) { c.vx *= -1; c.x = Math.max(30, Math.min(this.width - 30, c.x)); }
+                if (c.y < minY || c.y > maxY) { c.vy *= -1; c.y = Math.max(minY, Math.min(maxY, c.y)); }
+                if (Math.random() < 0.008) c.vx *= -1;
+                if (Math.random() < 0.008) c.vy *= -1;
+            });
+        }
+        checkCollisions() {
+            if (this.hook.state !== 'extending') return;
+            for (let i = this.creatures.length - 1; i >= 0; i--) {
+                const c = this.creatures[i];
+                const dist = Math.sqrt(Math.pow(this.hook.x - c.x, 2) + Math.pow(this.hook.y - c.y, 2));
+                if (dist < 25) {
+                    this.hook.caughtItem = c;
+                    this.creatures.splice(i, 1);
+                    this.hook.state = 'retracting';
+                    setTimeout(() => { if (this.isRunning) this.spawnCreature(); }, 800);
+                    break;
+                }
+            }
+        }
+        spawnCreature() {
+            if (this.creatures.length >= this.maxCreatures) return;
+            const rand = Math.random();
+            const minY = 140, maxY = this.height - 140;
+            let item;
+            if (rand < this.spawnChances.creature) {
+                const idx = this.getRandomLevel();
+                const data = this.creatureLevels[idx];
+                item = { ...data, x: Math.random()*(this.width-60)+30, y: Math.random()*(maxY-minY)+minY, vx: (Math.random()-0.5)*data.speed*2, vy: (Math.random()-0.5)*data.speed, type: 'model' };
+            } else if (rand < this.spawnChances.creature + this.spawnChances.obstacle) {
+                const o = this.obstacles[Math.floor(Math.random()*this.obstacles.length)];
+                item = { ...o, x: Math.random()*(this.width-60)+30, y: Math.random()*(maxY-minY)+minY, vx: (Math.random()-0.5)*0.4, vy: (Math.random()-0.5)*0.2, type: 'obstacle' };
+            } else {
+                item = { emoji: '🔨', name: '锤子', x: Math.random()*(this.width-60)+30, y: Math.random()*(maxY-minY)+minY, vx: (Math.random()-0.5)*0.6, vy: (Math.random()-0.5)*0.3, type: 'tool' };
+            }
+            this.creatures.push(item);
+        }
+        getRandomLevel() {
+            const weights = [40, 25, 15, 10, 6, 3, 1, 0.5];
+            const total = weights.reduce((a, b) => a + b, 0);
+            let r = Math.random() * total;
+            for (let i = 0; i < weights.length; i++) { r -= weights[i]; if (r <= 0) return i; }
+            return 0;
+        }
+        addToInventory(item) {
+            if (item.type === 'tool') { this.hammers++; this.updateUI(); return; }
+            const idx = this.inventory.findIndex(s => s === null);
+            if (idx === -1) { this.gameOver(); return; }
+            this.inventory[idx] = { ...item };
+            this.updateInventoryUI();
+            setTimeout(() => this.tryMergeAll(), 50);
+        }
+        tryMergeAll() {
+            let merged = true;
+            while (merged) {
+                merged = false;
+                for (let i = 0; i < this.inventory.length - 1; i++) {
+                    const curr = this.inventory[i], next = this.inventory[i+1];
+                    if (curr && next && curr.type === 'model' && next.type === 'model' && curr.level === next.level && curr.level < 8) {
+                        const newData = this.creatureLevels[curr.level];
+                        this.inventory[i] = { ...newData, type: 'model' };
+                        this.inventory[i+1] = null;
+                        this.score += newData.score;
+                        this.inventory = this.inventory.filter(x => x !== null);
+                        while (this.inventory.length < 8) this.inventory.push(null);
+                        this.updateUI();
+                        this.updateInventoryUI();
+                        merged = true;
+                        break;
+                    }
+                }
+            }
+        }
+        useHammer(idx) {
+            if (this.hammers <= 0) return;
+            const item = this.inventory[idx];
+            if (!item || item.type !== 'obstacle') return;
+            this.hammers--;
+            this.inventory[idx] = null;
+            this.inventory = this.inventory.filter(x => x !== null);
+            while (this.inventory.length < 8) this.inventory.push(null);
+            this.updateUI();
+            this.updateInventoryUI();
+        }
+        updateInventoryUI() {
+            const div = document.getElementById('inventory');
+            div.innerHTML = '';
+            this.inventory.forEach((item, i) => {
+                const slot = document.createElement('div');
+                slot.className = 'inventory-slot' + (item && item.type === 'obstacle' ? ' obstacle' : '');
+                if (item) {
+                    slot.textContent = item.emoji;
+                    if (item.type === 'obstacle' && this.hammers > 0) {
+                        const btn = document.createElement('div');
+                        btn.className = 'hammer-btn';
+                        btn.textContent = '🔨';
+                        btn.onclick = (e) => { e.stopPropagation(); this.useHammer(i); };
+                        slot.appendChild(btn);
+                    }
+                }
+                div.appendChild(slot);
+            });
+        }
+        updateUI() {
+            document.getElementById('score').textContent = this.score;
+            document.getElementById('hammers').textContent = this.hammers;
+        }
+        gameOver() {
+            this.isRunning = false;
+            document.getElementById('final-score').textContent = this.score;
+            document.getElementById('game-over').style.display = 'flex';
+        }
+        render() {
+            const ctx = this.ctx;
+            ctx.clearRect(0, 0, this.width, this.height);
+            const grad = ctx.createLinearGradient(0, 0, 0, this.height);
+            grad.addColorStop(0, '#87CEEB');
+            grad.addColorStop(0.3, '#4169E1');
+            grad.addColorStop(0.7, '#000080');
+            grad.addColorStop(1, '#00008B');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, this.width, this.height);
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(this.width/2 - 40, 60, 80, 20);
+            ctx.font = '28px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'bottom';
+            ctx.fillText('🎣', this.width/2, 80);
+            ctx.font = '26px Arial';
+            ctx.textBaseline = 'middle';
+            this.creatures.forEach(c => ctx.fillText(c.emoji, c.x, c.y));
+            const h = this.hook;
+            const rad = h.angle * Math.PI / 180;
+            const hx = this.width/2 + Math.sin(rad) * h.length;
+            const hy = this.platformY + Math.cos(rad) * h.length;
+            ctx.strokeStyle = '#FFF';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(this.width/2, this.platformY);
+            ctx.lineTo(hx, hy);
+            ctx.stroke();
+            ctx.font = '22px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🪝', hx, hy);
+            if (h.caughtItem) {
+                ctx.font = '26px Arial';
+                ctx.fillText(h.caughtItem.emoji, hx, hy + 22);
+            }
+        }
+    }
+    window.onload = () => new FishingGame();
+    </script>
+</body>
+</html>

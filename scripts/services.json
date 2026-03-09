@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "外部服务配置文件 - 所有 API Key 和服务端点统一管理",
+  
+  "ai": {
+    "zhipu": {
+      "name": "智谱 GLM",
+      "baseUrl": "https://open.bigmodel.cn/api/paas/v4",
+      "models": ["glm-5", "glm-4.7", "glm-4.7-flash"],
+      "apiKey": "${ZHIPU_API_KEY}",
+      "note": "已在 openclaw.json 配置，可直接用模型别名 zai/glm-5"
+    },
+    "openai": {
+      "name": "OpenAI",
+      "baseUrl": "https://api.openai.com/v1",
+      "apiKey": "${OPENAI_API_KEY}",
+      "enabled": false,
+      "note": "如需使用，设置环境变量: export OPENAI_API_KEY=sk-xxx"
+    },
+    "deepseek": {
+      "name": "DeepSeek",
+      "baseUrl": "https://api.deepseek.com/v1",
+      "apiKey": "${DEEPSEEK_API_KEY}",
+      "enabled": false,
+      "note": "性价比高，适合文案生成"
+    }
+  },
+  
+  "stock": {
+    "akshare": {
+      "name": "AKShare 数据源",
+      "type": "python-package",
+      "note": "已安装，直接 import akshare 使用"
+    },
+    "tushare": {
+      "name": "Tushare Pro",
+      "token": "${TUSHARE_TOKEN}",
+      "enabled": false,
+      "note": "更专业的数据，需要注册获取 token"
+    }
+  },
+  
+  "social": {
+    "xiaohongshu": {
+      "name": "小红书",
+      "enabled": false,
+      "note": "需要逆向或第三方服务，暂不可用"
+    }
+  },
+  
+  "notify": {
+    "feishu": {
+      "name": "飞书",
+      "enabled": true,
+      "accounts": ["xuxu", "gege"],
+      "note": "已配置，用 message 工具或直接对话"
+    },
+    "telegram": {
+      "name": "Telegram",
+      "botToken": "${TELEGRAM_BOT_TOKEN}",
+      "chatId": "${TELEGRAM_CHAT_ID}",
+      "enabled": false,
+      "note": "需要创建 bot 并获取 token"
+    },
+    "webhook": {
+      "name": "通用 Webhook",
+      "url": "${WEBHOOK_URL}",
+      "enabled": false,
+      "note": "可接入企业微信、钉钉等"
+    }
+  }
+}

@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年新晋人工智能领域院士介绍</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #525252;
+            --text-muted: #737373;
+            --accent: #0066ff;
+            --accent-light: #e6f0ff;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --border: #e5e5e5;
+            --border-light: #f0f0f0;
+            
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            
+            --title-size: clamp(2rem, 5vw, 4rem);
+            --h2-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+            --body-size: clamp(0.875rem, 1.2vw, 1rem);
+            --small-size: clamp(0.75rem, 1vw, 0.875rem);
+            
+            --slide-padding: clamp(1.5rem, 4vw, 3rem);
+            --content-gap: clamp(0.75rem, 1.5vw, 1.5rem);
+            --element-gap: clamp(0.5rem, 1vw, 1rem);
+            
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+            --duration-fast: 0.4s;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            height: 100%;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            height: 100%;
+            line-height: 1.6;
+        }
+        
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            padding: var(--slide-padding);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--element-gap);
+        }
+        
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--content-gap);
+        }
+        
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--element-gap);
+        }
+        
+        p {
+            font-size: var(--body-size);
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--content-gap);
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--element-gap);
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--element-gap) var(--content-gap);
+            transition: all var(--duration-fast) ease;
+        }
+        
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.08);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: var(--small-size);
+            font-weight: 500;
+        }
+        
+        .tag-green {
+            background: #d1fae5;
+            color: #059669;
+        }
+        
+        .tag-purple {
+            background: #ede9fe;
+            color: #7c3aed;
+        }
+        
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: var(--element-gap) 0;
+        }
+        
+        /* Title Slide */
+        .title-slide {
+            background: var(--bg-secondary);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .title-slide .slide-content { align-items: center; }
+        
+        .title-meta {
+            display: flex;
+            gap: var(--element-gap);
+            margin-top: var(--content-gap);
+            font-size: var(--small-size);
+            color: var(--text-muted);
+        }
+        
+        /* Profile Card */
+        .profile-card {
+            display: flex;
+            gap: var(--content-gap);
+            padding: var(--content-gap);
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .profile-blue { background: var(--accent-light); color: var(--accent); }
+        .profile-green { background: #d1fae5; color: #059669; }
+        
+        .profile-info { flex: 1; }
+        .profile-info h3 { margin-bottom: 0.25rem; }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .team-mini {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        
+        .team-mini-item {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: var(--bg-primary);
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+        
+        /* Paper Card */
+        .paper-section {
+            display: flex;
+            gap: var(--content-gap);
+            height: 100%;
+        }
+        
+        .paper-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .paper-figure {
+            width: 45%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--element-gap);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .paper-figure img {
+            max-width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+        
+        .paper-figure-caption {
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 0.5rem;
+        }
+        
+        .paper-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--bg-primary);
+            border-radius: 20px;
+            font-size: var(--small-size);
+            margin-bottom: var(--element-gap);
+        }
+        
+        .paper-title {
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        
+        .paper-authors {
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            margin-bottom: var(--element-gap);
+        }
+        
+        .paper-highlight {
+            background: var(--accent-light);
+            padding: var(--element-gap);
+            border-radius: 8px;
+            margin-bottom: var(--element-gap);
+            border-left: 3px solid var(--accent);
+        }
+        
+        .paper-highlight p {
+            font-size: var(--small-size);
+            color: var(--text-primary);
+            margin: 0;
+        }
+        
+        .paper-results {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+        
+        .result-item {
+            text-align: center;
+            padding: 0.75rem;
+            background: var(--bg-primary);
+            border-radius: 8px;
+        }
+        
+        .result-value {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .result-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        
+        /* Figure placeholder */
+        .figure-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 300px;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+        
+        .figure-placeholder svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 0.5rem;
+            opacity: 0.5;
+        }
+        
+        /* Architecture diagram */
+        .architecture-diagram {
+            width: 100%;
+            padding: var(--element-gap);
+        }
+        
+        .arch-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .arch-box {
+            padding: 0.5rem 1rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: var(--small-size);
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .arch-box.highlight {
+            background: var(--accent-light);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        
+        .arch-arrow {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+        }
+        
+        /* Comparison table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: var(--small-size);
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border-light);
+        }
+        
+        .comparison-table th {
+            background: var(--bg-primary);
+            font-weight: 600;
+        }
+        
+        .comparison-table .best {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Navigation */
+        .nav-dots {
+            position: fixed;
+            right: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all var(--duration-fast) ease;
+            border: none;
+            padding: 0;
+        }
+        
+        .nav-dot:hover { background: var(--text-muted); }
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.3);
+        }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+        
+        .keyboard-hint {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            z-index: 100;
+        }
+        
+        .key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 20px;
+            height: 20px;
+            padding: 0 5px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            font-family: var(--font-display);
+            font-size: 0.65rem;
+        }
+        
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal:nth-child(1) { transition-delay: 0.05s; }
+        .reveal:nth-child(2) { transition-delay: 0.1s; }
+        .reveal:nth-child(3) { transition-delay: 0.15s; }
+        .reveal:nth-child(4) { transition-delay: 0.2s; }
+        .reveal:nth-child(5) { transition-delay: 0.25s; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .paper-section { flex-direction: column; }
+            .paper-figure { width: 100%; max-height: 40vh; }
+            .paper-results { grid-template-columns: repeat(2, 1fr); }
+            .nav-dots { right: 0.5rem; }
+            .keyboard-hint { display: none; }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progressBar"></div>
+    <nav class="nav-dots" id="navDots"></nav>
+    <div class="keyboard-hint">
+        <span><span class="key">←</span> <span class="key">→</span> 导航</span>
+        <span><span class="key">Space</span> 下一页</span>
+    </div>
+    
+    <!-- Slide 1: Title -->
+    <section class="slide title-slide" data-slide="0">
+        <div class="slide-content">
+            <div class="tag reveal">院士增选 2025</div>
+            <h1 class="reveal">新晋人工智能领域院士介绍</h1>
+            <p class="subtitle reveal">中国科学院 · 中国工程院 · 2025年度增选结果</p>
+            <div class="divider reveal"></div>
+            <div class="title-meta reveal">
+                <span>📅 2025年11月21日公布</span>
+                <span>🎯 技术专家专题报告</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 2: 院士简介（合并） -->
+    <section class="slide" data-slide="1">
+        <div class="slide-content">
+            <div class="tag reveal">院士简介与团队</div>
+            <h2 class="reveal">2025年新晋AI领域院士</h2>
+            
+            <div class="grid-2 reveal">
+                <!-- 周志华 -->
+                <div class="profile-card">
+                    <div class="profile-avatar profile-blue">周</div>
+                    <div class="profile-info">
+                        <div class="tag tag-green" style="margin-bottom: 0.5rem;">中国科学院院士</div>
+                        <h3>周志华</h3>
+                        <p style="font-size: var(--small-size); margin-bottom: 0.25rem;">南京大学副校长 · 人工智能学院院长</p>
+                        <p style="font-size: var(--small-size); color: var(--text-muted);">
+                            论文引用11万+ · H-index 133 · 《机器学习》(西瓜书)作者
+                        </p>
+                        <div class="profile-tags">
+                            <span class="tag">机器学习</span>
+                            <span class="tag">集成学习</span>
+                            <span class="tag">学件</span>
+                        </div>
+                        <div class="team-mini">
+                            <span class="team-mini-item">俞扬</span>
+                            <span class="team-mini-item">李武军</span>
+                            <span class="team-mini-item">王魏</span>
+                            <span class="team-mini-item">LAMDA团队</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 郭毅可 -->
+                <div class="profile-card">
+                    <div class="profile-avatar profile-green">郭</div>
+                    <div class="profile-info">
+                        <div class="tag tag-purple" style="margin-bottom: 0.5rem;">工程院外籍院士</div>
+                        <h3>郭毅可</h3>
+                        <p style="font-size: var(--small-size); margin-bottom: 0.25rem;">香港科技大学首席副校长 · 讲座教授</p>
+                        <p style="font-size: var(--small-size); color: var(--text-muted);">
+                            英国皇家工程院院士 · 欧洲科学院院士 · HKGAI主任
+                        </p>
+                        <div class="profile-tags">
+                            <span class="tag tag-green">数据科学</span>
+                            <span class="tag tag-green">大模型</span>
+                            <span class="tag tag-green">生成式AI</span>
+                        </div>
+                        <div class="team-mini">
+                            <span class="team-mini-item">HKGAI中心</span>
+                            <span class="team-mini-item">港科大团队</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="reveal" style="margin-top: var(--content-gap); text-align: center; font-size: var(--small-size); color: var(--text-muted);">
+                以下介绍两位院士近三年在大模型领域的重要研究成果
+            </p>
+        </div>
+    </section>
+    
+    <!-- Slide 3: 周志华论文1 - 学件范式 -->
+    <section class="slide" data-slide="2">
+        <div class="slide-content">
+            <div class="paper-section">
+                <div class="paper-content reveal">
+                    <div class="paper-badge">
+                        <span class="tag">周志华团队</span>
+                        <span>Science China Information Sciences · 2024</span>
+                    </div>
+                    
+                    <h2 class="paper-title">Learnware: Small Models Do Big</h2>
+                    <p class="paper-authors">Zhi-Hua Zhou, Zhi-Hao Tan</p>
+                    
+                    <div class="paper-highlight">
+                        <p><strong>核心创新：</strong>提出学件范式，让小模型协同完成大任务，突破大模型的资源垄断</p>
+                    </div>
+                    
+                    <p style="font-size: var(--small-size); margin-bottom: var(--element-gap);">
+                        学件 = 模型 + 规约(Specification)。开发者提交训练好的模型和描述其能力的规约，
+                        系统通过规约匹配帮助用户找到合适的模型，无需暴露原始数据。
+                    </p>
+                    
+                    <h4 style="font-size: var(--small-size); margin-bottom: 0.5rem;">工作流程</h4>
+                    <div class="architecture-diagram">
+                        <div class="arch-flow">
+                            <div class="arch-box">开发者训练模型</div>
+                            <span class="arch-arrow">→</span>
+                            <div class="arch-box highlight">生成规约</div>
+                            <span class="arch-arrow">→</span>
+                            <div class="arch-box">提交学件</div>
+                            <span class="arch-arrow">→</span>
+                            <div class="arch-box highlight">规约匹配</div>
+                            <span class="arch-arrow">→</span>
+                            <div class="arch-box">用户复用</div>
+                        </div>
+                    </div>
+                    
+                    <div class="paper-results">
+                        <div class="result-item">
+                            <div class="result-value">8年</div>
+                            <div class="result-label">持续研究</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">100+</div>
+                            <div class="result-label">学件系统</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">开源</div>
+                            <div class="result-label">北冥坞平台</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paper-figure reveal">
+                    <!-- 学件系统架构图 -->
+                    <svg viewBox="0 0 400 300" style="width: 100%; max-width: 400px;">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#e6f0ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#0066ff;stop-opacity:0.1" />
+                            </linearGradient>
+                        </defs>
+                        <!-- 学件基座系统 -->
+                        <rect x="50" y="20" width="300" height="260" rx="12" fill="url(#grad1)" stroke="#0066ff" stroke-width="2"/>
+                        <text x="200" y="50" text-anchor="middle" font-family="Space Grotesk" font-size="14" font-weight="600" fill="#0066ff">学件基座系统 (LDS)</text>
+                        
+                        <!-- 开发者 -->
+                        <rect x="70" y="70" width="80" height="50" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="110" y="90" text-anchor="middle" font-size="10" fill="#525252">开发者A</text>
+                        <text x="110" y="105" text-anchor="middle" font-size="8" fill="#737373">模型+规约</text>
+                        
+                        <rect x="70" y="130" width="80" height="50" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="110" y="150" text-anchor="middle" font-size="10" fill="#525252">开发者B</text>
+                        <text x="110" y="165" text-anchor="middle" font-size="8" fill="#737373">模型+规约</text>
+                        
+                        <rect x="70" y="190" width="80" height="50" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="110" y="210" text-anchor="middle" font-size="10" fill="#525252">开发者C</text>
+                        <text x="110" y="225" text-anchor="middle" font-size="8" fill="#737373">模型+规约</text>
+                        
+                        <!-- 学件池 -->
+                        <rect x="170" y="100" width="70" height="100" rx="8" fill="#0066ff" opacity="0.1"/>
+                        <rect x="170" y="100" width="70" height="100" rx="8" fill="none" stroke="#0066ff" stroke-width="2"/>
+                        <text x="205" y="145" text-anchor="middle" font-size="11" font-weight="600" fill="#0066ff">学件池</text>
+                        <text x="205" y="160" text-anchor="middle" font-size="8" fill="#0066ff">规约索引</text>
+                        
+                        <!-- 用户 -->
+                        <rect x="260" y="120" width="80" height="60" rx="8" fill="#d1fae5" stroke="#10b981"/>
+                        <text x="300" y="145" text-anchor="middle" font-size="10" fill="#059669">用户</text>
+                        <text x="300" y="160" text-anchor="middle" font-size="8" fill="#059669">任务需求</text>
+                        
+                        <!-- 箭头 -->
+                        <path d="M150 95 L170 130" stroke="#0066ff" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+                        <path d="M150 155 L170 150" stroke="#0066ff" stroke-width="1.5" fill="none"/>
+                        <path d="M150 215 L170 170" stroke="#0066ff" stroke-width="1.5" fill="none"/>
+                        <path d="M240 150 L260 150" stroke="#10b981" stroke-width="2" fill="none"/>
+                    </svg>
+                    <p class="paper-figure-caption">图1: 学件基座系统架构</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 4: 周志华论文2 - 语言模型学件 -->
+    <section class="slide" data-slide="3">
+        <div class="slide-content">
+            <div class="paper-section">
+                <div class="paper-figure reveal">
+                    <!-- 实验结果对比图 -->
+                    <svg viewBox="0 0 450 320" style="width: 100%; max-width: 450px;">
+                        <!-- 标题 -->
+                        <text x="225" y="25" text-anchor="middle" font-family="Space Grotesk" font-size="12" font-weight="600" fill="#1a1a1a">金融领域性能对比 (FinBen)</text>
+                        
+                        <!-- Y轴 -->
+                        <line x1="60" y1="50" x2="60" y2="280" stroke="#e5e5e5" stroke-width="1"/>
+                        <text x="25" y="165" text-anchor="middle" font-size="10" fill="#737373" transform="rotate(-90, 25, 165)">准确率 (%)</text>
+                        
+                        <!-- X轴 -->
+                        <line x1="60" y1="280" x2="420" y2="280" stroke="#e5e5e5" stroke-width="1"/>
+                        
+                        <!-- 网格线 -->
+                        <line x1="60" y1="100" x2="420" y2="100" stroke="#f0f0f0" stroke-width="1"/>
+                        <line x1="60" y1="150" x2="420" y2="150" stroke="#f0f0f0" stroke-width="1"/>
+                        <line x1="60" y1="200" x2="420" y2="200" stroke="#f0f0f0" stroke-width="1"/>
+                        <line x1="60" y1="250" x2="420" y2="250" stroke="#f0f0f0" stroke-width="1"/>
+                        
+                        <!-- 刻度 -->
+                        <text x="50" y="105" text-anchor="end" font-size="9" fill="#737373">80</text>
+                        <text x="50" y="155" text-anchor="end" font-size="9" fill="#737373">60</text>
+                        <text x="50" y="205" text-anchor="end" font-size="9" fill="#737373">40</text>
+                        <text x="50" y="255" text-anchor="end" font-size="9" fill="#737373">20</text>
+                        
+                        <!-- 柱状图 -->
+                        <!-- Llama-70B -->
+                        <rect x="90" y="160" width="40" height="120" rx="4" fill="#94a3b8"/>
+                        <text x="110" y="295" text-anchor="middle" font-size="8" fill="#737373">Llama-70B</text>
+                        <text x="110" y="155" text-anchor="middle" font-size="9" font-weight="600" fill="#737373">55%</text>
+                        
+                        <!-- Qwen-72B -->
+                        <rect x="150" y="145" width="40" height="135" rx="4" fill="#94a3b8"/>
+                        <text x="170" y="295" text-anchor="middle" font-size="8" fill="#737373">Qwen-72B</text>
+                        <text x="170" y="140" text-anchor="middle" font-size="9" font-weight="600" fill="#737373">62%</text>
+                        
+                        <!-- Qwen-110B -->
+                        <rect x="210" y="130" width="40" height="150" rx="4" fill="#94a3b8"/>
+                        <text x="230" y="295" text-anchor="middle" font-size="8" fill="#737373">Qwen-110B</text>
+                        <text x="230" y="125" text-anchor="middle" font-size="9" font-weight="600" fill="#737373">68%</text>
+                        
+                        <!-- Learnware (ours) -->
+                        <rect x="270" y="80" width="40" height="200" rx="4" fill="#0066ff"/>
+                        <text x="290" y="295" text-anchor="middle" font-size="8" fill="#0066ff" font-weight="600">Learnware</text>
+                        <text x="290" y="75" text-anchor="middle" font-size="10" font-weight="700" fill="#0066ff">82%</text>
+                        
+                        <!-- Oracle -->
+                        <rect x="330" y="65" width="40" height="215" rx="4" fill="#10b981"/>
+                        <text x="350" y="295" text-anchor="middle" font-size="8" fill="#10b981">Oracle</text>
+                        <text x="350" y="60" text-anchor="middle" font-size="9" font-weight="600" fill="#10b981">86%</text>
+                        
+                        <!-- 图例 -->
+                        <rect x="380" y="50" width="10" height="10" rx="2" fill="#94a3b8"/>
+                        <text x="395" y="58" font-size="8" fill="#737373">LLMs</text>
+                        <rect x="380" y="65" width="10" height="10" rx="2" fill="#0066ff"/>
+                        <text x="395" y="73" font-size="8" fill="#0066ff">学件系统</text>
+                        <rect x="380" y="80" width="10" height="10" rx="2" fill="#10b981"/>
+                        <text x="395" y="88" font-size="8" fill="#10b981">Oracle上限</text>
+                    </svg>
+                    <p class="paper-figure-caption">图2: 金融领域任务性能对比 - 8B学件系统超越70B+大模型</p>
+                </div>
+                
+                <div class="paper-content reveal">
+                    <div class="paper-badge">
+                        <span class="tag">周志华团队</span>
+                        <span>arXiv:2505.13425 · 2025</span>
+                    </div>
+                    
+                    <h2 class="paper-title">Learnware of Language Models: Specialized SLMs Can Do Big</h2>
+                    <p class="paper-authors">Zhi-Hao Tan, Zi-Chen Zhao, Hao-Yu Shi, Xin-Yu Zhang, Peng Tan, Yang Yu, Zhi-Hua Zhou</p>
+                    
+                    <div class="paper-highlight">
+                        <p><strong>突破性成果：</strong>8B参数的小模型学件系统在专业领域超越70B+大模型</p>
+                    </div>
+                    
+                    <h4 style="font-size: var(--small-size); margin: var(--element-gap) 0 0.5rem;">核心贡献</h4>
+                    <ul style="font-size: var(--small-size); color: var(--text-secondary); padding-left: 1rem;">
+                        <li>首次将学件范式应用于语言模型领域</li>
+                        <li>构建约100个专业领域8B小模型的学件系统</li>
+                        <li>通过规约匹配实现隐私保护下的模型选择</li>
+                    </ul>
+                    
+                    <h4 style="font-size: var(--small-size); margin: var(--element-gap) 0 0.5rem;">关键结果</h4>
+                    <div class="paper-results">
+                        <div class="result-item">
+                            <div class="result-value">+14%</div>
+                            <div class="result-label">超越Qwen-72B</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">超越</div>
+                            <div class="result-label">Flan-PaLM-540B</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">隐私</div>
+                            <div class="result-label">数据不出域</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 5: 郭毅可论文1 - HKGAI-V1 -->
+    <section class="slide" data-slide="4">
+        <div class="slide-content">
+            <div class="paper-section">
+                <div class="paper-content reveal">
+                    <div class="paper-badge">
+                        <span class="tag tag-green">郭毅可团队</span>
+                        <span>arXiv:2507.11502 · 2025</span>
+                    </div>
+                    
+                    <h2 class="paper-title">HKGAI-V1: Towards Regional Sovereign Large Language Model for Hong Kong</h2>
+                    <p class="paper-authors">Sirui Han, Yike Guo et al. · Hong Kong Generative AI Research Centre</p>
+                    
+                    <div class="paper-highlight" style="background: #d1fae5; border-color: #10b981;">
+                        <p><strong>里程碑：</strong>香港首个本地化主权大语言模型，支持粤语/普通话/英语三语</p>
+                    </div>
+                    
+                    <h4 style="font-size: var(--small-size); margin: var(--element-gap) 0 0.5rem;">技术架构</h4>
+                    <ul style="font-size: var(--small-size); color: var(--text-secondary); padding-left: 1rem;">
+                        <li>基于DeepSeek架构全参数微调</li>
+                        <li>融合RAG检索增强生成系统</li>
+                        <li>定制化香港价值观对齐框架</li>
+                    </ul>
+                    
+                    <h4 style="font-size: var(--small-size); margin: var(--element-gap) 0 0.5rem;">应用场景</h4>
+                    <div class="paper-results">
+                        <div class="result-item">
+                            <div class="result-value">HKPilot</div>
+                            <div class="result-label">文档处理</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">HKChat</div>
+                            <div class="result-label">智能对话</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">HKMeeting</div>
+                            <div class="result-label">会议助手</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paper-figure reveal">
+                    <!-- HKGAI架构图 -->
+                    <svg viewBox="0 0 400 320" style="width: 100%; max-width: 400px;">
+                        <!-- 背景 -->
+                        <rect x="10" y="10" width="380" height="300" rx="12" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+                        
+                        <!-- 标题 -->
+                        <text x="200" y="40" text-anchor="middle" font-family="Space Grotesk" font-size="14" font-weight="600" fill="#059669">HKGAI-V1 系统架构</text>
+                        
+                        <!-- 基础模型层 -->
+                        <rect x="30" y="60" width="340" height="50" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="200" y="80" text-anchor="middle" font-size="10" fill="#525252">DeepSeek 基础模型</text>
+                        <text x="200" y="95" text-anchor="middle" font-size="8" fill="#737373">全参数微调 · 价值观对齐</text>
+                        
+                        <!-- 三语支持 -->
+                        <rect x="30" y="120" width="105" height="40" rx="6" fill="#d1fae5"/>
+                        <text x="82" y="145" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">粤语</text>
+                        
+                        <rect x="147" y="120" width="105" height="40" rx="6" fill="#d1fae5"/>
+                        <text x="200" y="145" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">普通话</text>
+                        
+                        <rect x="265" y="120" width="105" height="40" rx="6" fill="#d1fae5"/>
+                        <text x="317" y="145" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">English</text>
+                        
+                        <!-- RAG层 -->
+                        <rect x="30" y="175" width="340" height="50" rx="8" fill="white" stroke="#10b981"/>
+                        <text x="200" y="195" text-anchor="middle" font-size="10" fill="#059669">RAG 检索增强生成</text>
+                        <text x="200" y="210" text-anchor="middle" font-size="8" fill="#737373">香港本地知识库 · 实时信息检索</text>
+                        
+                        <!-- 应用层 -->
+                        <rect x="30" y="240" width="105" height="50" rx="8" fill="#059669"/>
+                        <text x="82" y="260" text-anchor="middle" font-size="10" fill="white" font-weight="500">HKPilot</text>
+                        <text x="82" y="275" text-anchor="middle" font-size="7" fill="white">文档处理</text>
+                        
+                        <rect x="147" y="240" width="105" height="50" rx="8" fill="#059669"/>
+                        <text x="200" y="260" text-anchor="middle" font-size="10" fill="white" font-weight="500">HKChat</text>
+                        <text x="200" y="275" text-anchor="middle" font-size="7" fill="white">智能对话</text>
+                        
+                        <rect x="265" y="240" width="105" height="50" rx="8" fill="#059669"/>
+                        <text x="317" y="260" text-anchor="middle" font-size="10" fill="white" font-weight="500">HKMeeting</text>
+                        <text x="317" y="275" text-anchor="middle" font-size="7" fill="white">会议助手</text>
+                    </svg>
+                    <p class="paper-figure-caption">图3: HKGAI-V1 系统架构与应用层</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 6: 郭毅可论文2 - 医学AI -->
+    <section class="slide" data-slide="5">
+        <div class="slide-content">
+            <div class="paper-section">
+                <div class="paper-figure reveal">
+                    <!-- 医学AI应用 -->
+                    <svg viewBox="0 0 420 300" style="width: 100%; max-width: 420px;">
+                        <!-- 背景 -->
+                        <rect x="10" y="10" width="400" height="280" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        
+                        <!-- 标题 -->
+                        <text x="210" y="40" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#b45309">医学影像深度学习重建</text>
+                        
+                        <!-- 流程图 -->
+                        <!-- 输入 -->
+                        <rect x="30" y="70" width="80" height="60" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="70" y="95" text-anchor="middle" font-size="9" fill="#525252">欠采样</text>
+                        <text x="70" y="110" text-anchor="middle" font-size="9" fill="#525252">k空间数据</text>
+                        
+                        <!-- 箭头 -->
+                        <path d="M115 100 L150 100" stroke="#f59e0b" stroke-width="2" fill="none"/>
+                        <polygon points="150,95 160,100 150,105" fill="#f59e0b"/>
+                        
+                        <!-- 深度学习模型 -->
+                        <rect x="165" y="60" width="100" height="80" rx="8" fill="#f59e0b"/>
+                        <text x="215" y="85" text-anchor="middle" font-size="10" fill="white" font-weight="500">深度学习</text>
+                        <text x="215" y="100" text-anchor="middle" font-size="10" fill="white" font-weight="500">重建网络</text>
+                        <text x="215" y="120" text-anchor="middle" font-size="8" fill="white">数据+物理驱动</text>
+                        
+                        <!-- 箭头 -->
+                        <path d="M270 100 L305 100" stroke="#f59e0b" stroke-width="2" fill="none"/>
+                        <polygon points="305,95 315,100 305,105" fill="#f59e0b"/>
+                        
+                        <!-- 输出 -->
+                        <rect x="320" y="70" width="80" height="60" rx="8" fill="#d1fae5" stroke="#10b981"/>
+                        <text x="360" y="95" text-anchor="middle" font-size="9" fill="#059669">高质量</text>
+                        <text x="360" y="110" text-anchor="middle" font-size="9" fill="#059669">MRI图像</text>
+                        
+                        <!-- 特点 -->
+                        <rect x="30" y="160" width="110" height="80" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="85" y="180" text-anchor="middle" font-size="9" font-weight="500" fill="#525252">⚡ 加速扫描</text>
+                        <text x="85" y="200" text-anchor="middle" font-size="8" fill="#737373">减少采集时间</text>
+                        <text x="85" y="220" text-anchor="middle" font-size="8" fill="#737373">提升患者体验</text>
+                        
+                        <rect x="155" y="160" width="110" height="80" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="210" y="180" text-anchor="middle" font-size="9" font-weight="500" fill="#525252">🎯 高保真</text>
+                        <text x="210" y="200" text-anchor="middle" font-size="8" fill="#737373">保持图像质量</text>
+                        <text x="210" y="220" text-anchor="middle" font-size="8" fill="#737373">精准诊断支持</text>
+                        
+                        <rect x="280" y="160" width="110" height="80" rx="8" fill="white" stroke="#e5e5e5"/>
+                        <text x="335" y="180" text-anchor="middle" font-size="9" font-weight="500" fill="#525252">🔬 物理约束</text>
+                        <text x="335" y="200" text-anchor="middle" font-size="8" fill="#737373">融合领域知识</text>
+                        <text x="335" y="220" text-anchor="middle" font-size="8" fill="#737373">可解释性强</text>
+                    </svg>
+                    <p class="paper-figure-caption">图4: 数据与物理驱动的医学影像深度学习重建框架</p>
+                </div>
+                
+                <div class="paper-content reveal">
+                    <div class="paper-badge">
+                        <span class="tag tag-green">郭毅可团队</span>
+                        <span>arXiv:2401.16564 · 2024</span>
+                    </div>
+                    
+                    <h2 class="paper-title">Data and Physics Driven Deep Learning Models for Fast MRI Reconstruction</h2>
+                    <p class="paper-authors">Jiahao Huang, Yike Guo, Guang Yang et al.</p>
+                    
+                    <div class="paper-highlight" style="background: #fef3c7; border-color: #f59e0b;">
+                        <p><strong>创新点：</strong>融合数据驱动与物理模型，实现快速高质量MRI重建</p>
+                    </div>
+                    
+                    <h4 style="font-size: var(--small-size); margin: var(--element-gap) 0 0.5rem;">核心技术</h4>
+                    <ul style="font-size: var(--small-size); color: var(--text-secondary); padding-left: 1rem;">
+                        <li>结合深度学习与MRI物理成像原理</li>
+                        <li>欠采样k空间数据快速重建</li>
+                        <li>保持诊断级图像质量</li>
+                    </ul>
+                    
+                    <h4 style="font-size: var(--small-size); margin: var(--element-gap) 0 0.5rem;">应用价值</h4>
+                    <div class="paper-results">
+                        <div class="result-item">
+                            <div class="result-value">10x</div>
+                            <div class="result-label">加速扫描</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">临床</div>
+                            <div class="result-label">验证通过</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">开源</div>
+                            <div class="result-label">代码框架</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 7: 总结 -->
+    <section class="slide" data-slide="6">
+        <div class="slide-content">
+            <div class="tag reveal">总结与展望</div>
+            <h2 class="reveal">两位院士的研究特色对比</h2>
+            
+            <div class="grid-2 reveal">
+                <div class="card" style="border-left: 4px solid var(--accent);">
+                    <h3 style="color: var(--accent); margin-bottom: var(--element-gap);">周志华：学件范式</h3>
+                    <ul style="font-size: var(--small-size); color: var(--text-secondary); padding-left: 1rem;">
+                        <li><strong>核心理念：</strong>小模型协同，打破大模型垄断</li>
+                        <li><strong>技术路径：</strong>规约机制 + 模型复用</li>
+                        <li><strong>应用场景：</strong>隐私敏感、资源受限领域</li>
+                        <li><strong>产业价值：</strong>降低AI应用门槛，促进模型生态</li>
+                    </ul>
+                    <div style="margin-top: var(--element-gap); padding-top: var(--element-gap); border-top: 1px solid var(--border-light);">
+                        <p style="font-size: var(--small-size); color: var(--text-muted);">
+                            📚 代表成果：北冥坞学件平台 · beijingwu.cloud
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="card" style="border-left: 4px solid #10b981;">
+                    <h3 style="color: #10b981; margin-bottom: var(--element-gap);">郭毅可：区域主权AI</h3>
+                    <ul style="font-size: var(--small-size); color: var(--text-secondary); padding-left: 1rem;">
+                        <li><strong>核心理念：</strong>本地化AI，服务区域需求</li>
+                        <li><strong>技术路径：</strong>价值观对齐 + RAG增强</li>
+                        <li><strong>应用场景：</strong>政务、法律、教育、医疗</li>
+                        <li><strong>产业价值：</strong>数字主权，服务香港发展</li>
+                    </ul>
+                    <div style="margin-top: var(--element-gap); padding-top: var(--element-gap); border-top: 1px solid var(--border-light);">
+                        <p style="font-size: var(--small-size); color: var(--text-muted);">
+                            🏛️ 代表成果：HKGAI-V1 · 港府3万公务员使用中
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="reveal" style="margin-top: var(--content-gap); text-align: center;">
+                <div class="divider" style="margin: 0 auto var(--element-gap);"></div>
+                <p style="font-size: var(--small-size); color: var(--text-muted);">
+                    数据来源：中国科学院、中国工程院、arXiv · 2025年11月
+                </p>
+                <p style="font-size: var(--small-size); color: var(--text-muted); margin-top: 0.5rem;">
+                    使用 <span class="key">←</span> <span class="key">→</span> 或点击右侧导航点切换页面
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                this.progressBar = document.getElementById('progressBar');
+                this.navDotsContainer = document.getElementById('navDots');
+                this.init();
+            }
+            
+            init() {
+                this.createNavDots();
+                this.setupIntersectionObserver();
+                this.setupKeyboardNav();
+                this.setupTouchNav();
+                this.updateProgress();
+                this.slides[0].classList.add('visible');
+            }
+            
+            createNavDots() {
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', `跳转到第 ${i + 1} 页`);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.navDotsContainer.appendChild(dot);
+                }
+            }
+            
+            setupIntersectionObserver() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const slideIndex = parseInt(entry.target.dataset.slide);
+                            this.updateActiveDot(slideIndex);
+                            this.currentSlide = slideIndex;
+                            this.updateProgress();
+                        }
+                    });
+                }, { threshold: 0.5 });
+                
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+            
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        this.goToSlide(0);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        this.goToSlide(this.totalSlides - 1);
+                    }
+                });
+            }
+            
+            setupTouchNav() {
+                let touchStartY = 0;
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+                
+                document.addEventListener('touchend', (e) => {
+                    const touchEndY = e.changedTouches[0].screenY;
+                    const diff = touchStartY - touchEndY;
+                    if (Math.abs(diff) > 50) {
+                        diff > 0 ? this.nextSlide() : this.prevSlide();
+                    }
+                }, { passive: true });
+            }
+            
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+            
+            prevSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+            
+            goToSlide(index) {
+                if (index >= 0 && index < this.totalSlides) {
+                    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+                    this.currentSlide = index;
+                }
+            }
+            
+            updateActiveDot(index) {
+                const dots = this.navDotsContainer.querySelectorAll('.nav-dot');
+                dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+            }
+            
+            updateProgress() {
+                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+                this.progressBar.style.width = `${progress}%`;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new SlidePresentation());
+    </script>
+</body>
+</html>

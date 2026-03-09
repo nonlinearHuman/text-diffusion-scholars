@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CVPR 2026/2025 多模态模型技术线索推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+        
+        .page {
+            width: 254mm;
+            height: 142.875mm;
+            margin: 0 auto 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        
+        /* 封面 */
+        .cover {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 50%, #fef3c7 100%);
+            width: 100%;
+            padding: 20px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 5px 14px;
+            background: #2563eb;
+            color: white;
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        .cover h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 16px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            max-width: 420px;
+            margin-bottom: 16px;
+        }
+        
+        .stat {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .stat-label {
+            font-size: 9px;
+            color: #64748b;
+            margin-top: 2px;
+        }
+        
+        /* 论文页 */
+        .paper-page {
+            padding: 10mm;
+            gap: 10mm;
+        }
+        
+        .left-column {
+            width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+        
+        .paper-number {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #2563eb;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        
+        .paper-type {
+            font-size: 8px;
+            color: #64748b;
+        }
+        
+        .paper-title {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 5px;
+            color: #1e293b;
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 6px;
+        }
+        
+        .author-main {
+            display: flex;
+            gap: 6px;
+            align-items: flex-start;
+            margin-bottom: 4px;
+        }
+        
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .author-info h3 {
+            font-size: 9px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .affiliation {
+            font-size: 7px;
+            color: #64748b;
+            margin-bottom: 2px;
+        }
+        
+        .author-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2px;
+        }
+        
+        .author-tag {
+            padding: 1px 4px;
+            background: #dbeafe;
+            color: #2563eb;
+            border-radius: 100px;
+            font-size: 7px;
+        }
+        
+        .author-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 3px;
+            font-size: 7px;
+            color: #64748b;
+        }
+        
+        .author-details p {
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+        
+        .author-details strong {
+            color: #1e293b;
+            font-weight: 500;
+        }
+        
+        /* 左下角补充内容 */
+        .extra-content {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            border-radius: 6px;
+            padding: 6px;
+            margin-top: auto;
+        }
+        
+        .extra-content h4 {
+            font-size: 8px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 3px;
+        }
+        
+        .metrics-mini {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            margin-bottom: 4px;
+        }
+        
+        .metric-mini {
+            background: white;
+            padding: 3px 5px;
+            border-radius: 3px;
+            text-align: center;
+        }
+        
+        .metric-mini-value {
+            font-size: 10px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .metric-mini-label {
+            font-size: 6px;
+            color: #64748b;
+        }
+        
+        .info-list {
+            font-size: 7px;
+            color: #475569;
+        }
+        
+        .info-list li {
+            margin-bottom: 1px;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 6px;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card h4 {
+            font-size: 9px;
+            font-weight: 600;
+            color: #2563eb;
+            margin-bottom: 4px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            padding: 5px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            font-size: 7px;
+            line-height: 1.3;
+        }
+        
+        .figure-box {
+            background: #f8fafc;
+            border-radius: 4px;
+            padding: 5px;
+            margin-bottom: 5px;
+            text-align: center;
+            min-height: 50px;
+        }
+        
+        .figure-caption {
+            font-size: 7px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 2px;
+        }
+        
+        .collab-suggestion {
+            background: #fef3c7;
+            border-left: 2px solid #f59e0b;
+            padding: 4px 5px;
+            border-radius: 0 4px 4px 0;
+            font-size: 7px;
+            margin-top: auto;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: 8px;
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 1px;
+        }
+        
+        .collab-suggestion p {
+            color: #78350f;
+            line-height: 1.2;
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            
+            .page:last-child {
+                page-break-after: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 封面 -->
+    <div class="page">
+        <div class="cover">
+            <div class="badge">CVPR 2026/2025</div>
+            <h1>多模态模型技术线索推荐</h1>
+            <p class="subtitle">Multimodal Models for Vision-Language Understanding & AI Agents</p>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">精选论文</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">多模态</div>
+                    <div class="stat-label">模型方向</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">5</div>
+                    <div class="stat-label">顶尖机构</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">2026</div>
+                    <div class="stat-label">最新研究</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文1: MoDES -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #3B82F6, #8B5CF6);">黄</div>
+                    <div class="author-info">
+                        <h3>Yushi Huang (黄钰诗)</h3>
+                        <p class="affiliation">港科大 · 北航 · 北大</p>
+                        <div class="author-tags">
+                            <span class="author-tag">MoE加速</span>
+                            <span class="author-tag">多模态</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>通讯作者:</strong> Xianglong Liu (北航教授)</p>
+                    <p><strong>研究方向:</strong> MoE模型加速、多模态LLM</p>
+                    <p><strong>获奖:</strong> NSFC优青、北京新星</p>
+                    <p><strong>代表工作:</strong> BiBench (ICML), DB-LLM</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">88%</div>
+                        <div class="metric-mini-label">专家跳过率</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">97.33%</div>
+                        <div class="metric-mini-label">准确率保持</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">2.16×</div>
+                        <div class="metric-mini-label">加速比</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">免训练</div>
+                        <div class="metric-mini-label">框架特点</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• MoE多模态模型部署优化</li>
+                    <li>• 边缘设备高效推理</li>
+                    <li>• 大规模视觉语言系统</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">1</div>
+                <span class="paper-type">CVPR 2026 · Multimodal LLM</span>
+            </div>
+            
+            <h2 class="paper-title">MoDES: Accelerating Mixture-of-Experts Multimodal Large Language Models via Dynamic Expert Skipping</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首个针对MoE多模态LLM的免训练动态专家跳过框架。创新包括：(1)全局调制局部门控(GMLG)；(2)双模态阈值方法(DMT)；(3)前沿搜索算法，将参数搜索从22天缩至22小时。跳过88%专家仍保持97.33%准确率。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 300px;">
+                        <defs>
+                            <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#DBEAFE"/>
+                                <stop offset="100%" style="stop-color:#BFDBFE"/>
+                            </linearGradient>
+                            <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#EDE9FE"/>
+                                <stop offset="100%" style="stop-color:#DDD6FE"/>
+                            </linearGradient>
+                            <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#D1FAE5"/>
+                                <stop offset="100%" style="stop-color:#A7F3D0"/>
+                            </linearGradient>
+                        </defs>
+                        
+                        <rect x="8" y="10" width="70" height="40" rx="3" fill="url(#g1)" stroke="#2563EB" stroke-width="1"/>
+                        <text x="43" y="28" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">全局调制</text>
+                        <text x="43" y="36" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">门控机制</text>
+                        
+                        <path d="M85 30 L100 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="100,27 106,30 100,33" fill="#64748B"/>
+                        
+                        <rect x="114" y="10" width="70" height="40" rx="3" fill="url(#g2)" stroke="#7C3AED" stroke-width="1"/>
+                        <text x="149" y="28" text-anchor="middle" font-size="6" fill="#5B21B6" font-weight="600">双模态</text>
+                        <text x="149" y="36" text-anchor="middle" font-size="6" fill="#5B21B6" font-weight="600">阈值处理</text>
+                        
+                        <path d="M191 30 L206 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="206,27 212,30 206,33" fill="#64748B"/>
+                        
+                        <rect x="220" y="10" width="60" height="40" rx="3" fill="url(#g3)" stroke="#10B981" stroke-width="1"/>
+                        <text x="250" y="28" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">动态跳过</text>
+                        <text x="250" y="36" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">88%专家</text>
+                    </svg>
+                    <p class="figure-caption">MoDES架构：全局调制+双模态阈值+动态跳过</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>北航团队在模型压缩、网络量化方面积累深厚，适合在边缘部署、高效推理方向合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文2: MultiModalPFN -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #10B981, #3B82F6);">W</div>
+                    <div class="author-info">
+                        <h3>Wall Kim</h3>
+                        <p class="affiliation">研究团队</p>
+                        <div class="author-tags">
+                            <span class="author-tag">表格学习</span>
+                            <span class="author-tag">多模态</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 表格数据学习、多模态融合</p>
+                    <p><strong>创新点:</strong> 扩展TabPFN到多模态场景</p>
+                    <p><strong>应用:</strong> 医疗数据、异构数据</p>
+                    <p><strong>代码:</strong> github.com/too-z/MultiModalPFN</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">异构</div>
+                        <div class="metric-mini-label">数据支持</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">SOTA</div>
+                        <div class="metric-mini-label">性能表现</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">医疗</div>
+                        <div class="metric-mini-label">应用领域</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">可扩展</div>
+                        <div class="metric-mini-label">框架特性</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 医疗影像+表格诊断</li>
+                    <li>• 金融多模态风控</li>
+                    <li>• 异构数据分析</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">2</div>
+                <span class="paper-type">CVPR 2026 · Multimodal Learning</span>
+            </div>
+            
+            <h2 class="paper-title">MultiModalPFN: Extending Prior-Data Fitted Networks for Multimodal Tabular Learning</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>扩展TabPFN基础模型处理表格和非表格模态（图像、文本）。创新包括：(1)多模态编码器和投影器；(2)多头门控MLP和交叉注意力池化；(3)在医疗和通用多模态数据集上超越SOTA。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 300px;">
+                        <rect x="8" y="10" width="60" height="40" rx="3" fill="url(#g1)" stroke="#2563EB" stroke-width="1"/>
+                        <text x="38" y="28" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">表格数据</text>
+                        <text x="38" y="36" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">+图像文本</text>
+                        
+                        <path d="M75 30 L90 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="90,27 96,30 90,33" fill="#64748B"/>
+                        
+                        <rect x="100" y="10" width="80" height="40" rx="3" fill="url(#g2)" stroke="#7C3AED" stroke-width="1"/>
+                        <text x="140" y="25" text-anchor="middle" font-size="6" fill="#5B21B6" font-weight="600">多模态编码器</text>
+                        <text x="140" y="35" text-anchor="middle" font-size="5" fill="#6B7280">门控MLP | 交叉注意力</text>
+                        
+                        <path d="M187 30 L202 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="202,27 208,30 202,33" fill="#64748B"/>
+                        
+                        <rect x="218" y="10" width="60" height="40" rx="3" fill="url(#g3)" stroke="#10B981" stroke-width="1"/>
+                        <text x="248" y="28" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">统一表示</text>
+                        <text x="248" y="36" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">预测输出</text>
+                    </svg>
+                    <p class="figure-caption">MultiModalPFN：异构数据统一学习框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>在医疗AI、金融风控等需要处理异构数据的场景有应用潜力。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文3: Insight-V -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">刘</div>
+                    <div class="author-info">
+                        <h3>Ziwei Liu (刘子玮)</h3>
+                        <p class="affiliation">NTU MMLab · 新加坡</p>
+                        <div class="author-tags">
+                            <span class="author-tag">视觉推理</span>
+                            <span class="author-tag">多模态</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>职位:</strong> NTU副教授</p>
+                    <p><strong>获奖:</strong> 新加坡总统青年科学家奖、MIT TR35</p>
+                    <p><strong>代表工作:</strong> CelebA、Video-MMMU</p>
+                    <p><strong>近作:</strong> Insight-V (Highlight)、3DTopia-XL</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">Highlight</div>
+                        <div class="metric-mini-label">CVPR 2025</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">长链</div>
+                        <div class="metric-mini-label">推理能力</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">腾讯</div>
+                        <div class="metric-mini-label">合作机构</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">高质量</div>
+                        <div class="metric-mini-label">数据集构建</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 复杂视觉问答系统</li>
+                    <li>• 多步骤视觉推理任务</li>
+                    <li>• AI辅助决策支持</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">3</div>
+                <span class="paper-type">CVPR 2025 Highlight · Visual Reasoning</span>
+            </div>
+            
+            <h2 class="paper-title">Insight-V: Exploring Long-Chain Visual Reasoning with Multimodal Large Language Models</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>探索多模态大语言模型的长链视觉推理能力。创新包括：(1)长链推理框架分解复杂任务；(2)高质量推理链数据集；(3)训练策略优化长程推理。CVPR 2025 Highlight论文。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 300px;">
+                        <rect x="8" y="10" width="55" height="40" rx="3" fill="url(#g1)" stroke="#2563EB" stroke-width="1"/>
+                        <text x="35" y="28" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">视觉输入</text>
+                        <text x="35" y="36" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">+问题</text>
+                        
+                        <path d="M70 30 L85 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="85,27 91,30 85,33" fill="#64748B"/>
+                        
+                        <rect x="95" y="10" width="90" height="40" rx="3" fill="url(#g2)" stroke="#7C3AED" stroke-width="1"/>
+                        <text x="140" y="25" text-anchor="middle" font-size="7" fill="#5B21B6" font-weight="700">Insight-V</text>
+                        <text x="140" y="35" text-anchor="middle" font-size="5" fill="#6B7280">长链推理 | 分步分解</text>
+                        
+                        <path d="M192 30 L207 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="207,27 213,30 207,33" fill="#64748B"/>
+                        
+                        <rect x="223" y="10" width="55" height="40" rx="3" fill="url(#g3)" stroke="#10B981" stroke-width="1"/>
+                        <text x="250" y="28" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">推理链</text>
+                        <text x="250" y="36" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">输出</text>
+                    </svg>
+                    <p class="figure-caption">Insight-V：长链视觉推理框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>NTU团队在视觉生成、多模态学习方向资源丰富，适合在复杂推理任务上合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文4: DINOv2 Meets Text -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #EC4899, #8B5CF6);">C</div>
+                    <div class="author-info">
+                        <h3>Cijo Jose</h3>
+                        <p class="affiliation">Meta FAIR · 法国</p>
+                        <div class="author-tags">
+                            <span class="author-tag">自监督</span>
+                            <span class="author-tag">视觉语言</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>机构:</strong> Meta FAIR研究员</p>
+                    <p><strong>研究方向:</strong> 自监督视觉学习、视觉语言对齐</p>
+                    <p><strong>合作:</strong> 巴黎萨克雷大学、POSTECH</p>
+                    <p><strong>代表工作:</strong> DINOv2 Meets Text、DINOv3</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">SOTA</div>
+                        <div class="metric-mini-label">零样本分类</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">开放词汇</div>
+                        <div class="metric-mini-label">分割能力</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">低成本</div>
+                        <div class="metric-mini-label">训练开销</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">像素级</div>
+                        <div class="metric-mini-label">对齐精度</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• 开放词汇图像分割</li>
+                    <li>• 零样本视觉分类</li>
+                    <li>• 视觉语言检索</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">4</div>
+                <span class="paper-type">CVPR 2025 · Vision-Language Alignment</span>
+            </div>
+            
+            <h2 class="paper-title">DINOv2 Meets Text: A Unified Framework for Image- and Pixel-Level Vision-Language Alignment</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>将DINOv2自监督视觉编码器与文本对齐，实现图像级和像素级视觉语言任务。创新包括：(1)LiT训练范式；(2)图像块平均训练对齐；(3)仅用CLIP一小部分成本达到SOTA零样本分类和开放词汇分割性能。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 300px;">
+                        <rect x="8" y="10" width="70" height="40" rx="3" fill="url(#g1)" stroke="#2563EB" stroke-width="1"/>
+                        <text x="43" y="25" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">DINOv2</text>
+                        <text x="43" y="35" text-anchor="middle" font-size="5" fill="#6B7280">自监督视觉编码器</text>
+                        
+                        <path d="M85 30 L100 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="100,27 106,30 100,33" fill="#64748B"/>
+                        
+                        <rect x="110" y="10" width="70" height="40" rx="3" fill="url(#g2)" stroke="#7C3AED" stroke-width="1"/>
+                        <text x="145" y="25" text-anchor="middle" font-size="6" fill="#5B21B6" font-weight="600">LiT训练</text>
+                        <text x="145" y="35" text-anchor="middle" font-size="5" fill="#6B7280">文本对齐 | 块平均</text>
+                        
+                        <path d="M187 30 L202 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="202,27 208,30 202,33" fill="#64748B"/>
+                        
+                        <rect x="218" y="10" width="60" height="40" rx="3" fill="url(#g3)" stroke="#10B981" stroke-width="1"/>
+                        <text x="248" y="25" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">图像+像素</text>
+                        <text x="248" y="35" text-anchor="middle" font-size="6" fill="#065F46" font-weight="600">级任务</text>
+                    </svg>
+                    <p class="figure-caption">DINOv2 Meets Text：低成本视觉语言对齐框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Meta FAIR在自监督学习、视觉语言模型方向领先，适合在基础模型研究上合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文5: Magma -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-main">
+                    <div class="author-avatar" style="background: linear-gradient(135deg, #76B900, #059669);">杨</div>
+                    <div class="author-info">
+                        <h3>Jianwei Yang (杨建伟)</h3>
+                        <p class="affiliation">Microsoft Research · xAI</p>
+                        <div class="author-tags">
+                            <span class="author-tag">AI代理</span>
+                            <span class="author-tag">多模态</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="author-details">
+                    <p><strong>职位:</strong> 原MSR首席研究员，现xAI技术团队</p>
+                    <p><strong>获奖:</strong> CVPR 2022 Best Paper Final (GLIP)</p>
+                    <p><strong>代表工作:</strong> Magma、GLIP、X-Decoder</p>
+                    <p><strong>近作:</strong> Phi-3-Vision、Semantic-SAM</p>
+                </div>
+            </div>
+            
+            <div class="extra-content">
+                <h4>📊 关键指标</h4>
+                <div class="metrics-mini">
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">统一</div>
+                        <div class="metric-mini-label">理解+行动</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">数字+物理</div>
+                        <div class="metric-mini-label">双环境</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">Hacker News</div>
+                        <div class="metric-mini-label">排名第一</div>
+                    </div>
+                    <div class="metric-mini">
+                        <div class="metric-mini-value">Microsoft</div>
+                        <div class="metric-mini-label">旗舰项目</div>
+                    </div>
+                </div>
+                <h4>🎯 应用场景</h4>
+                <ul class="info-list">
+                    <li>• UI导航与操作</li>
+                    <li>• 机器人控制</li>
+                    <li>• 多模态AI代理</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">5</div>
+                <span class="paper-type">CVPR 2025 · Multimodal AI Agent</span>
+            </div>
+            
+            <h2 class="paper-title">Magma: A Foundation Model for Multimodal AI Agents</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>首个能理解和执行多模态输入的基础模型，同时具备数字环境UI导航和物理环境机器人操作能力。创新包括：(1)保留视觉语言理解；(2)添加行动执行能力；(3)数字物理世界无缝切换。Microsoft Research旗舰项目，Hacker News排名第一。
+                </div>
+                
+                <div class="figure-box">
+                    <svg viewBox="0 0 350 60" xmlns="http://www.w3.org/2000/svg" style="width: 100%; max-width: 300px;">
+                        <rect x="8" y="10" width="65" height="40" rx="3" fill="url(#g1)" stroke="#2563EB" stroke-width="1"/>
+                        <text x="40" y="28" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">多模态</text>
+                        <text x="40" y="36" text-anchor="middle" font-size="6" fill="#1E40AF" font-weight="600">输入</text>
+                        
+                        <path d="M80 30 L95 30" stroke="#64748B" stroke-width="1"/>
+                        <polygon points="95,27 101,30 95,33" fill="#64748B"/>
+                        
+                        <rect x="105" y="10" width="80" height="40" rx="3" fill="url(#g2)" stroke="#7C3AED" stroke-width="1"/>
+                        <text x="145" y="28" text-anchor="middle" font-size="8" fill="#5B21B6" font-weight="700">Magma</text>
+                        <text x="145" y="38" text-anchor="middle" font-size="5" fill="#6B7280">理解+行动统一</text>
+                        
+                        <path d="M192 20 L207 15" stroke="#64748B" stroke-width="1"/>
+                        <path d="M192 40 L207 45" stroke="#64748B" stroke-width="1"/>
+                        
+                        <rect x="217" y="5" width="50" height="20" rx="2" fill="url(#g3)" stroke="#10B981" stroke-width="1"/>
+                        <text x="242" y="18" text-anchor="middle" font-size="5" fill="#065F46" font-weight="600">UI导航</text>
+                        
+                        <rect x="217" y="35" width="50" height="20" rx="2" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1"/>
+                        <text x="242" y="48" text-anchor="middle" font-size="5" fill="#92400E" font-weight="600">机器人操作</text>
+                    </svg>
+                    <p class="figure-caption">Magma：理解与行动统一的多模态AI代理</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Microsoft Research在多模态AI代理方向领先，适合在基础模型、AI系统方向合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

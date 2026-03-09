@@ -1,0 +1,20 @@
+{
+  "capital": 700.0,
+  "positions": {
+    "000001": {
+      "shares": 30.0,
+      "cost_price": 10.0
+    }
+  },
+  "trades": [
+    {
+      "time": "2026-02-27T08:57:53.913895",
+      "code": "000001",
+      "name": "平安银行",
+      "action": "BUY",
+      "amount": 300.0,
+      "strategy": "超跌反弹",
+      "status": "EXECUTED"
+    }
+  ]
+}

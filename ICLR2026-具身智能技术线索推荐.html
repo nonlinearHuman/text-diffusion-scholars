@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICLR 2026 具身智能技术线索推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans SC', sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.4;
+        }
+        
+        .page {
+            width: 254mm;
+            height: 143mm;
+            margin: 0 auto 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .paper-page {
+            padding: 10mm;
+            gap: 6mm;
+        }
+        
+        /* 左侧30% */
+        .left-column {
+            width: 30%;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        /* 右侧70% */
+        .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+        }
+        
+        .paper-header {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 4px;
+        }
+        
+        .paper-number {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #10B981, #3B82F6);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+        
+        .paper-type {
+            font-size: 8px;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .paper-title {
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 6px;
+            color: #1e293b;
+        }
+        
+        /* 作者卡片 */
+        .author-card {
+            background: #f8fafc;
+            border-radius: 6px;
+            padding: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .author-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 8px;
+            display: block;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .author-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 700;
+            color: white;
+            border: 3px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .author-info {
+            text-align: center;
+            margin-bottom: 6px;
+        }
+        
+        .author-info h3 {
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+        
+        .affiliation {
+            font-size: 8px;
+            color: #64748b;
+        }
+        
+        .author-details {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+            font-size: 7px;
+            color: #64748b;
+        }
+        
+        .author-details p {
+            margin-bottom: 2px;
+            line-height: 1.3;
+        }
+        
+        .author-details strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        .recent-papers {
+            background: linear-gradient(135deg, #D1FAE5, #DBEAFE);
+            border-radius: 6px;
+            padding: 8px;
+            flex: 1;
+        }
+        
+        .recent-papers h4 {
+            font-size: 8px;
+            font-weight: 600;
+            color: #059669;
+            margin-bottom: 4px;
+        }
+        
+        .paper-list {
+            font-size: 6px;
+            color: #475569;
+        }
+        
+        .paper-list li {
+            margin-bottom: 3px;
+            line-height: 1.3;
+        }
+        
+        .paper-list .paper-year {
+            color: #10B981;
+            font-weight: 600;
+        }
+        
+        /* 内容卡片 */
+        .content-card {
+            background: white;
+            border-radius: 6px;
+            padding: 10px;
+            border: 1px solid #e2e8f0;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .content-card h4 {
+            font-size: 9px;
+            font-weight: 600;
+            color: #10B981;
+            margin-bottom: 4px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #D1FAE5, #DBEAFE);
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 8px;
+            line-height: 1.5;
+        }
+        
+        .figure-box {
+            background: #f8fafc;
+            border-radius: 4px;
+            padding: 8px;
+            margin-bottom: 8px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .figure-box img {
+            max-width: 100%;
+            max-height: 130px;
+            object-fit: contain;
+            border-radius: 2px;
+        }
+        
+        .figure-caption {
+            font-size: 7px;
+            color: #64748b;
+            text-align: center;
+            margin-top: 3px;
+        }
+        
+        .metrics-row {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .metric-item {
+            background: white;
+            padding: 4px 6px;
+            border-radius: 3px;
+            text-align: center;
+            flex: 1;
+            border: 1px solid #e2e8f0;
+        }
+        
+        .metric-value {
+            font-size: 9px;
+            font-weight: 700;
+            color: #10B981;
+        }
+        
+        .metric-label {
+            font-size: 6px;
+            color: #64748b;
+        }
+        
+        .collab-suggestion {
+            background: #FEF3C7;
+            border-left: 2px solid #F59E0B;
+            padding: 6px 8px;
+            border-radius: 0 4px 4px 0;
+            font-size: 7px;
+            margin-top: auto;
+        }
+        
+        .collab-suggestion h5 {
+            font-size: 8px;
+            font-weight: 600;
+            color: #92400E;
+            margin-bottom: 2px;
+        }
+        
+        .collab-suggestion p {
+            color: #78350F;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            body { background: white; }
+            .page {
+                margin: 0;
+                box-shadow: none;
+                page-break-after: always;
+            }
+            .page:last-child { page-break-after: auto; }
+        }
+    </style>
+</head>
+<body>
+    <!-- 论文1: WholeBodyVLA -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #F59E0B, #EF4444);">H</div>
+                <div class="author-info">
+                    <h3>Haoran Jiang (姜浩然)</h3>
+                    <p class="affiliation">OpenDriveLab · HKU · 复旦</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>教育:</strong> 复旦大学博士生</p>
+                    <p><strong>研究方向:</strong> 人形机器人控制、VLA</p>
+                    <p><strong>团队:</strong> OpenDriveLab (自动驾驶实验室)</p>
+                    <p><strong>合作机构:</strong> AgiBot、HKU MMLab</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[ICLR 2026]</span> WholeBodyVLA: Towards Unified Latent VLA for Whole-Body Loco-Manipulation Control</li>
+                    <li><span class="paper-year">[2026]</span> HiWET: Hierarchical World-Frame End-Effector Tracking for Long-Horizon Humanoid Loco-Manipulation</li>
+                    <li><span class="paper-year">[2025]</span> Humanoid Manipulation Interface: Humanoid Whole-Body Manipulation from Robot-Free Demonstrations</li>
+                    <li><span class="paper-year">[2025]</span> Coordinated Humanoid Manipulation with Choice Policies</li>
+                    <li><span class="paper-year">[2024]</span> Planning-oriented Autonomous Driving</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">1</div>
+                <span class="paper-type">ICLR 2026 · Humanoid Control</span>
+            </div>
+            
+            <h2 class="paper-title">WholeBodyVLA: Towards Unified Latent VLA for Whole-Body Loco-Manipulation Control</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出WholeBodyVLA，首个统一的人形机器人全身定位-操作控制框架。创新包括：(1)统一潜在学习方法，将移动与操作任务融合到单一潜在空间，实现协调控制；(2)面向移动操作的强化学习设计，专门针对人形机器人的运动学约束优化；(3)支持大空间人形机器人定位-操作任务，包括蹲下、伸展等复杂动作；(4)在真实人形机器人平台上验证，展示对物体外观、位置、布局变化的鲁棒性。由OpenDriveLab、港大MMLab、复旦、AgiBot联合出品，代表人形机器人VLA方向的前沿工作。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">全身</div>
+                        <div class="metric-label">移动+操作</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">统一</div>
+                        <div class="metric-label">潜在学习</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">人形</div>
+                        <div class="metric-label">机器人</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">真实</div>
+                        <div class="metric-label">部署验证</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-embodied-images/wholebodyvla_method.png" alt="WholeBodyVLA架构图">
+                    <p class="figure-caption">WholeBodyVLA架构：人形机器人全身定位-操作控制框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>OpenDriveLab在自动驾驶和人形机器人方向领先，AgiBot提供工业落地场景。适合在人形机器人、全身控制、工业应用上合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文2: ST4VLA -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #3B82F6, #8B5CF6);">S</div>
+                <div class="author-info">
+                    <h3>ST4VLA Team</h3>
+                    <p class="affiliation">多机构合作</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 空间感知、VLA训练方法</p>
+                    <p><strong>创新点:</strong> 空间引导训练框架</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2602.10109</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[ICLR 2026]</span> ST4VLA: Spatially Guided Training for Vision-Language-Action Models</li>
+                    <li><span class="paper-year">[RSS 2025]</span> SpatialVLA: Exploring Spatial Representations for Visual-Language-Action Models</li>
+                    <li><span class="paper-year">[2025]</span> 3D Spatial Perception and Reasoning for Robot Manipulation</li>
+                    <li><span class="paper-year">[2025]</span> Point-based Visual Representation Learning for Embodied AI</li>
+                    <li><span class="paper-year">[2024]</span> Multi-modal Spatial Representation Learning</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">2</div>
+                <span class="paper-type">ICLR 2026 · Spatial Learning</span>
+            </div>
+            
+            <h2 class="paper-title">ST4VLA: Spatially Guided Training for Vision-Language-Action Models</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出ST4VLA，一个双系统空间引导训练的VLA框架，解决VLM与机器人控制之间的空间感知鸿沟。创新包括：(1)空间基础预训练阶段，通过点预测、框预测、轨迹预测等任务，在网络规模和机器人特定数据上学习可迁移的空间先验；(2)空间引导动作后训练阶段，通过空间提示鼓励模型生成丰富的空间先验来引导动作生成，保持在策略学习过程中的空间感知能力；(3)双系统架构：VLM规划器作为慢速可靠的System 2推理器，DiT执行器作为快速的System 1控制器；(4)实验表明ST4VLA在未见物体、未见指令、未见环境上实现强泛化，显著超越vanilla VLA基线。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">双系统</div>
+                        <div class="metric-label">规划+执行</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">空间</div>
+                        <div class="metric-label">引导训练</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">强泛化</div>
+                        <div class="metric-label">OOD场景</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">真实</div>
+                        <div class="metric-label">机器人验证</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-embodied-images/st4vla_overview.png" alt="ST4VLA架构图">
+                    <p class="figure-caption">ST4VLA架构：空间引导训练的双系统VLA框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>空间感知是VLA关键能力，ST4VLA提供了系统化解决方案。适合在空间推理、复杂操作任务、多模态表示学习上合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文3: CitySeeker -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <div class="author-placeholder" style="background: linear-gradient(135deg, #06B6D4, #10B981);">C</div>
+                <div class="author-info">
+                    <h3>CitySeeker Team</h3>
+                    <p class="affiliation">多机构合作</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>研究方向:</strong> 具身城市导航、VLM空间推理</p>
+                    <p><strong>创新点:</strong> 隐式人类需求理解基准</p>
+                    <p><strong>论文:</strong> arxiv.org/abs/2512.16755</p>
+                    <p><strong>发表:</strong> ICLR 2026</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[ICLR 2026]</span> CitySeeker: How Do VLMs Explore Embodied Urban Navigation with Implicit Human Needs?</li>
+                    <li><span class="paper-year">[ICLR 2025]</span> CityWalker: Learning Embodied Urban Navigation from Web-Scale Videos</li>
+                    <li><span class="paper-year">[2025]</span> Spatial Reasoning in Vision-Language Models for Navigation Tasks</li>
+                    <li><span class="paper-year">[2024]</span> Urban Environment Perception and Understanding</li>
+                    <li><span class="paper-year">[2024]</span> Multi-modal Navigation Methods for Autonomous Agents</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">3</div>
+                <span class="paper-type">ICLR 2026 · Embodied Navigation</span>
+            </div>
+            
+            <h2 class="paper-title">CitySeeker: How Do VLMs Explore Embodied Urban Navigation with Implicit Human Needs?</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出CitySeeker，首个专门评估VLM理解隐式人类需求的具身城市导航基准。创新包括：(1)隐式需求场景设计，如"我渴了"需要找到商店、"我需要休息"需要找到座位等，测试VLM对人类隐式意图的理解能力；(2)动态城市环境模拟，包含真实城市地图、多样化场所、动态交通等元素；(3)系统评估VLM的空间推理和决策能力，揭示当前VLM在隐式需求理解上的显著不足；(4)提供标准化评估指标和基准数据集，推动具身AI向更智能的人类意图理解方向发展。该工作开辟了具身AI理解隐式人类需求的新研究方向。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">隐式</div>
+                        <div class="metric-label">需求理解</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">城市</div>
+                        <div class="metric-label">导航</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">动态</div>
+                        <div class="metric-label">环境</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">基准</div>
+                        <div class="metric-label">测试集</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-embodied-images/cityseeker_fig1.png" alt="CitySeeker示例">
+                    <p class="figure-caption">CitySeeker基准：隐式人类需求的具身城市导航场景</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>隐式需求理解是具身AI重要方向，适合在城市计算、VLM推理、导航系统上合作。基准开源，便于算法对比评估。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文4: Cross-Embodiment RL -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <img class="author-photo" src="iclr2026-embodied-images/takayuki_osa.jpg" alt="Takayuki Osa">
+                <div class="author-info">
+                    <h3>Takayuki Osa (大佐拓哉)</h3>
+                    <p class="affiliation">RIKEN AIP · 东京大学</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>职位:</strong> RIKEN AIP 机器人学习团队负责人</p>
+                    <p><strong>教育:</strong> 东京工业大学博士</p>
+                    <p><strong>研究方向:</strong> 机器人学习、离线RL、模仿学习</p>
+                    <p><strong>Google Scholar:</strong> scholar.google.com/citations?user=LqVev6MAAAAJ</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[ICLR 2026]</span> Cross-Embodiment Offline Reinforcement Learning for Heterogeneous Robot Datasets</li>
+                    <li><span class="paper-year">[ICLR 2026]</span> Rethinking Policy Diversity in Ensemble Policy Gradient in Large-Scale Reinforcement Learning</li>
+                    <li><span class="paper-year">[2025]</span> Offline Reinforcement Learning for Robot Manipulation: A Survey</li>
+                    <li><span class="paper-year">[2024]</span> Imitation Learning Algorithms for Robot Control</li>
+                    <li><span class="paper-year">[2024]</span> Policy Learning from Demonstration and Interaction</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">4</div>
+                <span class="paper-type">ICLR 2026 · Offline RL</span>
+            </div>
+            
+            <h2 class="paper-title">Cross-Embodiment Offline Reinforcement Learning for Heterogeneous Robot Datasets</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出跨实体离线强化学习方法，解决如何利用异构机器人数据集进行策略学习的问题。创新包括：(1)静态分组策略，通过简单的按机器人类型分组，大幅减少不同机器人之间的梯度冲突；(2)将跨实体学习与离线RL结合，可以同时利用专家数据和次优数据扩展训练数据池；(3)理论分析揭示离线RL中的梯度冲突问题，提出有效解决方案；(4)实验证明该方法显著超越现有的冲突解决方法，在异构机器人数据集上取得更好的策略性能。RIKEN AIP与东京大学联合出品，为大规模机器人数据利用提供新思路。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">跨实体</div>
+                        <div class="metric-label">学习</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">离线</div>
+                        <div class="metric-label">RL</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">异构</div>
+                        <div class="metric-label">数据</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">冲突</div>
+                        <div class="metric-label">解决</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-embodied-images/cross_embodiment_rl.png" alt="Cross-Embodiment RL方法图">
+                    <p class="figure-caption">Cross-Embodiment RL：跨实体离线强化学习框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Takayuki Osa是机器人学习领域知名学者，RIKEN资源丰富。适合在离线RL、跨机器人学习、大规模数据利用上合作。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 论文5: Vlaser -->
+    <div class="page paper-page">
+        <div class="left-column">
+            <div class="author-card">
+                <img class="author-photo" src="iclr2026-embodied-images/moritz_reuss.jpg" alt="Moritz Reuss">
+                <div class="author-info">
+                    <h3>Moritz Reuss</h3>
+                    <p class="affiliation">KIT · NVIDIA SRL</p>
+                </div>
+                <div class="author-details">
+                    <p><strong>教育:</strong> KIT机械工程硕士 (2021)</p>
+                    <p><strong>研究方向:</strong> VLA、扩散策略、机器人学习</p>
+                    <p><strong>职位:</strong> NVIDIA研究员、KIT博士生</p>
+                    <p><strong>代表工作:</strong> FLOWER、BEAST、MDT</p>
+                </div>
+            </div>
+            
+            <div class="recent-papers">
+                <h4>📝 近两年代表论文</h4>
+                <ul class="paper-list">
+                    <li><span class="paper-year">[ICLR 2026]</span> FLOWER: Democratizing Generalist Robot Policies with Efficient Vision-Language-Action Flow Policies</li>
+                    <li><span class="paper-year">[ICLR 2026]</span> Vlaser: Vision-Language-Action Model with Synergistic Embodied Reasoning</li>
+                    <li><span class="paper-year">[2025]</span> BEAST: B-spline Embedding for Action Segments with Transformers</li>
+                    <li><span class="paper-year">[CoRL 2024]</span> MDT: Multimodal Diffusion Transformer for Robot Learning</li>
+                    <li><span class="paper-year">[2024]</span> BESO: Goal-Conditioned Diffusion Policy for Long-Horizon Tasks</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="right-column">
+            <div class="paper-header">
+                <div class="paper-number">5</div>
+                <span class="paper-type">ICLR 2026 · Embodied Reasoning</span>
+            </div>
+            
+            <h2 class="paper-title">Vlaser: Vision-Language-Action Model with Synergistic Embodied Reasoning</h2>
+            
+            <div class="content-card">
+                <h4>💡 创新点总结</h4>
+                <div class="highlight-box">
+                    <strong>核心贡献：</strong>本文提出Vlaser，一个具备协同具身推理能力的视觉语言行动模型，将高层推理与低层控制融合。创新包括：(1)协同具身推理设计，将VLM的推理能力与机器人控制无缝结合，实现复杂任务的层次化规划与执行；(2)两阶段训练框架：第一阶段进行多模态预训练增强推理能力，第二阶段进行动作微调学习控制策略；(3)系统研究哪些多模态数据流对下游VLA模型最关键，提供数据选择的指导原则；(4)在LIBERO、SIMPLER等基准上达到SOTA结果，展示对复杂任务的强泛化能力。由OpenGVLab出品，代表具身推理VLA方向的前沿工作。
+                </div>
+                
+                <div class="metrics-row">
+                    <div class="metric-item">
+                        <div class="metric-value">协同</div>
+                        <div class="metric-label">推理</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">高层</div>
+                        <div class="metric-label">+低层</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">两阶段</div>
+                        <div class="metric-label">训练</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-value">SOTA</div>
+                        <div class="metric-label">基准</div>
+                    </div>
+                </div>
+                
+                <div class="figure-box">
+                    <img src="iclr2026-embodied-images/vlaser_fig.png" alt="Vlaser架构图">
+                    <p class="figure-caption">Vlaser架构：协同具身推理框架</p>
+                </div>
+                
+                <div class="collab-suggestion">
+                    <h5>🤝 合作建议</h5>
+                    <p>Moritz在VLA领域深耕，博客系统梳理ICLR 2026 VLA研究。适合在具身推理、高效策略、开源基线上合作。NVIDIA SRL资源丰富。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

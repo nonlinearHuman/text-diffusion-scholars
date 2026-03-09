@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>郭毅可院士 - 2025年新晋院士介绍</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-light: #d1fae5;
+            --bg: #ffffff;
+            --bg-secondary: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+        }
+        
+        body {
+            font-family: 'Noto Sans SC', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            height: 100vh;
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            padding: 3rem 4rem;
+            position: relative;
+        }
+        
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+        
+        h2 {
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
+        }
+        
+        h3 {
+            font-size: clamp(1.25rem, 2vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        p { color: var(--text-muted); font-size: 1.125rem; }
+        .small { font-size: 0.875rem; }
+        
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.375rem 0.875rem;
+            background: var(--primary-light);
+            color: var(--primary);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+        
+        .tag-accent {
+            background: var(--accent-light);
+            color: var(--accent);
+        }
+        
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+        
+        .grid-2 { grid-template-columns: 1fr 1fr; }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        
+        .card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        
+        .title-slide {
+            background: linear-gradient(135deg, #f8fafc 0%, #d1fae5 100%);
+            text-align: center;
+        }
+        
+        .title-slide .slide-content { align-items: center; }
+        
+        .title-meta {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .profile-info h1 { margin-bottom: 0.5rem; }
+        .profile-info .subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 1rem; }
+        
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+        
+        .stat-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.25rem;
+        }
+        
+        .paper-section {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .paper-figure {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .paper-figure svg { max-width: 100%; height: auto; }
+        
+        .paper-figure-caption {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .paper-info .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border-radius: 100px;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+        
+        .paper-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+        }
+        
+        .paper-authors {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+        
+        .highlight-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1rem 0;
+        }
+        
+        .highlight-box p {
+            font-size: 0.9375rem;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .highlight-box.accent {
+            background: var(--accent-light);
+            border-color: var(--accent);
+        }
+        
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+        
+        .result-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+        }
+        
+        .result-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .result-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .nav-dot:hover { background: var(--text-muted); }
+        .nav-dot.active { background: var(--primary); transform: scale(1.4); }
+        
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary);
+            z-index: 100;
+            transition: width 0.2s;
+        }
+        
+        .keyboard-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: white;
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 100;
+        }
+        
+        .key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            padding: 0 6px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.7rem;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .slide.visible .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .fade-in:nth-child(1) { transition-delay: 0.1s; }
+        .fade-in:nth-child(2) { transition-delay: 0.2s; }
+        .fade-in:nth-child(3) { transition-delay: 0.3s; }
+        
+        @media (max-width: 900px) {
+            .slide { padding: 2rem; }
+            .grid-2, .paper-section { grid-template-columns: 1fr; }
+            .stat-grid { grid-template-columns: repeat(2, 1fr); }
+            .profile-header { flex-direction: column; align-items: center; text-align: center; }
+            .nav-dots { right: 1rem; }
+            .keyboard-hint { display: none; }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            * { transition-duration: 0.01ms !important; }
+            html { scroll-behavior: auto; }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar" id="progress"></div>
+    <nav class="nav-dots" id="navDots"></nav>
+    <div class="keyboard-hint">
+        <span><span class="key">←</span><span class="key">→</span> 导航</span>
+        <span><span class="key">Space</span> 下一页</span>
+    </div>
+
+    <!-- Slide 1: Title -->
+    <section class="slide title-slide" data-slide="0">
+        <div class="slide-content">
+            <div class="tag fade-in">中国工程院外籍院士</div>
+            <h1 class="fade-in">郭毅可</h1>
+            <p class="fade-in" style="font-size: 1.5rem; color: var(--text-muted); margin-top: 0.5rem;">
+                香港科技大学首席副校长 · 数据科学讲座教授
+            </p>
+            <div class="stat-grid fade-in" style="margin-top: 3rem; max-width: 800px;">
+                <div class="stat-item">
+                    <div class="stat-value">FREng</div>
+                    <div class="stat-label">英国皇家工程院院士</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">MAE</div>
+                    <div class="stat-label">欧洲科学院院士</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">HKGAI</div>
+                    <div class="stat-label">主任</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">吴文俊奖</div>
+                    <div class="stat-label">杰出贡献奖</div>
+                </div>
+            </div>
+            <div class="title-meta fade-in">
+                <span>📅 2025年11月当选中国工程院外籍院士</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 2: Profile -->
+    <section class="slide" data-slide="1">
+        <div class="slide-content">
+            <div class="profile-header fade-in">
+                <div class="avatar">郭</div>
+                <div class="profile-info">
+                    <h2>学术贡献与团队</h2>
+                    <p class="subtitle">数据科学 · 生成式AI · 大语言模型</p>
+                    <div class="tags">
+                        <span class="tag">数据科学</span>
+                        <span class="tag">机器学习</span>
+                        <span class="tag">生成式AI</span>
+                        <span class="tag">大模型</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-2 fade-in">
+                <div class="card">
+                    <h3>香港生成式AI研究中心 (HKGAI)</h3>
+                    <p style="margin-bottom: 1rem;">2023年成立，香港政府InnoHK创新平台资助，开发香港首个本地化大语言模型</p>
+                    <p class="small" style="color: var(--text-muted);">核心成果：HKGAI-V1 · HKPilot · HKChat · HKMeeting</p>
+                </div>
+                <div class="card">
+                    <h3>研究领域</h3>
+                    <ul style="font-size: 0.9375rem; color: var(--text-muted); padding-left: 1.25rem;">
+                        <li>大规模科学数据管理</li>
+                        <li>机器学习基础理论</li>
+                        <li>医学影像AI重建</li>
+                        <li>跨学科AI应用</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="fade-in" style="margin-top: 2rem; text-align: center; font-size: 0.875rem; color: var(--text-muted);">
+                致力于推动数据科学与人工智能领域的创新研究，积极促进跨学科及国际合作
+            </p>
+        </div>
+    </section>
+
+    <!-- Slide 3: Paper 1 - HKGAI-V1 -->
+    <section class="slide" data-slide="2">
+        <div class="slide-content">
+            <div class="tag fade-in">代表性论文 I</div>
+            
+            <div class="paper-section fade-in">
+                <div class="paper-figure">
+                    <svg viewBox="0 0 380 340" style="max-height: 50vh;">
+                        <!-- 背景 -->
+                        <rect x="5" y="5" width="370" height="330" rx="16" fill="#f0fdf4" stroke="#10b981" stroke-width="2"/>
+                        
+                        <!-- 标题 -->
+                        <text x="190" y="30" text-anchor="middle" font-family="Space Grotesk" font-size="14" font-weight="600" fill="#059669">HKGAI-V1 系统架构</text>
+                        
+                        <!-- 基础模型层 -->
+                        <rect x="30" y="50" width="320" height="50" rx="10" fill="white" stroke="#e2e8f0"/>
+                        <text x="190" y="72" text-anchor="middle" font-size="11" fill="#0f172a">DeepSeek 基础模型</text>
+                        <text x="190" y="88" text-anchor="middle" font-size="9" fill="#64748b">全参数微调 · 价值观对齐</text>
+                        
+                        <!-- 三语支持 -->
+                        <rect x="30" y="115" width="100" height="45" rx="8" fill="#d1fae5"/>
+                        <text x="80" y="143" text-anchor="middle" font-size="13" font-weight="500" fill="#059669">粤语</text>
+                        
+                        <rect x="140" y="115" width="100" height="45" rx="8" fill="#d1fae5"/>
+                        <text x="190" y="143" text-anchor="middle" font-size="13" font-weight="500" fill="#059669">普通话</text>
+                        
+                        <rect x="250" y="115" width="100" height="45" rx="8" fill="#d1fae5"/>
+                        <text x="300" y="143" text-anchor="middle" font-size="13" font-weight="500" fill="#059669">English</text>
+                        
+                        <!-- RAG层 -->
+                        <rect x="30" y="175" width="320" height="50" rx="10" fill="white" stroke="#10b981"/>
+                        <text x="190" y="197" text-anchor="middle" font-size="11" fill="#059669">RAG 检索增强生成</text>
+                        <text x="190" y="213" text-anchor="middle" font-size="9" fill="#64748b">香港本地知识库 · 实时信息检索</text>
+                        
+                        <!-- 应用层 -->
+                        <rect x="30" y="240" width="95" height="55" rx="10" fill="#059669"/>
+                        <text x="77" y="262" text-anchor="middle" font-size="11" fill="white" font-weight="500">HKPilot</text>
+                        <text x="77" y="280" text-anchor="middle" font-size="8" fill="white">文档处理</text>
+                        
+                        <rect x="142" y="240" width="95" height="55" rx="10" fill="#059669"/>
+                        <text x="190" y="262" text-anchor="middle" font-size="11" fill="white" font-weight="500">HKChat</text>
+                        <text x="190" y="280" text-anchor="middle" font-size="8" fill="white">智能对话</text>
+                        
+                        <rect x="255" y="240" width="95" height="55" rx="10" fill="#059669"/>
+                        <text x="302" y="262" text-anchor="middle" font-size="11" fill="white" font-weight="500">HKMeeting</text>
+                        <text x="302" y="280" text-anchor="middle" font-size="8" fill="white">会议助手</text>
+                        
+                        <!-- 部署信息 -->
+                        <text x="190" y="315" text-anchor="middle" font-size="9" fill="#64748b">已在香港政府3万+公务员中试点部署</text>
+                    </svg>
+                    <p class="paper-figure-caption">香港首个本地化主权大语言模型，支持粤语/普通话/英语三语</p>
+                </div>
+                
+                <div class="paper-info">
+                    <div class="badge">
+                        <span style="color: var(--primary);">arXiv:2507.11502</span>
+                        <span style="color: var(--text-muted);">2025</span>
+                    </div>
+                    
+                    <h2 class="paper-title">HKGAI-V1: Towards Regional Sovereign Large Language Model for Hong Kong</h2>
+                    <p class="paper-authors">Sirui Han, Yike Guo et al. · Hong Kong Generative AI Research Centre</p>
+                    
+                    <div class="highlight-box">
+                        <p><strong>里程碑：</strong>香港首个本地化主权大语言模型，专为"一国两制"框架下的区域需求设计</p>
+                    </div>
+                    
+                    <h4 style="font-size: 0.9375rem; margin-bottom: 0.5rem;">核心技术</h4>
+                    <ul style="font-size: 0.875rem; color: var(--text-muted); padding-left: 1.25rem; margin-bottom: 1rem;">
+                        <li>基于DeepSeek架构全参数微调</li>
+                        <li>融合RAG检索增强生成系统</li>
+                        <li>定制化香港价值观对齐框架</li>
+                        <li>本地知识库支持实时信息</li>
+                    </ul>
+                    
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-value">三语</div>
+                            <div class="result-label">粤语/普通话/英语</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">3万+</div>
+                            <div class="result-label">公务员试点</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value">主权</div>
+                            <div class="result-label">数字治理</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Paper 2 - Medical AI -->
+    <section class="slide" data-slide="3">
+        <div class="slide-content">
+            <div class="tag fade-in">代表性论文 II</div>
+            
+            <div class="paper-section fade-in">
+                <div class="paper-info">
+                    <div class="badge">
+                        <span style="color: var(--accent);">arXiv:2401.16564</span>
+                        <span style="color: var(--text-muted);">2024</span>
+                    </div>
+                    
+                    <h2 class="paper-title">Data and Physics Driven Deep Learning Models for Fast MRI Reconstruction</h2>
+                    <p class="paper-authors">Jiahao Huang, Yike Guo, Guang Yang et al.</p>
+                    
+                    <div class="highlight-box accent">
+                        <p><strong>创新点：</strong>融合数据驱动与物理模型，实现快速高质量MRI重建</p>
+                    </div>
+                    
+                    <h4 style="font-size: 0.9375rem; margin-bottom: 0.5rem;">核心技术</h4>
+                    <ul style="font-size: 0.875rem; color: var(--text-muted); padding-left: 1.25rem; margin-bottom: 1rem;">
+                        <li>结合深度学习与MRI物理成像原理</li>
+                        <li>欠采样k空间数据快速重建</li>
+                        <li>保持诊断级图像质量</li>
+                        <li>降低患者扫描时间和不适</li>
+                    </ul>
+                    
+                    <h4 style="font-size: 0.9375rem; margin-bottom: 0.5rem;">应用价值</h4>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1rem;">
+                        大幅减少MRI扫描时间，提升医院检查效率，改善患者体验，
+                        已通过临床验证。
+                    </p>
+                    
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <div class="result-value" style="color: var(--accent);">10x</div>
+                            <div class="result-label">加速扫描</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" style="color: var(--accent);">临床</div>
+                            <div class="result-label">验证通过</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-value" style="color: var(--accent);">开源</div>
+                            <div class="result-label">代码框架</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="paper-figure">
+                    <svg viewBox="0 0 380 340" style="max-height: 50vh;">
+                        <!-- 背景 -->
+                        <rect x="5" y="5" width="370" height="330" rx="16" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+                        
+                        <!-- 标题 -->
+                        <text x="190" y="30" text-anchor="middle" font-family="Space Grotesk" font-size="13" font-weight="600" fill="#b45309">医学影像深度学习重建流程</text>
+                        
+                        <!-- 输入 -->
+                        <rect x="30" y="60" width="90" height="70" rx="10" fill="white" stroke="#e2e8f0"/>
+                        <text x="75" y="88" text-anchor="middle" font-size="10" fill="#0f172a">欠采样</text>
+                        <text x="75" y="105" text-anchor="middle" font-size="10" fill="#0f172a">k空间数据</text>
+                        
+                        <!-- 箭头 -->
+                        <path d="M125 95 L155 95" stroke="#f59e0b" stroke-width="3" fill="none"/>
+                        <polygon points="155,90 165,95 155,100" fill="#f59e0b"/>
+                        
+                        <!-- 深度学习 -->
+                        <rect x="170" y="45" width="100" height="100" rx="10" fill="#f59e0b"/>
+                        <text x="220" y="75" text-anchor="middle" font-size="11" fill="white" font-weight="500">深度学习</text>
+                        <text x="220" y="92" text-anchor="middle" font-size="11" fill="white" font-weight="500">重建网络</text>
+                        <text x="220" y="115" text-anchor="middle" font-size="9" fill="white">数据驱动</text>
+                        <text x="220" y="130" text-anchor="middle" font-size="9" fill="white">物理约束</text>
+                        
+                        <!-- 箭头 -->
+                        <path d="M275 95 L305 95" stroke="#f59e0b" stroke-width="3" fill="none"/>
+                        <polygon points="305,90 315,95 305,100" fill="#f59e0b"/>
+                        
+                        <!-- 输出 -->
+                        <rect x="320" y="60" width="90" height="70" rx="10" fill="#d1fae5" stroke="#10b981"/>
+                        <text x="365" y="88" text-anchor="middle" font-size="10" fill="#059669">高质量</text>
+                        <text x="365" y="105" text-anchor="middle" font-size="10" fill="#059669">MRI图像</text>
+                        
+                        <!-- 特点卡片 -->
+                        <rect x="30" y="160" width="105" height="80" rx="10" fill="white" stroke="#e2e8f0"/>
+                        <text x="82" y="185" text-anchor="middle" font-size="10" font-weight="500" fill="#0f172a">⚡ 快速扫描</text>
+                        <text x="82" y="205" text-anchor="middle" font-size="9" fill="#64748b">减少采集时间</text>
+                        <text x="82" y="225" text-anchor="middle" font-size="9" fill="#64748b">提升患者体验</text>
+                        
+                        <rect x="150" y="160" width="105" height="80" rx="10" fill="white" stroke="#e2e8f0"/>
+                        <text x="202" y="185" text-anchor="middle" font-size="10" font-weight="500" fill="#0f172a">🎯 高保真</text>
+                        <text x="202" y="205" text-anchor="middle" font-size="9" fill="#64748b">保持图像质量</text>
+                        <text x="202" y="225" text-anchor="middle" font-size="9" fill="#64748b">精准诊断支持</text>
+                        
+                        <rect x="270" y="160" width="105" height="80" rx="10" fill="white" stroke="#e2e8f0"/>
+                        <text x="322" y="185" text-anchor="middle" font-size="10" font-weight="500" fill="#0f172a">🔬 物理约束</text>
+                        <text x="322" y="205" text-anchor="middle" font-size="9" fill="#64748b">融合领域知识</text>
+                        <text x="322" y="225" text-anchor="middle" font-size="9" fill="#64748b">可解释性强</text>
+                        
+                        <!-- 应用场景 -->
+                        <text x="190" y="280" text-anchor="middle" font-size="9" fill="#64748b">应用于临床MRI扫描，显著提升医疗效率</text>
+                    </svg>
+                    <p class="paper-figure-caption">数据与物理驱动的医学影像深度学习重建框架</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Summary -->
+    <section class="slide" data-slide="4">
+        <div class="slide-content" style="text-align: center;">
+            <div class="tag fade-in">总结</div>
+            <h2 class="fade-in">郭毅可院士研究特色</h2>
+            
+            <div class="grid grid-3 fade-in" style="max-width: 1000px; margin: 2rem auto;">
+                <div class="card">
+                    <h3 style="color: var(--primary);">区域主权AI</h3>
+                    <p style="font-size: 0.9375rem;">HKGAI-V1：香港首个本地化大模型</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary);">跨学科应用</h3>
+                    <p style="font-size: 0.9375rem;">医学影像、政务、教育等多领域落地</p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--primary);">国际合作</h3>
+                    <p style="font-size: 0.9375rem;">促进内地与香港AI领域深度交流</p>
+                </div>
+            </div>
+            
+            <p class="fade-in" style="font-size: 0.875rem; color: var(--text-muted); margin-top: 2rem;">
+                🏛️ 香港生成式AI研究中心：hkust.edu.hk/hkgai
+            </p>
+            
+            <div class="fade-in" style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                <p style="font-size: 0.75rem; color: var(--text-muted);">
+                    数据来源：中国工程院 · arXiv · 2025年11月
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const navDotsContainer = document.getElementById('navDots');
+        const progressBar = document.getElementById('progress');
+        let currentSlide = 0;
+
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+            dot.onclick = () => goToSlide(i);
+            navDotsContainer.appendChild(dot);
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    currentSlide = parseInt(entry.target.dataset.slide);
+                    updateNav();
+                }
+            });
+        }, { threshold: 0.5 });
+
+        slides.forEach(slide => observer.observe(slide));
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                goToSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        let touchY = 0;
+        document.addEventListener('touchstart', e => touchY = e.touches[0].clientY, { passive: true });
+        document.addEventListener('touchend', e => {
+            const diff = touchY - e.changedTouches[0].clientY;
+            if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
+        }, { passive: true });
+
+        function goToSlide(index) {
+            if (index >= 0 && index < slides.length) {
+                slides[index].scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function updateNav() {
+            document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+            progressBar.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
+        }
+
+        slides[0].classList.add('visible');
+        updateNav();
+    </script>
+</body>
+</html>

@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年新晋人工智能领域院士介绍</title>
+    
+    <!-- Fonts: Space Grotesk (headings) + Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===========================================
+           CSS CUSTOM PROPERTIES - SWISS MODERN THEME
+           Clean, precise, professional for tech experts
+           =========================================== */
+        :root {
+            /* Colors - Minimalist monochrome with blue accent */
+            --bg-primary: #fafafa;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #1a1a1a;
+            --text-secondary: #525252;
+            --text-muted: #737373;
+            --accent: #0066ff;
+            --accent-light: #e6f0ff;
+            --border: #e5e5e5;
+            --border-light: #f0f0f0;
+            
+            /* Typography */
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-body: 'Inter', -apple-system, sans-serif;
+            
+            /* Responsive sizing with clamp() */
+            --title-size: clamp(2rem, 5vw, 4rem);
+            --h2-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            --h3-size: clamp(1.1rem, 2vw, 1.5rem);
+            --body-size: clamp(0.875rem, 1.2vw, 1rem);
+            --small-size: clamp(0.75rem, 1vw, 0.875rem);
+            
+            /* Spacing */
+            --slide-padding: clamp(2rem, 5vw, 4rem);
+            --content-gap: clamp(1rem, 2vw, 2rem);
+            --element-gap: clamp(0.5rem, 1vw, 1rem);
+            
+            /* Animation */
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --duration-normal: 0.6s;
+            --duration-fast: 0.4s;
+        }
+        
+        /* ===========================================
+           BASE STYLES
+           =========================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y mandatory;
+            height: 100%;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            height: 100%;
+            line-height: 1.6;
+        }
+        
+        /* ===========================================
+           SLIDE CONTAINER
+           CRITICAL: Each slide = exact viewport height
+           =========================================== */
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
+            padding: var(--slide-padding);
+            scroll-snap-align: start;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        /* ===========================================
+           TYPOGRAPHY
+           =========================================== */
+        h1 {
+            font-family: var(--font-display);
+            font-size: var(--title-size);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--element-gap);
+        }
+        
+        h2 {
+            font-family: var(--font-display);
+            font-size: var(--h2-size);
+            font-weight: 600;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--content-gap);
+        }
+        
+        h3 {
+            font-family: var(--font-display);
+            font-size: var(--h3-size);
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--element-gap);
+        }
+        
+        p {
+            font-size: var(--body-size);
+            line-height: 1.7;
+            color: var(--text-secondary);
+        }
+        
+        .subtitle {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+        
+        /* ===========================================
+           LAYOUT COMPONENTS
+           =========================================== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--content-gap);
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--element-gap);
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: var(--content-gap);
+            transition: all var(--duration-fast) ease;
+        }
+        
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 20px rgba(0, 102, 255, 0.08);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: var(--small-size);
+            font-weight: 500;
+        }
+        
+        .divider {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: var(--element-gap) 0;
+        }
+        
+        /* ===========================================
+           SPECIFIC SLIDE STYLES
+           =========================================== */
+        
+        /* Title Slide */
+        .title-slide {
+            background: var(--bg-secondary);
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .title-slide .slide-content {
+            align-items: center;
+        }
+        
+        .title-meta {
+            display: flex;
+            gap: var(--element-gap);
+            margin-top: var(--content-gap);
+            font-size: var(--small-size);
+            color: var(--text-muted);
+        }
+        
+        .title-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Profile Card */
+        .profile-header {
+            display: flex;
+            gap: var(--content-gap);
+            align-items: flex-start;
+            margin-bottom: var(--content-gap);
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-light), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            flex-shrink: 0;
+        }
+        
+        .profile-info h2 {
+            margin-bottom: var(--element-gap);
+        }
+        
+        .profile-info .subtitle {
+            margin-bottom: var(--element-gap);
+        }
+        
+        .profile-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        /* Info Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--element-gap);
+        }
+        
+        .info-item {
+            padding: var(--element-gap);
+            background: var(--bg-primary);
+            border-radius: 8px;
+        }
+        
+        .info-item label {
+            display: block;
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .info-item span {
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+        
+        /* Paper Card */
+        .paper-card {
+            border-left: 3px solid var(--accent);
+        }
+        
+        .paper-title {
+            font-family: var(--font-display);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .paper-meta {
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .paper-impact {
+            display: flex;
+            gap: var(--element-gap);
+            margin-top: 0.5rem;
+        }
+        
+        .impact-stat {
+            font-size: var(--small-size);
+        }
+        
+        .impact-stat strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Team Grid */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--element-gap);
+        }
+        
+        .team-member {
+            text-align: center;
+            padding: var(--element-gap);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            transition: all var(--duration-fast) ease;
+        }
+        
+        .team-member:hover {
+            border-color: var(--accent);
+            background: var(--bg-secondary);
+        }
+        
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            margin: 0 auto 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .member-name {
+            font-weight: 500;
+            font-size: var(--small-size);
+            margin-bottom: 0.25rem;
+        }
+        
+        .member-role {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        /* ===========================================
+           NAVIGATION
+           =========================================== */
+        .nav-dots {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            z-index: 100;
+        }
+        
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            cursor: pointer;
+            transition: all var(--duration-fast) ease;
+            border: none;
+            padding: 0;
+        }
+        
+        .nav-dot:hover {
+            background: var(--text-muted);
+        }
+        
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        /* Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 100;
+            transition: width 0.1s ease;
+        }
+        
+        /* Keyboard Hint */
+        .keyboard-hint {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            font-size: var(--small-size);
+            color: var(--text-muted);
+            background: var(--bg-secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            z-index: 100;
+        }
+        
+        .key {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            padding: 0 6px;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+        }
+        
+        /* ===========================================
+           ANIMATIONS
+           =========================================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity var(--duration-normal) var(--ease-out-expo),
+                        transform var(--duration-normal) var(--ease-out-expo);
+        }
+        
+        .slide.visible .reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .reveal:nth-child(1) { transition-delay: 0.05s; }
+        .reveal:nth-child(2) { transition-delay: 0.1s; }
+        .reveal:nth-child(3) { transition-delay: 0.15s; }
+        .reveal:nth-child(4) { transition-delay: 0.2s; }
+        .reveal:nth-child(5) { transition-delay: 0.25s; }
+        
+        /* ===========================================
+           RESPONSIVE BREAKPOINTS
+           =========================================== */
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .profile-tags {
+                justify-content: center;
+            }
+            
+            .nav-dots {
+                right: 1rem;
+            }
+            
+            .keyboard-hint {
+                display: none;
+            }
+        }
+        
+        @media (max-height: 600px) {
+            :root {
+                --slide-padding: clamp(1rem, 3vw, 2rem);
+                --content-gap: clamp(0.75rem, 1.5vw, 1.25rem);
+            }
+            
+            .profile-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.2s !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+    
+    <!-- Navigation Dots -->
+    <nav class="nav-dots" id="navDots"></nav>
+    
+    <!-- Keyboard Hint -->
+    <div class="keyboard-hint">
+        <span><span class="key">←</span> <span class="key">→</span> 导航</span>
+        <span><span class="key">Space</span> 下一页</span>
+    </div>
+    
+    <!-- Slide 1: Title -->
+    <section class="slide title-slide" data-slide="0">
+        <div class="slide-content">
+            <div class="tag reveal">院士增选 2025</div>
+            <h1 class="reveal">新晋人工智能领域院士介绍</h1>
+            <p class="subtitle reveal">中国科学院 · 中国工程院 · 2025年度增选结果</p>
+            <div class="divider reveal"></div>
+            <div class="title-meta reveal">
+                <span>📅 2025年11月21日公布</span>
+                <span>🎯 技术专家专题报告</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 2: 周志华 -->
+    <section class="slide" data-slide="1">
+        <div class="slide-content">
+            <div class="tag reveal">中国科学院院士 · 信息技术科学部</div>
+            
+            <div class="profile-header reveal">
+                <div class="profile-avatar">周</div>
+                <div class="profile-info">
+                    <h2>周志华</h2>
+                    <p class="subtitle">南京大学副校长 · 人工智能学院院长</p>
+                    <div class="profile-tags">
+                        <span class="tag">机器学习</span>
+                        <span class="tag">集成学习</span>
+                        <span class="tag">数据挖掘</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-grid reveal">
+                <div class="info-item">
+                    <label>研究领域</label>
+                    <span>人工智能、机器学习、数据挖掘</span>
+                </div>
+                <div class="info-item">
+                    <label>学术成就</label>
+                    <span>论文引用 11万+ · H-index 133</span>
+                </div>
+                <div class="info-item">
+                    <label>重要著作</label>
+                    <span>《机器学习》(西瓜书)</span>
+                </div>
+                <div class="info-item">
+                    <label>荣誉头衔</label>
+                    <span>ACM/IEEE/AAAI Fellow</span>
+                </div>
+            </div>
+            
+            <p class="reveal" style="margin-top: var(--content-gap);">
+                长期从事机器学习理论研究，在集成学习、多标记学习等领域作出系统性原创贡献。
+                所著《机器学习》被海内外500+院校采用为教材，译为英、日、韩文出版。
+            </p>
+        </div>
+    </section>
+    
+    <!-- Slide 3: 周志华 - 论文与团队 -->
+    <section class="slide" data-slide="2">
+        <div class="slide-content">
+            <div class="tag reveal">代表性论文 · LAMDA团队</div>
+            
+            <h2 class="reveal">学术贡献与团队建设</h2>
+            
+            <div class="grid-2">
+                <div class="reveal">
+                    <h3 style="margin-bottom: var(--element-gap);">代表性论文</h3>
+                    <div class="card paper-card" style="margin-bottom: var(--element-gap);">
+                        <div class="paper-title">Ensemble Learning: Foundations and Algorithms</div>
+                        <div class="paper-meta">周志华 · 专著 · 2012</div>
+                        <p style="font-size: var(--small-size);">系统阐述集成学习理论框架，提出"多样性-精度"平衡机制</p>
+                        <div class="paper-impact">
+                            <span class="impact-stat"><strong>2000+</strong> 引用</span>
+                            <span class="impact-stat">机器学习经典著作</span>
+                        </div>
+                    </div>
+                    <div class="card paper-card">
+                        <div class="paper-title">Multi-Label Learning</div>
+                        <div class="paper-meta">Zhou et al. · IEEE TPAMI</div>
+                        <p style="font-size: var(--small-size);">开创多标记学习研究范式，定义该领域核心问题与方法论</p>
+                        <div class="paper-impact">
+                            <span class="impact-stat"><strong>1500+</strong> 引用</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="reveal">
+                    <h3 style="margin-bottom: var(--element-gap);">LAMDA 研究团队</h3>
+                    <p style="margin-bottom: var(--element-gap); font-size: var(--small-size);">
+                        南京大学机器学习与数据挖掘研究所（LAMDA），国内顶级机器学习研究团队
+                    </p>
+                    <div class="team-grid">
+                        <div class="team-member">
+                            <div class="member-avatar">俞</div>
+                            <div class="member-name">俞扬</div>
+                            <div class="member-role">教授 · 强化学习</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">李</div>
+                            <div class="member-name">李武军</div>
+                            <div class="member-role">教授 · 统计学习</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">王</div>
+                            <div class="member-name">王魏</div>
+                            <div class="member-role">教授 · 演化计算</div>
+                        </div>
+                        <div class="team-member">
+                            <div class="member-avatar">钱</div>
+                            <div class="member-name">钱宇华</div>
+                            <div class="member-role">教授 · 数据挖掘</div>
+                        </div>
+                    </div>
+                    <p style="font-size: var(--small-size); color: var(--text-muted); margin-top: var(--element-gap);">
+                        团队成员获国家杰青、优青等多项荣誉，培养博士百余人
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slide 4: 郭毅可 -->
+    <section class="slide" data-slide="3">
+        <div class="slide-content">
+            <div class="tag reveal">中国工程院外籍院士</div>
+            
+            <div class="profile-header reveal">
+                <div class="profile-avatar">郭</div>
+                <div class="profile-info">
+                    <h2>郭毅可</h2>
+                    <p class="subtitle">香港科技大学首席副校长 · 数据科学讲座教授</p>
+                    <div class="profile-tags">
+                        <span class="tag">数据科学</span>
+                        <span class="tag">人工智能</span>
+                        <span class="tag">机器学习</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="info-grid reveal">
+                <div class="info-item">
+                    <label>研究领域</label>
+                    <span>数据科学、机器学习、AI</span>
+                </div>
+                <div class="info-item">
+                    <label>院士头衔</label>
+                    <span>英国皇家工程院 · 欧洲科学院</span>
+                </div>
+                <div class="info-item">
+                    <label>重要奖项</label>
+                    <span>吴文俊人工智能杰出贡献奖</span>
+                </div>
+                <div class="info-item">
+                    <label>任职机构</label>
+                    <span>港科大 · 帝国理工(曾任)</span>
+                </div>
+            </div>
+            
+            <p class="reveal" style="margin-top: var(--content-gap);">
+                致力于推动数据科学与人工智能领域的创新研究，积极促进跨学科及国际合作。
+                研究涵盖大规模科学数据管理、机器学习基础理论，在大模型与智能体领域有重要贡献。
+            </p>
+        </div>
+    </section>
+    
+    <!-- Slide 5: 总结 -->
+    <section class="slide" data-slide="4">
+        <div class="slide-content">
+            <div class="tag reveal">总结与展望</div>
+            
+            <h2 class="reveal">2025年AI领域院士增选特点</h2>
+            
+            <div class="grid-3 reveal">
+                <div class="card">
+                    <h3 style="color: var(--accent);">基础研究重视</h3>
+                    <p style="font-size: var(--small-size);">
+                        机器学习理论、数据科学基础等核心领域获得认可，彰显国家对AI基础研究的战略重视
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--accent);">国际视野</h3>
+                    <p style="font-size: var(--small-size);">
+                        外籍院士入选体现开放包容的科研生态，促进国际AI领域的深度合作交流
+                    </p>
+                </div>
+                <div class="card">
+                    <h3 style="color: var(--accent);">人才培养</h3>
+                    <p style="font-size: var(--small-size);">
+                        新晋院士均在人才培养方面贡献卓著，推动中国AI人才梯队建设
+                    </p>
+                </div>
+            </div>
+            
+            <div class="reveal" style="margin-top: var(--content-gap); text-align: center;">
+                <div class="divider" style="margin: 0 auto var(--element-gap);"></div>
+                <p style="font-size: var(--small-size); color: var(--text-muted);">
+                    数据来源：中国科学院、中国工程院官方网站 · 2025年11月21日公布
+                </p>
+                <p style="font-size: var(--small-size); color: var(--text-muted); margin-top: 0.5rem;">
+                    点击右侧导航点或使用键盘 ← → 切换页面
+                </p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        /* ===========================================
+           SLIDE PRESENTATION CONTROLLER
+           Handles navigation, animations, and interactions
+           =========================================== */
+        
+        class SlidePresentation {
+            constructor() {
+                this.slides = document.querySelectorAll('.slide');
+                this.currentSlide = 0;
+                this.totalSlides = this.slides.length;
+                
+                this.progressBar = document.getElementById('progressBar');
+                this.navDotsContainer = document.getElementById('navDots');
+                
+                this.init();
+            }
+            
+            init() {
+                // Create navigation dots
+                this.createNavDots();
+                
+                // Set up intersection observer for animations
+                this.setupIntersectionObserver();
+                
+                // Set up keyboard navigation
+                this.setupKeyboardNav();
+                
+                // Set up touch/swipe navigation
+                this.setupTouchNav();
+                
+                // Set initial state
+                this.updateProgress();
+                
+                // Mark first slide as visible
+                this.slides[0].classList.add('visible');
+            }
+            
+            createNavDots() {
+                for (let i = 0; i < this.totalSlides; i++) {
+                    const dot = document.createElement('button');
+                    dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('aria-label', `跳转到第 ${i + 1} 页`);
+                    dot.addEventListener('click', () => this.goToSlide(i));
+                    this.navDotsContainer.appendChild(dot);
+                }
+            }
+            
+            setupIntersectionObserver() {
+                const options = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.5
+                };
+                
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            const slideIndex = parseInt(entry.target.dataset.slide);
+                            this.updateActiveDot(slideIndex);
+                            this.currentSlide = slideIndex;
+                            this.updateProgress();
+                        }
+                    });
+                }, options);
+                
+                this.slides.forEach(slide => observer.observe(slide));
+            }
+            
+            setupKeyboardNav() {
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+                        e.preventDefault();
+                        this.nextSlide();
+                    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.prevSlide();
+                    } else if (e.key === 'Home') {
+                        e.preventDefault();
+                        this.goToSlide(0);
+                    } else if (e.key === 'End') {
+                        e.preventDefault();
+                        this.goToSlide(this.totalSlides - 1);
+                    }
+                });
+            }
+            
+            setupTouchNav() {
+                let touchStartY = 0;
+                let touchEndY = 0;
+                
+                document.addEventListener('touchstart', (e) => {
+                    touchStartY = e.changedTouches[0].screenY;
+                }, { passive: true });
+                
+                document.addEventListener('touchend', (e) => {
+                    touchEndY = e.changedTouches[0].screenY;
+                    this.handleSwipe();
+                }, { passive: true });
+                
+                const handleSwipe = () => {
+                    const diff = touchStartY - touchEndY;
+                    if (Math.abs(diff) > 50) {
+                        if (diff > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                    }
+                };
+                
+                this.handleSwipe = handleSwipe;
+            }
+            
+            nextSlide() {
+                if (this.currentSlide < this.totalSlides - 1) {
+                    this.goToSlide(this.currentSlide + 1);
+                }
+            }
+            
+            prevSlide() {
+                if (this.currentSlide > 0) {
+                    this.goToSlide(this.currentSlide - 1);
+                }
+            }
+            
+            goToSlide(index) {
+                if (index >= 0 && index < this.totalSlides) {
+                    this.slides[index].scrollIntoView({ behavior: 'smooth' });
+                    this.currentSlide = index;
+                }
+            }
+            
+            updateActiveDot(index) {
+                const dots = this.navDotsContainer.querySelectorAll('.nav-dot');
+                dots.forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+            
+            updateProgress() {
+                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+                this.progressBar.style.width = `${progress}%`;
+            }
+        }
+        
+        // Initialize presentation
+        document.addEventListener('DOMContentLoaded', () => {
+            new SlidePresentation();
+        });
+    </script>
+</body>
+</html>

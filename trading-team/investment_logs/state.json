@@ -1,0 +1,33 @@
+{
+  "capital": 1014.475,
+  "positions": {},
+  "trade_log": [
+    {
+      "time": "2026-02-27T09:36:52.436959",
+      "code": "000001",
+      "name": "平安银行",
+      "action": "BUY",
+      "price": 10.0,
+      "shares": 50,
+      "amount": 500.0,
+      "fees": 5,
+      "net_amount": 505.0,
+      "reason": ""
+    },
+    {
+      "time": "2026-02-27T09:36:52.437085",
+      "code": "000001",
+      "name": "平安银行",
+      "action": "SELL",
+      "price": 10.5,
+      "shares": 50,
+      "amount": 525.0,
+      "fees": 5.525,
+      "net_amount": 519.475,
+      "reason": "",
+      "profit": 14.475,
+      "total_fees": 10.525
+    }
+  ],
+  "updated": "2026-02-27T09:37:56.847112"
+}
