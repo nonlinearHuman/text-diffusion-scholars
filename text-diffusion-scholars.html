@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Diffusion 领域学者推荐</title>
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f5f5f5;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --accent: #ff3300;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        header { text-align: center; margin-bottom: 60px; padding: 60px 0; border-bottom: 3px solid var(--text-primary); }
+        h1 { font-size: 48px; font-weight: 700; margin-bottom: 20px; letter-spacing: -1px; }
+        .subtitle { font-size: 18px; color: var(--text-secondary); }
+        .section-title { font-size: 32px; margin: 50px 0 30px; padding-bottom: 15px; border-bottom: 2px solid var(--accent); display: inline-block; }
+        .scholar-card { background: var(--bg-secondary); padding: 30px; margin-bottom: 30px; border-left: 5px solid var(--accent); }
+        .scholar-header { display: flex; align-items: center; margin-bottom: 20px; }
+        .scholar-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #ff6600); display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold; margin-right: 20px; }
+        .scholar-name { font-size: 28px; font-weight: 700; }
+        .scholar-title { font-size: 16px; color: var(--text-secondary); margin-top: 5px; }
+        .scholar-stats { display: flex; gap: 30px; margin: 20px 0; }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 24px; font-weight: 700; color: var(--accent); }
+        .stat-label { font-size: 12px; color: var(--text-secondary); text-transform: uppercase; }
+        .scholar-interests { margin: 15px 0; }
+        .interest-tag { display: inline-block; background: var(--text-primary); color: white; padding: 5px 12px; margin: 3px; font-size: 13px; border-radius: 3px; }
+        .paper-list { margin-top: 20px; }
+        .paper-item { padding: 12px 0; border-bottom: 1px solid #ddd; }
+        .paper-item:last-child { border-bottom: none; }
+        .paper-title { font-weight: 600; font-size: 15px; }
+        .paper-meta { font-size: 13px; color: var(--text-secondary); margin-top: 5px; }
+        .paper-citation { color: var(--accent); font-weight: 600; }
+        footer { text-align: center; margin-top: 80px; padding: 40px 0; border-top: 1px solid #ddd; color: var(--text-secondary); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Text Diffusion 领域学者推荐</h1>
+            <p class="subtitle">5位在 Text Diffusion / Non-autoregressive Text Generation 领域做出突出贡献的学者</p>
+        </header>
+
+        <section>
+            <h2 class="section-title">学者列表</h2>
+
+            <div class="scholar-card">
+                <div class="scholar-header">
+                    <div class="scholar-avatar">WZ</div>
+                    <div>
+                        <div class="scholar-name">Wayne Xin Zhao (赵欣昕)</div>
+                        <div class="scholar-title">Professor | Renmin University of China | h-index: 85</div>
+                    </div>
+                </div>
+                <div class="scholar-stats">
+                    <div class="stat-item"><div class="stat-value">48,075</div><div class="stat-label">总引用</div></div>
+                    <div class="stat-item"><div class="stat-value">43,512</div><div class="stat-label">2021后引用</div></div>
+                    <div class="stat-item"><div class="stat-value">263</div><div class="stat-label">i10-index</div></div>
+                </div>
+                <div class="scholar-interests">
+                    <span class="interest-tag">Recommender System</span>
+                    <span class="interest-tag">NLP</span>
+                    <span class="interest-tag">LLM</span>
+                    <span class="interest-tag">Text Diffusion</span>
+                </div>
+                <div class="paper-list">
+                    <div class="paper-item">
+                        <div class="paper-title">Diffusion Models for Non-autoregressive Text Generation: A Survey</div>
+                        <div class="paper-meta">IJCAI 2023 | Y Li, K Zhou, WX Zhao, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">68 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Pre-trained language models for text generation: A survey</div>
+                        <div class="paper-meta">ACM Computing Surveys 2024 | J Li, T Tang, WX Zhao, JY Nie, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">805 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">A Survey of Large Language Models</div>
+                        <div class="paper-meta">arXiv 2023 | WX Zhao, K Zhou, J Li, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">8,870 citations</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scholar-card">
+                <div class="scholar-header">
+                    <div class="scholar-avatar">KZ</div>
+                    <div>
+                        <div class="scholar-name">Kun Zhou (周坤)</div>
+                        <div class="scholar-title">Postdoctoral Researcher | UCSD | h-index: 32</div>
+                    </div>
+                </div>
+                <div class="scholar-stats">
+                    <div class="stat-item"><div class="stat-value">17,059</div><div class="stat-label">总引用</div></div>
+                    <div class="stat-item"><div class="stat-value">17,019</div><div class="stat-label">2021后引用</div></div>
+                    <div class="stat-item"><div class="stat-value">51</div><div class="stat-label">i10-index</div></div>
+                </div>
+                <div class="scholar-interests">
+                    <span class="interest-tag">World Models</span>
+                    <span class="interest-tag">LLM</span>
+                    <span class="interest-tag">Text Diffusion</span>
+                </div>
+                <div class="paper-list">
+                    <div class="paper-item">
+                        <div class="paper-title">Diffusion Models for Non-autoregressive Text Generation: A Survey</div>
+                        <div class="paper-meta">IJCAI 2023 | Y Li, K Zhou, WX Zhao, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">68 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Diffusion-NAT: Self-prompting Discrete Diffusion for Non-autoregressive Text Generation</div>
+                        <div class="paper-meta">EACL 2024 | K Zhou, Y Li, WX Zhao, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">34 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">S3-Rec: Self-supervised learning for sequential recommendation</div>
+                        <div class="paper-meta">ACM SIGIR 2020 | K Zhou, H Wang, WX Zhao, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">1,268 citations</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scholar-card">
+                <div class="scholar-header">
+                    <div class="scholar-avatar">ZF</div>
+                    <div>
+                        <div class="scholar-name">Zhihao Fan (范志浩)</div>
+                        <div class="scholar-title">Researcher | Alibaba Qwen + Fudan University | h-index: 21</div>
+                    </div>
+                </div>
+                <div class="scholar-stats">
+                    <div class="stat-item"><div class="stat-value">14,495</div><div class="stat-label">总引用</div></div>
+                    <div class="stat-item"><div class="stat-value">14,430</div><div class="stat-label">2021后引用</div></div>
+                    <div class="stat-item"><div class="stat-value">25</div><div class="stat-label">i10-index</div></div>
+                </div>
+                <div class="scholar-interests">
+                    <span class="interest-tag">LVLM</span>
+                    <span class="interest-tag">Agent</span>
+                    <span class="interest-tag">Text Diffusion</span>
+                </div>
+                <div class="paper-list">
+                    <div class="paper-item">
+                        <div class="paper-title">AR-Diffusion: Auto-regressive diffusion model for text generation</div>
+                        <div class="paper-meta">NeurIPS 2023 | T Wu, Z Fan, X Liu, HT Zheng, Y Gong, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">137 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Text Generation with Diffusion Language Models</div>
+                        <div class="paper-meta">ICML 2023 | Z Lin, Y Gong, Y Shen, T Wu, Z Fan, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">131 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Qwen3 Technical Report</div>
+                        <div class="paper-meta">arXiv 2025 | A Yang, A Li, B Yang, Z Fan, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">9,446 citations</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scholar-card">
+                <div class="scholar-header">
+                    <div class="scholar-avatar">YL</div>
+                    <div>
+                        <div class="scholar-name">Yifan Li (李亦凡)</div>
+                        <div class="scholar-title">PhD Student | Renmin University of China | h-index: 8</div>
+                    </div>
+                </div>
+                <div class="scholar-stats">
+                    <div class="stat-item"><div class="stat-value">11,284</div><div class="stat-label">总引用</div></div>
+                    <div class="stat-item"><div class="stat-value">11,264</div><div class="stat-label">2021后引用</div></div>
+                    <div class="stat-item"><div class="stat-value">8</div><div class="stat-label">i10-index</div></div>
+                </div>
+                <div class="scholar-interests">
+                    <span class="interest-tag">Multimodal Learning</span>
+                    <span class="interest-tag">LLM</span>
+                    <span class="interest-tag">Text Diffusion</span>
+                </div>
+                <div class="paper-list">
+                    <div class="paper-item">
+                        <div class="paper-title">Diffusion Models for Non-autoregressive Text Generation: A Survey</div>
+                        <div class="paper-meta">IJCAI 2023 | Y Li, K Zhou, WX Zhao, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">68 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Diffusion-NAT: Self-prompting Discrete Diffusion for Non-autoregressive Text Generation</div>
+                        <div class="paper-meta">EACL 2024 | K Zhou, Y Li, WX Zhao, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">34 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Evaluating Object Hallucination in Large Vision-Language Models</div>
+                        <div class="paper-meta">EMNLP 2023 | Y Li, Y Du, K Zhou, J Wang, WX Zhao, JR Wen</div>
+                        <div class="paper-meta"><span class="paper-citation">1,955 citations</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scholar-card">
+                <div class="scholar-header">
+                    <div class="scholar-avatar">TW</div>
+                    <div>
+                        <div class="scholar-name">Tong Wu (吴彤)</div>
+                        <div class="scholar-title">PhD Student | Tsinghua University | h-index: 8</div>
+                    </div>
+                </div>
+                <div class="scholar-stats">
+                    <div class="stat-item"><div class="stat-value">1,334</div><div class="stat-label">总引用</div></div>
+                    <div class="stat-item"><div class="stat-value">1,331</div><div class="stat-label">2021后引用</div></div>
+                    <div class="stat-item"><div class="stat-value">8</div><div class="stat-label">i10-index</div></div>
+                </div>
+                <div class="scholar-interests">
+                    <span class="interest-tag">Text Generation</span>
+                    <span class="interest-tag">Diffusion Language Model</span>
+                </div>
+                <div class="paper-list">
+                    <div class="paper-item">
+                        <div class="paper-title">AR-Diffusion: Auto-regressive diffusion model for text generation</div>
+                        <div class="paper-meta">NeurIPS 2023 | T Wu, Z Fan, X Liu, HT Zheng, Y Gong, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">137 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">Text Generation with Diffusion Language Models</div>
+                        <div class="paper-meta">ICML 2023 | Z Lin, Y Gong, Y Shen, T Wu, Z Fan, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">131 citations</span></div>
+                    </div>
+                    <div class="paper-item">
+                        <div class="paper-title">DeepSeek LLM: Scaling open-source language models</div>
+                        <div class="paper-meta">arXiv 2024 | X Bi, D Chen, T Wu, et al.</div>
+                        <div class="paper-meta"><span class="paper-citation">851 citations</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>数据来源: Google Scholar | 搜索关键词: text diffusion, text generation diffusion</p>
+            <p>Generated by OpenClaw Academic Insight</p>
+        </footer>
+    </div>
+</body>
+</html>
